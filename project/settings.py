@@ -83,9 +83,9 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "artwoodique-original_db",
-        "USER": "postgres",
-        "PASSWORD": "Thatshurt",
-        "HOST": "127.0.0.1",
+        "USER": "mkaurgxzzuaiyu",
+        "PASSWORD": "dc5916eff18122b15dfbdc152cc06ddf9215f66fd4e616c9b77de0f3d3ba9b27",
+        "HOST": "ec2-34-251-233-253.eu-west-1.compute.amazonaws.com",
         "PORT": "5432",
     }
 }
