@@ -89,6 +89,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 #         "PORT": "5432",
 #     }
 # }
+
 import dj_database_url
 
 DATABASES = {
