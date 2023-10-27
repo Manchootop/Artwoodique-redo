@@ -1,0 +1,99 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Artwoodique</title>
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Poppins:wght@200;300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/65341679a84dd54dc4839eee/1hd9nfirh';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
+<div class="wrapper">
+    <div class="social-icons">
+        <ul>
+            <li><a href="#"><i class="fab fa-facebook-f fa-2x" style="color: var(--main-bg-color-dark)"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter fa-2x" style="color: var(--main-bg-color-dark)"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram fa-2x" style="color: var(--main-bg-color-dark)"></i></a></li>
+
+            <!-- Add more social icons as needed -->
+        </ul>
+    </div>
+
+    <header>
+        <a href="{% url 'index' %}" class="logo"><img src="{% static 'images/AW-logo-resized.png' %}" alt=""></a>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">home</a></li>
+                <li><a href="{% url 'shop' %}">store</a></li>
+                <li><a href="{% url 'catalog' %}">catalog</a></li>
+                <li><a href="{% url 'contacts' %}" class="active">contacts</a></li>
+                <!-- <li><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M7 22q-.825 0-1.413-.588T5 20q0-.825.588-1.413T7 18q.825 0 1.413.588T9 20q0 .825-.588 1.413T7 22Zm10 0q-.825 0-1.413-.588T15 20q0-.825.588-1.413T17 18q.825 0 1.413.588T19 20q0 .825-.588 1.413T17 22ZM6.15 6l2.4 5h7l2.75-5H6.15ZM5.2 4h14.75q.575 0 .875.513t.025 1.037l-3.55 6.4q-.275.5-.738.775T15.55 13H8.1L7 15h12v2H7q-1.125 0-1.7-.988t-.05-1.962L6.6 11.6L3 4H1V2h3.25l.95 2Zm3.35 7h7h-7Z" />
+                </svg></a></li> -->
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="messages custom-message">
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif message.tags == 'info' %}
+                    <div class="alert alert-info">
+                        {{ message }}
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif message.tags == 'warning' %}
+                    <div class="alert alert-warning">
+                        {{ message }}
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif message.tags == 'error' %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <main>
+
+    </main>
+
+</div>
+</body>
+</html>

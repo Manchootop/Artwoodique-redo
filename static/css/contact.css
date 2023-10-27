@@ -1,0 +1,184 @@
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --main-bg-color-light: #bfa271;
+    --main-bg-color-dark: #583d22;
+
+    --header-font: 'Playfair Display SC';
+    --main-font: 'Poppins';
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Styling for the close button */
+.close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 10px;
+    color: #333;
+}
+
+.message {
+    list-style: none;
+    border-radius: 10px;
+    box-shadow: 3px 3px 4px 0px rgba(50, 50, 50, 0.75);
+    color: white;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+    width: 80%;
+}
+
+/*
+ * Give the various message types the correct colors
+ */
+.message.success {
+    background-color: green;
+}
+
+.message.error {
+    background-color: red;
+}
+
+.success {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Info Messages */
+.info {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Warning Messages */
+.warning {
+    background-color: #FF9800;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Error Messages */
+.error {
+    background-color: #F44336;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.wrapper {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.social-icons {
+    position: fixed;
+    top: 50%;
+    left: 20px; /* Adjust as needed */
+    z-index: 1000;
+}
+
+.social-icons ul {
+    list-style: none;
+    padding: 0;
+}
+
+.social-icons li {
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.animated {
+    transition: transform 0.3s ease-in-out;
+}
+
+.animated:hover {
+    transform: scale(1.2); /* Larger size on hover */
+}
+
+
+.social-icons.fixed {
+    position: fixed;
+    top: 20px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+}
+
+
+/* Navbar */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    margin: 2em 0;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 4.1em;
+    margin: 0;
+}
+
+nav ul li a, .logo {
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    position: relative;
+}
+
+.logo {
+    font-weight: 500;
+}
+
+nav ul li a.active:before {
+    position: absolute;
+    content: "";
+    width: 35%;
+    height: 1px;
+    border-bottom: 2px solid black;
+    bottom: -6px;
+}
+
+/* for microinteraction */
+
+nav ul li a:before {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 1px;
+    border-bottom: 2px solid rgb(122, 122, 122);
+    bottom: -6px;
+    transition: width .3s;
+}
+
+/* Hero Section */
+
+main {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8em;
+    margin: 0 0 10em 0;
+}

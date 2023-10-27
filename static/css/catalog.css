@@ -1,0 +1,565 @@
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --main-bg-color-light: #bfa271;
+    --main-bg-color-dark: #583d22;
+
+    --header-font: 'Playfair Display SC';
+    --main-font: 'Poppins';
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-image: url('https://www.xlab.design/wp-content/uploads/2019/05/xlab-pattern.jpg');
+}
+
+.wrapper {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* Navbar */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+/* header.main-header {
+    position: sticky;
+    z-index: 999;
+    top: 0;
+    background-color: white;
+} */
+
+nav {
+    margin: 2em 0;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 4.1em;
+    margin: 0;
+}
+
+nav ul li a,
+.logo {
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    position: relative;
+}
+
+.logo {
+    font-weight: 500;
+}
+
+nav ul li a.active:before {
+    position: absolute;
+    content: "";
+    width: 35%;
+    height: 1px;
+    border-bottom: 2px solid black;
+    bottom: -6px;
+}
+
+/* for microinteraction */
+
+nav ul li a:before {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 1px;
+    border-bottom: 2px solid rgb(122, 122, 122);
+    bottom: -6px;
+    transition: width .3s;
+}
+
+/* Hero Section */
+
+.page-description {
+    background: var(--main-bg-color-light);
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 4fr;
+    grid-template-areas:
+        "aside main"
+        "aside main";
+    gap: 4em;
+    margin: 2em 0 11em 0;
+    align-items: start;
+}
+
+main > * {
+    /* border: 1px solid black; */
+}
+
+.left-col {
+    width: 15%;
+    grid-area: aside;
+    position: sticky;
+    z-index: 1000;
+    top: 1em;
+}
+
+.right-col {
+    flex-grow: 1;
+    grid-area: main;
+}
+
+h1 {
+    font-size: 5.2rem;
+    font-family: 'Playfair Display SC';
+    font-weight: normal;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.right-col header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 3em;
+}
+
+.right-col header span {
+    font-size: 1.8rem;
+    font-family: 'Poppins';
+    font-weight: lighter;
+}
+
+.right-col header .dropdown {
+    display: flex;
+    gap: 1rem;
+}
+
+.right-col header .dropdown p {
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+
+.dropbtn {
+    padding: 0 1em;
+    font-size: 1.2em;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #E4D2BC;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 1.2em 1.6em;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+    display: block;
+}
+
+
+/* Nav above cards */
+
+.navigation {
+    margin: 2em 0;
+    grid-area: nav;
+}
+
+.navigation ul {
+    list-style-type: none;
+    display: flex;
+    gap: 2.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    position: relative;
+}
+
+.navigation ul li a.active:before {
+    position: absolute;
+    content: "";
+    width: 35%;
+    height: 1px;
+    border-bottom: 2px solid black;
+    bottom: -6px;
+}
+
+/* for microinteraction */
+
+.navigation ul li a:before {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 1px;
+    border-bottom: 2px solid rgb(122, 122, 122);
+    bottom: -6px;
+    transition: width .3s;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr;
+    gap: 0em 4em;
+    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2em 0;
+}
+
+.card {
+    max-height: 450px;
+    margin-bottom: 3em;
+}
+
+
+.card img {
+    object-fit: cover;
+    background-origin: border-box;
+    min-height: 350px;
+
+    width: 100%;
+    /* Ensure the image takes the full width of the container */
+    height: 60%;
+    /* Ensure the image takes the full height of the container */
+    border-radius: .8em;
+}
+
+
+.card-details {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    background: white;
+    border-radius: .6em;
+    padding: 2em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 800ms;
+    box-shadow: rgb(208, 208, 208) 0px 8px 24px;
+}
+
+.card-details a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.card-details p {
+    font-size: 1.4rem;
+    margin: 0;
+    font-weight: lighter;
+}
+
+p.product-price {
+    font-size: 1.8rem;
+}
+
+.left-col {
+    width: 100%;
+}
+
+
+/* Microinteractions */
+nav ul li a:hover:before {
+    width: 35%;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/*
+.card:hover .card-details {
+    transform: translateY(-20px);
+} */
+
+@media (max-width: 1000px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr 1fr;
+        gap: 0em 4em;
+        /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .wrapper {
+        margin: 0 3em;
+        /* Adjust the margin as per your preference */
+    }
+
+}
+
+@media (max-width: 800px) {
+    .cards {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 0em 4em;
+        /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+
+.filter-sidebar {
+    background: linear-gradient(90deg, rgba(191, 162, 113, 0.7), rgba(191, 162, 113, 0.7));
+    padding: 3em;
+    border: 1px solid #ddd;
+    border-radius: 0.5em; /* Convert 5px to 0.5em */
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.1); /* Convert 10px to 1em */
+    height: 100%; /* Make it take full height */
+}
+
+.filter-section {
+    margin-bottom: 3em; /* Convert 30px to 3em */
+}
+
+.filter-section h3 {
+    font-size: 1.4em; /* Convert 14px to 1.4em */
+    margin-bottom: 1.5em; /* Convert 15px to 1.5em */
+    color: #333;
+}
+
+/* Increase the size of material checkboxes */
+input[type="checkbox"] {
+    margin-right: 1em; /* Convert 10px to 1em */
+    transform: scale(1.2); /* Leave as is */
+}
+
+/* Increase the size of size filter select */
+#size-filter {
+    width: 100%;
+    padding: 1em; /* Convert 10px to 1em */
+    border: 1px solid #ccc;
+    border-radius: 0.5em; /* Convert 5px to 0.5em */
+    font-size: 1.4em; /* Convert 14px to 1.4em */
+}
+
+/* Increase the size of the price range slider */
+#price-range {
+    width: 100%;
+    height: 3em; /* Convert 30px to 3em */
+}
+
+#price-value {
+    font-size: 1.4rem; /* Convert 14px to 1.4em */
+    margin-top: 1em; /* Convert 10px to 1em */
+    color: #333;
+}
+
+li {
+    list-style: none;
+}
+
+aside {
+    position: sticky;
+    background-color: var(--main-bg-color-light);
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 2em; /* Adjust margin as needed */
+}
+
+.pagination ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination li {
+    display: inline;
+    margin-right: 1em; /* Adjust spacing between page links */
+}
+
+.pagination a {
+    font-size: 2rem;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 0.3em 0.6em;
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+    main {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 4fr;
+        grid-template-areas:
+            "main"
+            "main";
+        gap: 0em;
+        margin: 2em 0;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card {
+        margin: 0 auto;
+
+    }
+
+    .left-col {
+        display: none;
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 1fr;
+        gap: 0em 4em;
+        /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+        margin-right: 1em;
+
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+    }
+
+    .card img {
+        width: 100%;
+        height: 60%;
+    }
+
+    .card-details {
+        width: 100%;
+        padding: 1.4em;
+
+    }
+
+    .card-details a {
+
+    }
+
+    .card-details p {
+
+    }
+}
+
+/* Breadcrumb Navigation Styles */
+.breadcrumbs {
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    margin: 0 auto;
+    justify-content: center
+}
+
+.breadcrumbs ul {
+    list-style-type: none;
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumbs li {
+    color: #777; /* Subtle color for non-current items */
+}
+
+.breadcrumbs a {
+    text-decoration: none;
+    color: #007bff; /* Blue color for links */
+}
+
+.breadcrumbs span {
+    color: #777; /* Subtle color for separators */
+}
+
+/* Style for the current page (last item) */
+.breadcrumbs li:last-child {
+    font-weight: bold;
+    color: #333; /* Slightly darker color for the current item */
+}
+
+
+.card {
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    transition: transform 0.3s;
+}
+
+.card:hover img {
+    transform: scale(1.01);
+}

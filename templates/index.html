@@ -1,0 +1,441 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artwoodique</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Poppins:wght@200;300;400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"></script>
+
+
+</head>
+
+<body>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/65341679a84dd54dc4839eee/1hd9nfirh';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
+<div class="wrapper">
+    <div class="social-icons">
+        <ul>
+            <li><a href="https://www.facebook.com/profile.php?id=61550907957945"><i class="fab fa-facebook-f fa-2x" style="color: var(--main-bg-color-dark)"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter fa-2x" style="color: var(--main-bg-color-dark)"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram fa-2x" style="color: var(--main-bg-color-dark)"></i></a></li>
+
+            <!-- Add more social icons as needed -->
+        </ul>
+    </div>
+
+    <header>
+        <a href="{% url 'index' %}" class="logo"><img src="{% static 'images/AW-logo.svg' %}" alt="" style="width:150px; height: 150px"></a>
+
+{#        <span style="font-size: 3rem; font-family: 'Roboto Light'; margin-left: 5em; font-weight: lighter">Artwoodique</span>#}
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}" class="active">HOME</a></li>
+                <li><a href="{% url 'shop' %}">Store</a></li>
+                <li><a href="{% url 'catalog' %}">Catalog</a></li>
+                <li><a href="{% url 'faq' %}">FAQ</a></li>
+                <!-- <li><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M7 22q-.825 0-1.413-.588T5 20q0-.825.588-1.413T7 18q.825 0 1.413.588T9 20q0 .825-.588 1.413T7 22Zm10 0q-.825 0-1.413-.588T15 20q0-.825.588-1.413T17 18q.825 0 1.413.588T19 20q0 .825-.588 1.413T17 22ZM6.15 6l2.4 5h7l2.75-5H6.15ZM5.2 4h14.75q.575 0 .875.513t.025 1.037l-3.55 6.4q-.275.5-.738.775T15.55 13H8.1L7 15h12v2H7q-1.125 0-1.7-.988t-.05-1.962L6.6 11.6L3 4H1V2h3.25l.95 2Zm3.35 7h7h-7Z" />
+                </svg></a></li> -->
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="messages custom-message">
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif message.tags == 'info' %}
+                    <div class="alert alert-info">
+                        {{ message }}
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif message.tags == 'warning' %}
+                    <div class="alert alert-warning">
+                        {{ message }}
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif message.tags == 'error' %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <main>
+        <div class="left-col">
+            <h1>Elegance Unveiled - Wood & Resin Masterpieces</h1>
+            <p class="subhead">
+                Elevate your space with timeless Beauty by discovering
+                the artistry of Handcrafted Tables
+            </p>
+            <div class="cta-btns">
+                <a href="{% url 'shop' %}" class="primary-cta">Browse our collection</a>
+                <a href="{% url 'catalog' %}" class="secondary-cta">
+                    <span>Examine catalog</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 9" fill="none">
+                        <path
+                            d="M23.3536 4.85355C23.5488 4.65829 23.5488 4.34171 23.3536 4.14645L20.1716 0.964466C19.9763 0.769204 19.6597 0.769204 19.4645 0.964466C19.2692 1.15973 19.2692 1.47631 19.4645 1.67157L22.2929 4.5L19.4645 7.32843C19.2692 7.52369 19.2692 7.84027 19.4645 8.03553C19.6597 8.2308 19.9763 8.2308 20.1716 8.03553L23.3536 4.85355ZM0 5H23V4H0V5Z"
+                            fill="black"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="offerings">
+                <p class="percentage">100%</p>
+                <p class="details">Premium Materials: We use only the finest solid <strong>wood</strong> and
+                    high-quality <strong>resin</strong> to create tables that are both durable and stunning.
+                    <br></br />
+                    Customization Options: Tailor your <strong>table</strong> to your unique style with our range of
+                    <strong>finishes</strong>, <strong>sizes</strong>, and <strong>designs</strong>.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="right-col">
+            <div class="card card0">
+                <div class="card-details">
+                    <div>
+                        <a href="#" class="product-title">Coffee Table</a>
+                        <p>Cross-cut</p>
+                    </div>
+                    <p class="product-price">$227</p>
+                </div>
+            </div>
+            <div class="card card1">
+                <div class="card-details">
+                    <div>
+                        <a href="#" class="product-title">Dinner Table</a>
+                        <p>Cross-cut</p>
+                    </div>
+                    <p class="product-price">$282</p>
+                </div>
+            </div>
+
+            <div class="card card2">
+                <div class="card-details">
+                    <div>
+                        <a href="#" class="product-title">Coffee Table</a>
+                        <p>Rip-cut</p>
+                    </div>
+                    <p class="product-price">$459</p>
+                </div>
+            </div>
+
+            <div class="card card3">
+                <div class="card-details">
+                    <div>
+                        <a href="#" class="product-title">Coffee Table</a>
+                        <p>Slabbed</p>
+                    </div>
+                    <p class="product-price">$459</p>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+</div>
+
+<div class="what_do_you_get">
+    <div class="what-you-get">
+        <div class="benefit benefit1">
+            <div class="icon"><img src="{% static 'images/refund.png' %}" alt="Money-Back Guarantee"></div>
+            <h2>30-Day Money-Back Guarantee</h2>
+            <p>Not satisfied? We offer a hassle-free refund within 30 days of your purchase.</p>
+        </div>
+
+        <div class="benefit benefit2">
+            <div class="icon"><img src="{% static 'images/fast-delivery.png' %}" alt="Quick Purchase"></div>
+            <h2>Quick and Easy Purchase</h2>
+            <p>Streamlined ordering process for your convenience. Get your dream table in no time.</p>
+        </div>
+
+        <div class="benefit benefit3">
+            <div class="icon"><img src="{% static 'images/order.png' %}" alt="Custom Order"></div>
+            <h2>Custom Table Orders</h2>
+            <p>Order tables tailored to your specifications. Choose sizes, materials, and finishes that suit your
+                space.</p>
+        </div>
+        <a href="{% url 'shop' %}" id="order-now" class="cta-button">
+            <img src="{% static 'images/table.png' %}" alt="t">
+            Shop availables</a>
+        <a href="{% url 'catalog' %}" class="cta-button" id="gallery">
+            <img src="{% static 'images/gear.png' %}" alt="c">
+            <span>Explore <strong>catalog</strong></span>
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 9" fill="none">
+                <path
+                    d="M23.3536 4.85355C23.5488 4.65829 23.5488 4.34171 23.3536 4.14645L20.1716 0.964466C19.9763 0.769204 19.6597 0.769204 19.4645 0.964466C19.2692 1.15973 19.2692 1.47631 19.4645 1.67157L22.2929 4.5L19.4645 7.32843C19.2692 7.52369 19.2692 7.84027 19.4645 8.03553C19.6597 8.2308 19.9763 8.2308 20.1716 8.03553L23.3536 4.85355ZM0 5H23V4H0V5Z"
+                    fill="black"/>
+            </svg>
+        </a>
+
+    </div>
+
+
+    <!-- Call to Action Button -->
+
+
+</div>
+
+<div class="container">
+    <section class="why-choose-us">
+        <h2>Why Choose Us</h2>
+        <p>We specialize in creating exquisite tables topped with epoxy resin, offering a unique blend of art and
+            functionality. Here's why you should choose our epoxy resin tables:</p>
+        <ul>
+            <li><strong>Exceptional Craftsmanship:</strong> Our artisans meticulously craft each table, ensuring
+                top-notch quality.
+            </li>
+            <li><strong>Stunning Designs:</strong> Our epoxy resin tables come in a variety of captivating designs
+                and colors to suit your style.
+            </li>
+            <li><strong>Durability:</strong> Epoxy resin provides a durable and long-lasting surface that's
+                resistant to stains and scratches.
+            </li>
+            <li><strong>Customization:</strong> We offer customization options to create a table that matches your
+                vision perfectly.
+            </li>
+            <li><strong>Environmentally Friendly:</strong> We use eco-friendly materials and processes to minimize
+                our environmental footprint.
+            </li>
+        </ul>
+</div>
+
+    <div class="container">
+        <section class="products-services background">
+            <h2>Products and Services</h2>
+            <div class="product">
+                <div class="product-image">
+                    <img src="{% static 'images/table_for_p&s_section.jpg' %}" alt="Product 1">
+                </div>
+                <div class="product-description">
+                    <h3>Choose a table that has been already created</h3>
+                    <p>Explore our wide selection of beautifully crafted tables that are ready for immediate purchase.
+                        These tables are designed to meet various styles
+                    </p>
+                    <a href="{% url 'shop' %}">Learn More</a>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image">
+                    <img src="{% static 'images/sideways-table_for_p&s_section.jpg' %}" alt="Product 2">
+                </div>
+                <div class="product-description">
+                    <h3>Choose from Our Catalog and Contact Us</h3>
+                    <p>Discover a diverse catalog of customizable tables tailored to your specific needs. Simply browse
+                        through our catalog, select your desired options, and then give us a call. Our experts will
+                        assist you in creating the perfect table for your space.
+                    </p>
+                    <a href="{% url 'catalog' %}">Learn More</a>
+                </div>
+            </div>
+            <!-- Add more products/services here -->
+        </section>
+    </div>
+
+
+<div class="container">
+    <hr>
+    <footer>
+        <div class="left-col">
+            <div class="contact-item">
+                <div class="icon">
+                    <img src="{% static 'images/email.png' %}" alt="Phone Icon">
+                </div>
+                <div class="text">
+                    <h3>Client Service</h3>
+                    <span>+359 878 130 052</span>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="icon">
+                    <img src="{% static 'images/email.png' %}" alt="Email Icon">
+                </div>
+                <div class="text">
+                    <h3>Request an offer</h3>
+                    <span>info@artwoodique.com</span>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="icon">
+                    <img src="{% static 'images/withdraw.png' %}" alt="Withdraw Icon">
+                </div>
+                <div class="text">
+                    <h3>Right of Withdrawal</h3>
+                    <span>Within 14 days of delivery</span>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="icon">
+                    <img src="{% static 'images/faq.png' %}" alt="FAQ Icon">
+                </div>
+                <div class="text">
+                    <h3>FAQ</h3>
+                    <span>Need help? Click <em><a href="{% url 'faq' %}">here</a></em></span>
+                </div>
+            </div>
+        </div>
+        <div class="right-col">
+            <div class="newsletter">
+                <h2>Subscribe to Our Newsletter</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+    <h4>Copyrights reserved 2023©</h4>
+</div>
+
+<style>
+    .container {
+        padding: 0;
+        margin: 0;
+    }
+
+
+    .custom-message {
+        display: flex;
+        flex-direction: column;
+        padding: 3em;
+        border: 1px solid transparent;
+        font-size: 1.4rem;
+        width: 100%;
+        margin: -2em auto;
+    }
+
+    /* Individual messages */
+    .custom-message .alert {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em;
+        border-radius: 0.25rem;
+        font-size: 2rem;
+        margin: -2em auto;
+    }
+
+    /* Close button */
+    .custom-message .close {
+        font-size: 1.6rem;
+        font-weight: bold;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.3rem 0.5rem;
+        transition: color 0.3s;
+        margin: 0;
+    }
+
+    .custom-message .close:hover {
+        color: red; /* Change color on hover for better visibility */
+        margin: 0;
+    }
+
+    /* Different message tags */
+    .custom-message .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        margin: 0;
+    }
+
+    .custom-message .alert-info {
+        color: #0c5460;
+        background-color: #cce5ff;
+        border-color: #b8daff;
+        margin: 0;
+    }
+
+    .custom-message .alert-warning {
+        color: #856404;
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+        margin: 0;
+    }
+
+    .custom-message .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        margin: 0;
+    }
+
+
+</style>
+
+<script>
+    // Get all close buttons by class name
+    var closeButtons = document.getElementsByClassName('close');
+
+    // Add click event listeners to close buttons
+    document.addEventListener('DOMContentLoaded', function () {
+        var closeButtons = document.querySelectorAll('.close');
+
+        closeButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var message = this.parentElement;
+                if (message.style.display === 'none' || message.style.display === '') {
+                    message.style.display = 'flex';
+                } else {
+                    message.style.display = 'none';
+                }
+            });
+        });
+
+        // Show messages with class 'alert' by setting display to 'flex'
+        var alertMessages = document.querySelectorAll('.custom-message .alert');
+        alertMessages.forEach(function (message) {
+            message.style.display = 'flex';
+        });
+    });
+</script>
+
+</body>
+
+</html>
