@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "artwoodique_db",
+        "NAME": "artwoodique-original_db",
         "USER": "postgres",
         "PASSWORD": "Thatshurt",
         "HOST": "127.0.0.1",
