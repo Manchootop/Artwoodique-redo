@@ -4,8 +4,10 @@ import cloudinary
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Read SECRET_KEY from the file
-with open('secret_key.txt') as f:
-    SECRET_KEY = f.read().strip()
+# if DEBUG:
+#     with open('secret_key.txt') as f:
+#         SECRET_KEY = f.read().strip()
+SECRET_KEY = 'django-insecure-=(!&olqxy6ni=d_7_)#x6#9rhs9(oad+@h%f1(+utjc-8k99a+'
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
