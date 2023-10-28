@@ -12,27 +12,15 @@
             href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Poppins:wght@200;300;400;700&display=swap"
             rel="stylesheet">
     <script src="{% static 'js/shop.js' %}"></script>
+    <link rel="shortcut icon" href="{% static 'images/AW-logo.svg' %}">
+
 </head>
 
 <body>
 
 
 <div class="wrapper">
-    <header class="main-header">
-        <a href="{% url 'index' %}" class="logo">Artwoodique</a>
-        <nav>
-            <ul>
-                <li><a href="{% url 'index' %}">HOME</a></li>
-                <li><a href="{% url 'shop' %}" class="active">Store</a></li>
-                <li><a href="{% url 'catalog' %}">Catalog</a></li>
-                <li><a href="{% url 'faq' %}">FAQ</a></li>
-                <!-- <li><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                        d="M7 22q-.825 0-1.413-.588T5 20q0-.825.588-1.413T7 18q.825 0 1.413.588T9 20q0 .825-.588 1.413T7 22Zm10 0q-.825 0-1.413-.588T15 20q0-.825.588-1.413T17 18q.825 0 1.413.588T19 20q0 .825-.588 1.413T17 22ZM6.15 6l2.4 5h7l2.75-5H6.15ZM5.2 4h14.75q.575 0 .875.513t.025 1.037l-3.55 6.4q-.275.5-.738.775T15.55 13H8.1L7 15h12v2H7q-1.125 0-1.7-.988t-.05-1.962L6.6 11.6L3 4H1V2h3.25l.95 2Zm3.35 7h7h-7Z" />
-                </svg></a></li> -->
-            </ul>
-        </nav>
-    </header>
+    {% include 'header.html' %}
 
     <!-- main section -->
     <nav class="breadcrumbs" style="">
@@ -150,7 +138,6 @@
 </body>
 
 
-
 <style>
     input[type="text"],
     input[type="number"] {
@@ -189,47 +176,47 @@
 </style>
 
 <script>    function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
+    document.getElementById("myDropdown").classList.toggle("show");
+}
 
-    // Close the dropdown menu if the user clicks outside of it
-    window.onclick = function (event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
             }
         }
     }
+}
 
-    function myFunction() {
-        const dropdownContent = document.getElementById("myDropdown");
-        dropdownContent.classList.toggle("show");
-    }
+function myFunction() {
+    const dropdownContent = document.getElementById("myDropdown");
+    dropdownContent.classList.toggle("show");
+}
 
-    // Change the button text when an option is selected
-    document.querySelectorAll(".dropdown-content a").forEach(function (option) {
-        option.addEventListener("click", function () {
-            const buttonText = option.getAttribute("data-option-text");
-            document.getElementById("dropdownButton").textContent = buttonText;
-        });
+// Change the button text when an option is selected
+document.querySelectorAll(".dropdown-content a").forEach(function (option) {
+    option.addEventListener("click", function () {
+        const buttonText = option.getAttribute("data-option-text");
+        document.getElementById("dropdownButton").textContent = buttonText;
     });
+});
 
-    // Close the dropdown menu when clicking outside of it
-    window.addEventListener('click', function (event) {
-        if (!event.target.matches('.dropbtn')) {
-            const dropdowns = document.getElementsByClassName("dropdown-content");
-            for (let i = 0; i < dropdowns.length; i++) {
-                const openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
+// Close the dropdown menu when clicking outside of it
+window.addEventListener('click', function (event) {
+    if (!event.target.matches('.dropbtn')) {
+        const dropdowns = document.getElementsByClassName("dropdown-content");
+        for (let i = 0; i < dropdowns.length; i++) {
+            const openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
             }
         }
-    });
+    }
+});
 </script>
 </html>

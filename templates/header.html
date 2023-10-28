@@ -1,0 +1,56 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+<header class="main-header">
+    <a href="{% url 'index' %}" class="logo">
+        <img src="{% static 'images/AW-logo.svg' %}" alt="" style="width:100px; height: 100px">
+    </a>
+
+    <!-- Hamburger menu icon -->
+    <div class="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <nav class="side-nav">
+        <div class="close-button" style="display: none;" title="Close Navigation">&times;</div>
+        <ul>
+            <li><a href="{% url 'index' %}" class="{% if request.path == '/' %}active{% endif %}">HOME</a></li>
+            <li><a href="{% url 'store' %}" class="{% if request.path == '/store/' %}active{% endif %}">Store</a></li>
+            <li><a href="{% url 'catalog' %}" class="{% if request.path == '/catalog/' %}active{% endif %}">Catalog</a>
+            </li>
+            <li><a href="{% url 'faq' %}" class="{% if request.path == '/faq/' %}active{% endif %}">FAQ</a></li>
+        </ul>
+    </nav>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the hamburger menu and side-nav elements
+            var hamburgerMenu = document.querySelector('.hamburger-menu');
+            var sideNav = document.querySelector('.side-nav');
+            var closeButton = document.querySelector('.close-button');
+
+            // Function to toggle the 'show' class and close button
+            function toggleSideNav() {
+                sideNav.classList.toggle('show');
+                closeButton.style.display = (closeButton.style.display === 'none') ? 'block' : 'none';
+            }
+
+            // Function to close the navigation menu
+            function closeSideNav() {
+                sideNav.classList.remove('show');
+                closeButton.style.display = 'none';
+            }
+
+            // Add a click event listener to the hamburger menu
+            hamburgerMenu.addEventListener('click', toggleSideNav);
+
+            // Add a click event listener to the close button
+            closeButton.addEventListener('click', closeSideNav);
+        });
+    </script>
+
+
+</header>
+

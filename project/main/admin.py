@@ -2,11 +2,17 @@ from django.contrib import admin
 from project.main.models import Product, ProductImage, ProductRating, Subscriber
 
 
+class ProductImageInline(admin.TabularInline):  # Use TabularInline for a table-based layout
+    model = ProductImage
+    extra = 1  # The number of empty forms displayed
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     search_fields = ('__all__',)
     readonly_fields = ('views',)
     list_display = ('id', 'name', 'price')
+    inlines = [ProductImageInline]
 
 
 @admin.register(ProductImage)
@@ -51,3 +57,6 @@ class ProductRatingAdmin(admin.ModelAdmin):
 @admin.register(Subscriber)
 class SubscriberAdminModel(admin.ModelAdmin):
     pass
+
+
+from django.contrib import admin

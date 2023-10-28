@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Poppins:wght@200;300;400;700&display=swap"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Poppins:wght@200;300;400;700&display=swap"
+            rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/js/bootstrap.min.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
@@ -20,6 +20,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"></script>
+    <link rel="shortcut icon" href="{% static 'images/AW-logo.svg' %}">
 
 
 </head>
@@ -42,7 +43,9 @@
 <div class="wrapper">
     <div class="social-icons">
         <ul>
-            <li><a href="https://www.facebook.com/profile.php?id=61550907957945"><i class="fab fa-facebook-f fa-2x" style="color: var(--main-bg-color-dark)"></i></a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=61550907957945"><i class="fab fa-facebook-f fa-2x"
+                                                                                    style="color: var(--main-bg-color-dark)"></i></a>
+            </li>
             <li><a href="#"><i class="fab fa-twitter fa-2x" style="color: var(--main-bg-color-dark)"></i></a></li>
             <li><a href="#"><i class="fab fa-instagram fa-2x" style="color: var(--main-bg-color-dark)"></i></a></li>
 
@@ -50,23 +53,7 @@
         </ul>
     </div>
 
-    <header>
-        <a href="{% url 'index' %}" class="logo"><img src="{% static 'images/AW-logo.svg' %}" alt="" style="width:150px; height: 150px"></a>
-
-{#        <span style="font-size: 3rem; font-family: 'Roboto Light'; margin-left: 5em; font-weight: lighter">Artwoodique</span>#}
-        <nav>
-            <ul>
-                <li><a href="{% url 'index' %}" class="active">HOME</a></li>
-                <li><a href="{% url 'shop' %}">Store</a></li>
-                <li><a href="{% url 'catalog' %}">Catalog</a></li>
-                <li><a href="{% url 'faq' %}">FAQ</a></li>
-                <!-- <li><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                        d="M7 22q-.825 0-1.413-.588T5 20q0-.825.588-1.413T7 18q.825 0 1.413.588T9 20q0 .825-.588 1.413T7 22Zm10 0q-.825 0-1.413-.588T15 20q0-.825.588-1.413T17 18q.825 0 1.413.588T19 20q0 .825-.588 1.413T17 22ZM6.15 6l2.4 5h7l2.75-5H6.15ZM5.2 4h14.75q.575 0 .875.513t.025 1.037l-3.55 6.4q-.275.5-.738.775T15.55 13H8.1L7 15h12v2H7q-1.125 0-1.7-.988t-.05-1.962L6.6 11.6L3 4H1V2h3.25l.95 2Zm3.35 7h7h-7Z" />
-                </svg></a></li> -->
-            </ul>
-        </nav>
-    </header>
+    {% include 'header.html' %}
     <div class="container">
         <div class="messages custom-message">
             {% for message in messages %}
@@ -110,13 +97,13 @@
                 the artistry of Handcrafted Tables
             </p>
             <div class="cta-btns">
-                <a href="{% url 'shop' %}" class="primary-cta">Browse our collection</a>
+                <a href="{% url 'store' %}" class="primary-cta">Browse our collection</a>
                 <a href="{% url 'catalog' %}" class="secondary-cta">
                     <span>Examine catalog</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 9" fill="none">
                         <path
-                            d="M23.3536 4.85355C23.5488 4.65829 23.5488 4.34171 23.3536 4.14645L20.1716 0.964466C19.9763 0.769204 19.6597 0.769204 19.4645 0.964466C19.2692 1.15973 19.2692 1.47631 19.4645 1.67157L22.2929 4.5L19.4645 7.32843C19.2692 7.52369 19.2692 7.84027 19.4645 8.03553C19.6597 8.2308 19.9763 8.2308 20.1716 8.03553L23.3536 4.85355ZM0 5H23V4H0V5Z"
-                            fill="black"/>
+                                d="M23.3536 4.85355C23.5488 4.65829 23.5488 4.34171 23.3536 4.14645L20.1716 0.964466C19.9763 0.769204 19.6597 0.769204 19.4645 0.964466C19.2692 1.15973 19.2692 1.47631 19.4645 1.67157L22.2929 4.5L19.4645 7.32843C19.2692 7.52369 19.2692 7.84027 19.4645 8.03553C19.6597 8.2308 19.9763 8.2308 20.1716 8.03553L23.3536 4.85355ZM0 5H23V4H0V5Z"
+                                fill="black"/>
                     </svg>
                 </a>
             </div>
@@ -198,7 +185,7 @@
             <p>Order tables tailored to your specifications. Choose sizes, materials, and finishes that suit your
                 space.</p>
         </div>
-        <a href="{% url 'shop' %}" id="order-now" class="cta-button">
+        <a href="{% url 'store' %}" id="order-now" class="cta-button">
             <img src="{% static 'images/table.png' %}" alt="t">
             Shop availables</a>
         <a href="{% url 'catalog' %}" class="cta-button" id="gallery">
@@ -207,8 +194,8 @@
 
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 9" fill="none">
                 <path
-                    d="M23.3536 4.85355C23.5488 4.65829 23.5488 4.34171 23.3536 4.14645L20.1716 0.964466C19.9763 0.769204 19.6597 0.769204 19.4645 0.964466C19.2692 1.15973 19.2692 1.47631 19.4645 1.67157L22.2929 4.5L19.4645 7.32843C19.2692 7.52369 19.2692 7.84027 19.4645 8.03553C19.6597 8.2308 19.9763 8.2308 20.1716 8.03553L23.3536 4.85355ZM0 5H23V4H0V5Z"
-                    fill="black"/>
+                        d="M23.3536 4.85355C23.5488 4.65829 23.5488 4.34171 23.3536 4.14645L20.1716 0.964466C19.9763 0.769204 19.6597 0.769204 19.4645 0.964466C19.2692 1.15973 19.2692 1.47631 19.4645 1.67157L22.2929 4.5L19.4645 7.32843C19.2692 7.52369 19.2692 7.84027 19.4645 8.03553C19.6597 8.2308 19.9763 8.2308 20.1716 8.03553L23.3536 4.85355ZM0 5H23V4H0V5Z"
+                        fill="black"/>
             </svg>
         </a>
 
@@ -220,7 +207,7 @@
 
 </div>
 
-<div class="container">
+<div class="container bg-pattern" >
     <section class="why-choose-us">
         <h2>Why Choose Us</h2>
         <p>We specialize in creating exquisite tables topped with epoxy resin, offering a unique blend of art and
@@ -244,37 +231,37 @@
         </ul>
 </div>
 
-    <div class="container">
-        <section class="products-services background">
-            <h2>Products and Services</h2>
-            <div class="product">
-                <div class="product-image">
-                    <img src="{% static 'images/table_for_p&s_section.jpg' %}" alt="Product 1">
-                </div>
-                <div class="product-description">
-                    <h3>Choose a table that has been already created</h3>
-                    <p>Explore our wide selection of beautifully crafted tables that are ready for immediate purchase.
-                        These tables are designed to meet various styles
-                    </p>
-                    <a href="{% url 'shop' %}">Learn More</a>
-                </div>
+<div class="container">
+    <section class="products-services background">
+        <h2>Products and Services</h2>
+        <div class="product">
+            <div class="product-image">
+                <img src="{% static 'images/table_for_p&s_section.jpg' %}" alt="Product 1">
             </div>
-            <div class="product">
-                <div class="product-image">
-                    <img src="{% static 'images/sideways-table_for_p&s_section.jpg' %}" alt="Product 2">
-                </div>
-                <div class="product-description">
-                    <h3>Choose from Our Catalog and Contact Us</h3>
-                    <p>Discover a diverse catalog of customizable tables tailored to your specific needs. Simply browse
-                        through our catalog, select your desired options, and then give us a call. Our experts will
-                        assist you in creating the perfect table for your space.
-                    </p>
-                    <a href="{% url 'catalog' %}">Learn More</a>
-                </div>
+            <div class="product-description">
+                <h3>Choose a table that has been already created</h3>
+                <p>Explore our wide selection of beautifully crafted tables that are ready for immediate purchase.
+                    These tables are designed to meet various styles
+                </p>
+                <a href="{% url 'store' %}">Learn More</a>
             </div>
-            <!-- Add more products/services here -->
-        </section>
-    </div>
+        </div>
+        <div class="product">
+            <div class="product-image">
+                <img src="{% static 'images/sideways-table_for_p&s_section.jpg' %}" alt="Product 2">
+            </div>
+            <div class="product-description">
+                <h3>Choose from Our Catalog and Contact Us</h3>
+                <p>Discover a diverse catalog of customizable tables tailored to your specific needs. Simply browse
+                    through our catalog, select your desired options, and then give us a call. Our experts will
+                    assist you in creating the perfect table for your space.
+                </p>
+                <a href="{% url 'catalog' %}">Learn More</a>
+            </div>
+        </div>
+        <!-- Add more products/services here -->
+    </section>
+</div>
 
 
 <div class="container">
@@ -329,7 +316,8 @@
             </div>
         </div>
     </footer>
-    <h4>Copyrights reserved 2023©</h4>
+        <h4 class="full-width-heading">Copyrights reserved 2023©</h4>
+
 </div>
 
 <style>

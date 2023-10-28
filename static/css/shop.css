@@ -27,67 +27,6 @@ body {
 
 /* Navbar */
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
-/* header.main-header {
-    position: sticky;
-    z-index: 999;
-    top: 0;
-    background-color: white;
-} */
-
-nav {
-    margin: 2em 0;
-}
-
-nav ul {
-    list-style-type: none;
-    display: flex;
-    gap: 4.1em;
-    margin: 0;
-}
-
-nav ul li a,
-.logo {
-    text-decoration: none;
-    color: black;
-    text-transform: uppercase;
-    font-size: 1.6rem;
-    position: relative;
-}
-
-.logo {
-    font-weight: 500;
-}
-
-nav ul li a.active:before {
-    position: absolute;
-    content: "";
-    width: 35%;
-    height: 1px;
-    border-bottom: 2px solid black;
-    bottom: -6px;
-}
-
-/* for microinteraction */
-
-nav ul li a:before {
-    position: absolute;
-    content: "";
-    width: 0%;
-    height: 1px;
-    border-bottom: 2px solid rgb(122, 122, 122);
-    bottom: -6px;
-    transition: width .3s;
-}
-
-/* Hero Section */
-
 .page-description {
     background: var(--main-bg-color-light);
     padding: 2em;
@@ -350,6 +289,10 @@ nav ul li a:hover:before {
         /* Adjust the margin as per your preference */
     }
 
+    aside.filter-sidebar {
+        padding: 1em;
+        margin: 0 -3em 0 -2em;
+    }
 }
 
 @media (max-width: 800px) {

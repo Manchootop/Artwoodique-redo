@@ -90,12 +90,12 @@ body {
     margin: 0 auto;
 }
 
-.social-icons {
-    position: fixed;
-    top: 50%;
-    left: 20px; /* Adjust as needed */
-    z-index: 1000;
-}
+/*.social-icons {*/
+/*    position: fixed;*/
+/*    top: 50%;*/
+/*    left: 20px; !* Adjust as needed *!*/
+/*    z-index: 1000;*/
+/*}*/
 
 .social-icons ul {
     list-style: none;
@@ -106,19 +106,11 @@ body {
     margin-bottom: 20px; /* Adjust as needed */
 }
 
-.animated {
-    transition: transform 0.3s ease-in-out;
-}
-
-.animated:hover {
-    transform: scale(1.2); /* Larger size on hover */
-}
-
-
-.social-icons.fixed {
+.social-icons {
     position: fixed;
-    top: 20px; /* Adjust as needed */
-    right: 20px; /* Adjust as needed */
+    top: 20%; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+    z-index: 10000000;
 }
 
 
@@ -884,8 +876,9 @@ h4 {
     }
 }
 
-.why-choose-us, footer {
+.why-choose-us, footer, h4, .bg-pattern {
     background-image: url("https://www.xlab.design/wp-content/uploads/2019/05/xlab-pattern.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
+
