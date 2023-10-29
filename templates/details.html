@@ -10,39 +10,37 @@
     <link rel="stylesheet" href="{% static 'css/details.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0-beta/css/all.min.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Poppins:wght@200;300;400;700&display=swap"
-        rel="stylesheet">
-        <link rel="shortcut icon" href="{% static 'images/AW-logo.svg' %}">
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Poppins:wght@200;300;400;700&display=swap"
+            rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'images/AW-logo.svg' %}">
 
     <script src="{% static 'js/details.js' %}" defer></script>
 </head>
 
 <body>
 <div class="wrapper">
-{% include 'header.html' %}
-    <div class="slider-container">
-        <div class="slider">
-            <ul>
-                <li>
-                    <span>Shop All New Arrivals</span>
-                    <div class="slider-cta">
-                        <p><a href="{% url 'store' %}">Shop</a></p>
-                    </div>
-                </li>
-
-            </ul>
-        </div>
-        <!-- Repeat this structure for each new arrival -->
-    </div>
+    {% include 'header.html' %}
+    {#    <div class="slider-container">#}
+    {#        <div class="slider">#}
+    {#            <ul>#}
+    {#                <li>#}
+    {#                    <span>Shop All New Arrivals</span>#}
+    {#                    <div class="slider-cta">#}
+    {#                        <p><a href="{% url 'store' %}">Shop</a></p>#}
+    {#                    </div>#}
+    {#                </li>#}
+    {##}
+    {#            </ul>#}
+    {#        </div>#}
+    {#        <!-- Repeat this structure for each new arrival -->#}
+    {#    </div>#}
 
     <main>
 
 
         <!-- <a href="#" class="primary-cta"><---</a> -->
 
-
         <div class="container">
-
 
             <div class="up-row">
                 <div class="arrow left-arrow">
@@ -78,39 +76,7 @@
                 <br>
                 <span>{{ product.price|floatformat:2 }}</span>
                 <p>{{ product.description }}</p>
-                <table>
 
-                    <!-- Add more rows for other details -->
-
-                    <tr>
-                        <td><strong>Review:</strong></td>
-                        <td>
-                            <div class="star-rating">
-                                <!-- Add your star rating spans here -->
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Material:</strong></td>
-                        <td>{{ product.material }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Max-width:</strong></td>
-                        <td>150</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Max-height:</strong></td>
-                        <td>160</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Size:</strong></td>
-                        <td>{{ product.size }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Id:</strong></td>
-                        <td>{{ product.id }}</td>
-                    </tr>
-                </table>
 
                 <div class="cta-btns">
                     <a href="#" class="primary-cta" id="contactLink">Contact us</a>
@@ -147,8 +113,8 @@
                 </div>
                 <div class="disclaimer">
                     <img
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAB/CAMAAADxY+0hAAAAY1BMVEX///8AAADJyclhYWGampr09PS4uLj7+/vv7+/j4+MRERHc3NzDw8PQ0NDn5+cjIyNra2uUlJQwMDCMjIw7OzuDg4MKCgpAQEBbW1uhoaF1dXUXFxewsLAqKirW1tZQUFBISEiHYq6NAAAD9UlEQVRoge1aa3eqMBAsUOQpClVEser//5W9bd0ByeYBBHruOZlvBsiQZB+zi29vDg4ODg4ODg4O/w2iJLtlSfRH7HEZVKmXVkEZ/gF7ePQ6fMRr0ycHr49Tsi591nqv2GVr0oepN0S7phEcBXrPO65HnzP0nuevxn8CZ13VnQ2uRX8G5ebfrw1+XdehjysizH9+4wWqdaIAjO/yHLggDK1Bf4Pv0XIL+OAaQWBPbCWGPmhovzw9fO/UBZwQDpEvTR/e+7ZPgAnel46C8L3gZbih4fOy9CGcffsyvsX4shsg+B4BPrhoGsAyP4vBlWLHb4xdwPjehUvvdKlZjv6K5TMXsQEb5qIVhA8VBXzwsZQJYov5MIfAKB6OFSTYYV5sZnR5t4wY1brYUXfDLMD3qqHvEQoIg9sC/IE+xEqCsxXA9+69ei/0c79n7REcxL4Ug87spdjim+/ROw4k59Q2fclsbfy73EdP9uGQSnGKOUC91ZdYubgjWcrcZwGILX2JSfGoH2+WkWI417o/yvGzdjIXEfLei12z/KyfzAT8unmZk+WP7EuxruB51RYsfy9O2iqHZKKL57deDiU03zCvSfh1eXIspHldwt/FKis+CF1zGuoaGX+I3pQNKfbJ+p6Kv/PBaj49RNddeknUWwqdPBIFli9qCjm/vE4YC5XokvPL66SR6Oo6Jpoq+CM8N68cQj7nDlLBr9PqhlDX9Sp+da1iCE1fQ8XfpewZ5ZAmkCn5LUixmGZIeT2v5hf7ZGOhS2Rq/tk+6NPzskROskQiNGKErmmdaRifTMgw+pd9v2md6av26af+l/fcsIIJ5VCMJCoXsj9KQ1FtwwcP403QzHrys1JmT5diKGS8ORlsemeaLXjG48NoF0XA907zRHRnRaN8UFLwCCjKY6k+n2nlUFfwKG/LNf7xjSnlUKcelLv21GbSftAPcJK1+QYYRm5SB+oMP94Hkbla9dlS/lHvbEKtC0kWFWGqnnXxf/Capp1pRE1d9RD+2lagEzjIg0YtiQjCRavcim/vPmgDJFRkYGKCaOOaKNdsYxBYIwRTkyh8HnOzGbAkkxhA22+ziUw+aNKXJeFu83M+mfTD4N6naKltfkeiIGgixMj7bX7GoSwk1vAi6KwOFvmpgWaiAhB+7ra+ItwQUE0CUPclsW0CHhfuzW4Xyd0N/iu0MxIz0EwKiMax0T9kmAHjWj+TkBkT8R9JAlJDLXfVTyVsgMnyjauQs36uYSSd8IgCpXayoQVutU+MasXdGvVkl2Em7XIcj2ZkNov8fdXKDLHdi4k83A//kkeo22rvT/kYkWx9HrziKCR3b1f+b6KDg4ODg4ODg4ODgwRf9gIoOKaA6/cAAAAASUVORK5CYII="
-                        alt="disclaimer_icon">
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAB/CAMAAADxY+0hAAAAY1BMVEX///8AAADJyclhYWGampr09PS4uLj7+/vv7+/j4+MRERHc3NzDw8PQ0NDn5+cjIyNra2uUlJQwMDCMjIw7OzuDg4MKCgpAQEBbW1uhoaF1dXUXFxewsLAqKirW1tZQUFBISEiHYq6NAAAD9UlEQVRoge1aa3eqMBAsUOQpClVEser//5W9bd0ByeYBBHruOZlvBsiQZB+zi29vDg4ODg4ODg4O/w2iJLtlSfRH7HEZVKmXVkEZ/gF7ePQ6fMRr0ycHr49Tsi591nqv2GVr0oepN0S7phEcBXrPO65HnzP0nuevxn8CZ13VnQ2uRX8G5ebfrw1+XdehjysizH9+4wWqdaIAjO/yHLggDK1Bf4Pv0XIL+OAaQWBPbCWGPmhovzw9fO/UBZwQDpEvTR/e+7ZPgAnel46C8L3gZbih4fOy9CGcffsyvsX4shsg+B4BPrhoGsAyP4vBlWLHb4xdwPjehUvvdKlZjv6K5TMXsQEb5qIVhA8VBXzwsZQJYov5MIfAKB6OFSTYYV5sZnR5t4wY1brYUXfDLMD3qqHvEQoIg9sC/IE+xEqCsxXA9+69ei/0c79n7REcxL4Ug87spdjim+/ROw4k59Q2fclsbfy73EdP9uGQSnGKOUC91ZdYubgjWcrcZwGILX2JSfGoH2+WkWI417o/yvGzdjIXEfLei12z/KyfzAT8unmZk+WP7EuxruB51RYsfy9O2iqHZKKL57deDiU03zCvSfh1eXIspHldwt/FKis+CF1zGuoaGX+I3pQNKfbJ+p6Kv/PBaj49RNddeknUWwqdPBIFli9qCjm/vE4YC5XokvPL66SR6Oo6Jpoq+CM8N68cQj7nDlLBr9PqhlDX9Sp+da1iCE1fQ8XfpewZ5ZAmkCn5LUixmGZIeT2v5hf7ZGOhS2Rq/tk+6NPzskROskQiNGKErmmdaRifTMgw+pd9v2md6av26af+l/fcsIIJ5VCMJCoXsj9KQ1FtwwcP403QzHrys1JmT5diKGS8ORlsemeaLXjG48NoF0XA907zRHRnRaN8UFLwCCjKY6k+n2nlUFfwKG/LNf7xjSnlUKcelLv21GbSftAPcJK1+QYYRm5SB+oMP94Hkbla9dlS/lHvbEKtC0kWFWGqnnXxf/Capp1pRE1d9RD+2lagEzjIg0YtiQjCRavcim/vPmgDJFRkYGKCaOOaKNdsYxBYIwRTkyh8HnOzGbAkkxhA22+ziUw+aNKXJeFu83M+mfTD4N6naKltfkeiIGgixMj7bX7GoSwk1vAi6KwOFvmpgWaiAhB+7ra+ItwQUE0CUPclsW0CHhfuzW4Xyd0N/iu0MxIz0EwKiMax0T9kmAHjWj+TkBkT8R9JAlJDLXfVTyVsgMnyjauQs36uYSSd8IgCpXayoQVutU+MasXdGvVkl2Em7XIcj2ZkNov8fdXKDLHdi4k83A//kkeo22rvT/kYkWx9HrziKCR3b1f+b6KDg4ODg4ODg4ODgwRf9gIoOKaA6/cAAAAASUVORK5CYII="
+                            alt="disclaimer_icon">
 
 
                     <h3>Disclaimer</h3>
@@ -171,6 +137,42 @@
                 </ul>
 
 
+            </div>
+
+            <div class="details-tb">
+                <table>
+
+                    <!-- Add more rows for other details -->
+
+                    <tr>
+                        <td><strong>Review:</strong></td>
+                        <td>
+                            <div class="star-rating">
+                                <!-- Add your star rating spans here -->
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Material:</strong></td>
+                        <td>{{ product.material }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Max-width:</strong></td>
+                        <td>150</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Max-height:</strong></td>
+                        <td>160</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Size:</strong></td>
+                        <td>{{ product.size }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Id:</strong></td>
+                        <td>{{ product.id }}</td>
+                    </tr>
+                </table>
             </div>
 
 

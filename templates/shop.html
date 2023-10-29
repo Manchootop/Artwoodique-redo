@@ -21,111 +21,59 @@
 
 <div class="wrapper">
     {% include 'header.html' %}
-
-    <!-- main section -->
-    <nav class="breadcrumbs" style="">
-        <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><span>/</span></li>
-            <li style="font-size: 2rem">STORE</li>
-        </ul>
-    </nav>
-
-
+    <h1>Store</h1>
     <main>
-        <div class="left-col">
-            <aside class="filter-sidebar">
-                <h2>Filter Options</h2>
-
-                <!-- Material Filter -->
-                <form method="GET">
-                    {% csrf_token %}
-                    {{ filter.form.material.label_tag }}
-                    {{ filter.form.material }}
-
-                    {{ filter.form.size.label_tag }}
-                    {{ filter.form.size }}
-
-                    {{ filter.form.price.label_tag }}
-                    {{ filter.form.price }}
-
-                    <button type="submit">Apply Filters</button>
-                </form>
-
-            </aside>
-
-            <div class="right-col">
-                <!-- Your product grid goes here -->
+        <header>
+            <span>{{ products|length }}  results found</span>
+            <div class="dropdown">
+                <p>Sort by</p>
+                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="?sort_by=default&order=asc">Default</a>
+                    <a href="?sort_by=price&order=asc">Price (Low to High)</a>
+                    <a href="?sort_by=price&order=desc">Price (High to Low)</a>
+                    <a href="?sort_by=views&order=desc">Most Views</a>
+                </div>
             </div>
-
-        </div>
-
-
-        <div class="right-col">
-            <header>
-                <span>{{ products|length }}  results found</span>
-                <div class="dropdown">
-                    <p>Sort by</p>
-                    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="?sort_by=default&order=asc">Default</a>
-                        <a href="?sort_by=price&order=asc">Price (Low to High)</a>
-                        <a href="?sort_by=price&order=desc">Price (High to Low)</a>
-                        <a href="?sort_by=views&order=desc">Most Views</a>
+        </header>
+        <div class="cards">
+            {% for product in products %}
+                <div class="card">
+                    <a href="{% url 'catalog-details' pk=product.id %}">
+                        <img src="{{ product.image.url }}" alt="product_image">
+                    </a>
+                    <div class="card-details">
+                        <div>
+                            <a href="{% url 'catalog-details' pk=product.id %}"
+                               class="product-title">{{ product.name }}</a>
+                            <p>{{ product.subheading }}</p>
+                        </div>
+                        <p class="product-price">${{ product.price }}</p>
                     </div>
                 </div>
-
-
-            </header>
-
-            {#            <div class="navigation">#}
-            {#                <ul>#}
-            {#                    <li><a href="#">Tables</a></li>#}
-            {#                    <li><a href="#">others</a></li>#}
-            {#                    <li><a href="#">all</a></li>#}
-            {#                </ul>#}
-            {#            </div>#}
-
-            <div class="cards">
-                {% for product in products %}
-                    <div class="card">
-                        <img src="{{ product.image.url }}" alt="product_image">
-                        <div class="card-details">
-                            <div>
-                                <a href="{% url 'catalog-details' pk=product.id %}"
-                                   class="product-title">{{ product.name }}</a>
-                                <p>{{ product.subheading }}</p>
-                            </div>
-                            <p class="product-price">${{ product.price }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-
-
-            </div>
-            {% if is_paginated %}
-                <ul class="pagination">
-                    {% if page_obj.has_previous %}
-                        <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-                    {% else %}
-                        <li class="disabled"><span>&laquo;</span></li>
-                    {% endif %}
-                    {% for i in paginator.page_range %}
-                        {% if page_obj.number == i %}
-                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                        {% else %}
-                            <li><a href="?page={{ i }}">{{ i }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                    {% if page_obj.has_next %}
-                        <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-                    {% else %}
-                        <li class="disabled"><span>&raquo;</span></li>
-                    {% endif %}
-                </ul>
-            {% endif %}
-
+            {% endfor %}
         </div>
+        {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
 
     </main>
 </div>

@@ -536,6 +536,7 @@ footer {
     align-items: center;
     background-color: white;
     padding: 20px;
+    background-image: url("https://www.xlab.design/wp-content/uploads/2018/08/xlab-footer-bg-min.png")
 
 }
 
@@ -876,7 +877,7 @@ h4 {
     }
 }
 
-.why-choose-us, footer, h4, .bg-pattern {
+.why-choose-us, h4, body, .bg-pattern {
     background-image: url("https://www.xlab.design/wp-content/uploads/2019/05/xlab-pattern.jpg");
     background-repeat: no-repeat;
     background-size: cover;
