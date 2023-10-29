@@ -13,7 +13,7 @@
             rel="stylesheet">
     <script src="{% static 'js/shop.js' %}"></script>
     <link rel="shortcut icon" href="{% static 'images/AW-logo.svg' %}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
@@ -36,23 +36,38 @@
                 </div>
             </div>
         </header>
-        <div class="cards">
-            {% for product in products %}
-                <div class="card">
-                    <a href="{% url 'catalog-details' pk=product.id %}">
-                        <img src="{{ product.image.url }}" alt="product_image">
-                    </a>
-                    <div class="card-details">
-                        <div>
-                            <a href="{% url 'catalog-details' pk=product.id %}"
-                               class="product-title">{{ product.name }}</a>
-                            <p>{{ product.subheading }}</p>
-                        </div>
-                        <p class="product-price">${{ product.price }}</p>
-                    </div>
+<div class="cards">
+    {% for product in products %}
+        <div class="card">
+            <a href="{% url 'catalog-details' pk=product.id %}">
+                <img src="{{ product.image.url }}" alt="product_image">
+                <div class="like-button">
+                    <i class="far fa-heart"></i> <!-- Font Awesome heart icon for like -->
                 </div>
-            {% endfor %}
+            </a>
+            <div class="card-details">
+                <div>
+                    <a href="{% url 'catalog-details' pk=product.id %}" class="product-title">{{ product.name }}</a>
+                    <p>{{ product.subheading }}</p>
+                </div>
+                <div class="product-rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="average-score">4.5</p> <!-- Replace with the actual average score -->
+                </div>
+                <p class="product-price">${{ product.price }}</p>
+            </div>
         </div>
+    {% endfor %}
+</div>
+
+
+
         {% if is_paginated %}
             <ul class="pagination">
                 {% if page_obj.has_previous %}

@@ -244,6 +244,54 @@ nav ul li a:hover:before {
     transform: translateY(-20px);
 } */
 
+/* Like button */
+/* Add a white circle around the like button icon */
+/* Add a white circle around the like button icon */
+/* Add a white circle around the like button icon */
+.like-button {
+    position: absolute;
+    top: 10px; /* Adjust the vertical position as needed */
+    right: 10px; /* Adjust the horizontal position as needed */
+    width: 30px; /* Adjust the size of the circle as needed */
+    height: 30px; /* Adjust the size of the circle as needed */
+    background-color: white;
+    border-radius: 50%; /* Create a circular shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.like-button i {
+    color: #ff0000; /* Set the initial color of the heart icon */
+    font-size: 20px; /* Adjust the icon size as needed */
+    transition: color 0.3s; /* Add a transition for color changes */
+}
+
+.like-button:hover i {
+    color: #ff0000; /* Set the color of the heart icon on hover */
+}
+
+
+
+
+/* Review stars */
+.stars {
+    display: flex;
+    color: gold; /* Change the color as needed */
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.stars i {
+    margin-right: 3px; /* Adjust the spacing between stars */
+}
+
+.average-score {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
 @media (max-width: 1000px) {
     .cards {
         grid-template-columns: repeat(2, 1fr);

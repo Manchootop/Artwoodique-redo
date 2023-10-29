@@ -131,3 +131,13 @@ class Subscriber(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class OrderItem(models.Model):
+    item = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.item.name
+
+class Order(models.Model):
+    pass
