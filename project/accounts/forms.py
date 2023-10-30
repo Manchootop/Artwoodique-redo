@@ -1,61 +1,110 @@
+from django.contrib.auth import forms as auth_forms, get_user_model
+# from phonenumber_field.formfields import PhoneNumberField
 from django import forms
-from django_countries.fields import CountryField
-from django_countries.widgets import CountrySelectWidget
+
+from project.accounts.models import ArtwoodiqueUserProfile
+
+UserModel = get_user_model()
 
 
-PAYMENT_CHOICES = (
-    ('S', 'Stripe'),
-    ('P', 'PayPal')
-)
+class UserRegisterForm(auth_forms.UserCreationForm):
+    first_name = forms.CharField(max_length=ArtwoodiqueUserProfile.FIRST_NAME_MAX_LENGTH)
+    last_name = forms.CharField(max_length=ArtwoodiqueUserProfile.LAST_NAME_MAX_LENGTH)
+    date_of_birth = forms.DateField()
+    gender = forms.ChoiceField(choices=ArtwoodiqueUserProfile.GENDERS)
+
+    def save(self, commit=True):
+        user = super().save(commit=commit)
+        profile = ArtwoodiqueUserProfile(
+            first_name=self.cleaned_data['first_name'],
+            last_name=self.cleaned_data['last_name'],
+            phone_number=self.cleaned_data['phone_number'],
+            date_of_birth=self.cleaned_data['date_of_birth'],
+            gender=self.cleaned_data['gender'],
+            user=user,
+        )
+        if commit:
+            profile.save()
+        return user
+
+    class Meta:
+        model = UserModel
+        fields = ('password1', 'password2', 'first_name', 'last_name', 'gender')
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder': 'Enter first name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Enter last name'}),
+            'date_of_birth': forms.DateInput(attrs={'min': '1920-01-01'}),
+        }
 
 
-class CheckoutForm(forms.Form):
-    shipping_address = forms.CharField(required=False)
-    shipping_address2 = forms.CharField(required=False)
-    shipping_country = CountryField(blank_label='(select country)').formfield(
-        required=False,
-        widget=CountrySelectWidget(attrs={
-            'class': 'custom-select d-block w-100',
-        }))
-    shipping_zip = forms.CharField(required=False)
+class EditProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.initial['gender'] = ArtwoodiqueUserProfile.DO_NOT_SHOW
 
-    billing_address = forms.CharField(required=False)
-    billing_address2 = forms.CharField(required=False)
-    billing_country = CountryField(blank_label='(select country)').formfield(
-        required=False,
-        widget=CountrySelectWidget(attrs={
-            'class': 'custom-select d-block w-100',
-        }))
-    billing_zip = forms.CharField(required=False)
-
-    same_billing_address = forms.BooleanField(required=False)
-    set_default_shipping = forms.BooleanField(required=False)
-    use_default_shipping = forms.BooleanField(required=False)
-    set_default_billing = forms.BooleanField(required=False)
-    use_default_billing = forms.BooleanField(required=False)
-
-    payment_option = forms.ChoiceField(
-        widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
+    class Meta:
+        model = ArtwoodiqueUserProfile
+        fields = '__all__'
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder': 'Enter first name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Enter last name'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Enter email'}),
+            'date_of_birth': forms.DateInput(attrs={'min': '1920-01-01'}),
+        }
 
 
-class CouponForm(forms.Form):
-    code = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Promo code',
-        'aria-label': 'Recipient\'s username',
-        'aria-describedby': 'basic-addon2'
-    }))
+class UserRegisterForm1(auth_forms.UserCreationForm):
+    first_name = forms.CharField(
+        max_length=ArtwoodiqueUserProfile.FIRST_NAME_MAX_LENGTH,
+    )
+
+    last_name = forms.CharField(
+        max_length=ArtwoodiqueUserProfile.LAST_NAME_MAX_LENGTH,
+    )
+
+    date_of_birth = forms.DateField()
+
+    gender = forms.ChoiceField(
+        choices=ArtwoodiqueUserProfile.GENDERS,
+    )
+
+    def save(self, commit=True):
+        user = super().save(commit=commit)
+
+        profile = ArtwoodiqueUserProfile(
+            first_name=self.cleaned_data['first_name'],
+            last_name=self.cleaned_data['last_name'],
+            date_of_birth=self.cleaned_data['date_of_birth'],
+            gender=self.cleaned_data['gender'],
+            user=user,
+        )
+
+        if commit:
+            profile.save()
+        return user
+
+    class Meta:
+        model = UserModel
+        fields = ('email', 'password1', 'password2', 'first_name', 'last_name',)
+
+        widgets = {
+            'first_name': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter first name',
+                }
+            ),
+            'last_name': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter last name',
+                }
+            ),
+        }
 
 
-class RefundForm(forms.Form):
-    ref_code = forms.CharField()
-    message = forms.CharField(widget=forms.Textarea(attrs={
-        'rows': 4
-    }))
-    email = forms.EmailField()
+class DeleteProfileForm(forms.ModelForm):
+    def save(self, commit=True):
+        pass
 
-
-class PaymentForm(forms.Form):
-    stripeToken = forms.CharField(required=False)
-    save = forms.BooleanField(required=False)
-    use_default = forms.BooleanField(required=False)
+    class Meta:
+        model = ArtwoodiqueUserProfile
+        fields = ()

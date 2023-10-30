@@ -1,5 +1,6 @@
 from django.contrib import admin
 from project.main.models import Product, ProductImage, ProductRating, Subscriber
+from .models import OrderItem, Order, Payment, Coupon, Refund, Address, UserProfile
 
 
 class ProductImageInline(admin.TabularInline):  # Use TabularInline for a table-based layout
@@ -11,7 +12,7 @@ class ProductImageInline(admin.TabularInline):  # Use TabularInline for a table-
 class ProductAdmin(admin.ModelAdmin):
     search_fields = ('__all__',)
     readonly_fields = ('views',)
-    list_display = ('id', 'name', 'price')
+    list_display = ('id', 'title', 'price')
     inlines = [ProductImageInline]
 
 
@@ -52,11 +53,67 @@ class ProductRatingAdmin(admin.ModelAdmin):
 #             'fields': ('has_expired',),
 #         }),
 #     )
-
-
 @admin.register(Subscriber)
 class SubscriberAdminModel(admin.ModelAdmin):
     pass
 
 
-from django.contrib import admin
+def make_refund_accepted(modeladmin, request, queryset):
+    queryset.update(refund_requested=False, refund_granted=True)
+
+
+make_refund_accepted.short_description = 'Update orders to refund granted'
+
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['user',
+                    'ordered',
+                    'being_delivered',
+                    'received',
+                    'refund_requested',
+                    'refund_granted',
+                    'shipping_address',
+                    'billing_address',
+                    'payment',
+                    'coupon'
+                    ]
+    list_display_links = [
+        'user',
+        'shipping_address',
+        'billing_address',
+        'payment',
+        'coupon'
+    ]
+    list_filter = ['ordered',
+                   'being_delivered',
+                   'received',
+                   'refund_requested',
+                   'refund_granted']
+    search_fields = [
+        'user__username',
+        'ref_code'
+    ]
+    actions = [make_refund_accepted]
+
+
+class AddressAdmin(admin.ModelAdmin):
+    list_display = [
+        'user',
+        'street_address',
+        'apartment_address',
+        'country',
+        'zip',
+        'address_type',
+        'default'
+    ]
+    list_filter = ['default', 'address_type', 'country']
+    search_fields = ['user', 'street_address', 'apartment_address', 'zip']
+
+
+admin.site.register(OrderItem)
+admin.site.register(Order, OrderAdmin)
+admin.site.register(Payment)
+admin.site.register(Coupon)
+admin.site.register(Refund)
+admin.site.register(Address, AddressAdmin)
+admin.site.register(UserProfile)

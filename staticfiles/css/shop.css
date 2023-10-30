@@ -27,67 +27,6 @@ body {
 
 /* Navbar */
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
-/* header.main-header {
-    position: sticky;
-    z-index: 999;
-    top: 0;
-    background-color: white;
-} */
-
-nav {
-    margin: 2em 0;
-}
-
-nav ul {
-    list-style-type: none;
-    display: flex;
-    gap: 4.1em;
-    margin: 0;
-}
-
-nav ul li a,
-.logo {
-    text-decoration: none;
-    color: black;
-    text-transform: uppercase;
-    font-size: 1.6rem;
-    position: relative;
-}
-
-.logo {
-    font-weight: 500;
-}
-
-nav ul li a.active:before {
-    position: absolute;
-    content: "";
-    width: 35%;
-    height: 1px;
-    border-bottom: 2px solid black;
-    bottom: -6px;
-}
-
-/* for microinteraction */
-
-nav ul li a:before {
-    position: absolute;
-    content: "";
-    width: 0%;
-    height: 1px;
-    border-bottom: 2px solid rgb(122, 122, 122);
-    bottom: -6px;
-    transition: width .3s;
-}
-
-/* Hero Section */
-
 .page-description {
     background: var(--main-bg-color-light);
     padding: 2em;
@@ -97,34 +36,6 @@ nav ul li a:before {
     align-items: center
 }
 
-main {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr 4fr;
-    grid-template-areas:
-        "aside main"
-        "aside main";
-    gap: 4em;
-    margin: 2em 0 11em 0;
-    align-items: start;
-}
-
-main > * {
-    /* border: 1px solid black; */
-}
-
-.left-col {
-    width: 15%;
-    grid-area: aside;
-    position: sticky;
-    z-index: 1000;
-    top: 1em;
-}
-
-.right-col {
-    flex-grow: 1;
-    grid-area: main;
-}
 
 h1 {
     font-size: 5.2rem;
@@ -134,25 +45,25 @@ h1 {
     text-align: center;
 }
 
-.right-col header {
+main header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 3em;
 }
 
-.right-col header span {
+main header span {
     font-size: 1.8rem;
     font-family: 'Poppins';
     font-weight: lighter;
 }
 
-.right-col header .dropdown {
+main header .dropdown {
     display: flex;
     gap: 1rem;
 }
 
-.right-col header .dropdown p {
+main header .dropdown p {
     font-size: 2.2rem;
     margin: 0;
 }
@@ -333,11 +244,59 @@ nav ul li a:hover:before {
     transform: translateY(-20px);
 } */
 
+/* Like button */
+/* Add a white circle around the like button icon */
+/* Add a white circle around the like button icon */
+/* Add a white circle around the like button icon */
+.like-button {
+    position: absolute;
+    top: 10px; /* Adjust the vertical position as needed */
+    right: 10px; /* Adjust the horizontal position as needed */
+    width: 30px; /* Adjust the size of the circle as needed */
+    height: 30px; /* Adjust the size of the circle as needed */
+    background-color: white;
+    border-radius: 50%; /* Create a circular shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.like-button i {
+    color: #ff0000; /* Set the initial color of the heart icon */
+    font-size: 20px; /* Adjust the icon size as needed */
+    transition: color 0.3s; /* Add a transition for color changes */
+}
+
+.like-button:hover i {
+    color: #ff0000; /* Set the color of the heart icon on hover */
+}
+
+
+
+
+/* Review stars */
+.stars {
+    display: flex;
+    color: gold; /* Change the color as needed */
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.stars i {
+    margin-right: 3px; /* Adjust the spacing between stars */
+}
+
+.average-score {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
 @media (max-width: 1000px) {
     .cards {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 1fr 1fr;
-        gap: 0em 4em;
+        gap: 0 4em;
         /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
 
         list-style: none;
@@ -350,6 +309,10 @@ nav ul li a:hover:before {
         /* Adjust the margin as per your preference */
     }
 
+    aside.filter-sidebar {
+        padding: 1em;
+        margin: 0 -3em 0 -2em;
+    }
 }
 
 @media (max-width: 800px) {

@@ -17,7 +17,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'project.main'
+    'project.main',
+    'project.accounts',
+
+    'crispy_forms',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'django_countries',
+    'crispy_bootstrap5',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -25,6 +33,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -114,3 +123,10 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_FROM_EMAIL = "mariqn5000@gmail.com"
 
+STRIPE_SECRET_KEY = "sk_test_Thatshurt74408K"
+
+# settings.py
+LOGIN_REDIRECT_URL = '/'
+# AUTH_USER_MODEL = 'accounts.ArtwoodiqueUser'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
