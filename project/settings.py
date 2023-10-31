@@ -76,16 +76,16 @@ if DEBUG:
         }
     }
 else:
-    # DATABASES = {
-    #     "default": {
-    #         "ENGINE": "django.db.backends.postgresql",
-    #         "NAME": "artwoodique-original_db",
-    #         "USER": "mkaurgxzzuaiyu",
-    #         "PASSWORD": "dc5916eff18122b15dfbdc152cc06ddf9215f66fd4e616c9b77de0f3d3ba9b27",
-    #         "HOST": "ec2-34-251-233-253.eu-west-1.compute.amazonaws.com",
-    #         "PORT": "5432",
-    #     }
-    # }
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "artwoodique-original_db",
+            "USER": "mkaurgxzzuaiyu",
+            "PASSWORD": "dc5916eff18122b15dfbdc152cc06ddf9215f66fd4e616c9b77de0f3d3ba9b27",
+            "HOST": "ec2-34-251-233-253.eu-west-1.compute.amazonaws.com",
+            "PORT": "5432",
+        }
+    }
 
     DATABASES = {
         "default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))
@@ -129,4 +129,3 @@ LOGIN_REDIRECT_URL = '/'
 # AUTH_USER_MODEL = 'accounts.ArtwoodiqueUser'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
-
