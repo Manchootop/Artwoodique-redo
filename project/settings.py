@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 import cloudinary
-import suit
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Read SECRET_KEY from the file
@@ -91,7 +90,7 @@ else:
     DATABASES = {
         "default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))
     }
-if DEBUG:
+if not DEBUG:
     AUTH_PASSWORD_VALIDATORS = [
         {
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
