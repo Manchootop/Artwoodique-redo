@@ -64,7 +64,7 @@ TEMPLATES = [
     },
 ]
 WSGI_APPLICATION = 'project.wsgi.application'
-if not DEBUG:
+if DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
