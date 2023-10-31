@@ -88,7 +88,7 @@ else:
     }
 
     DATABASES = {
-        "default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))
+        "default": dj_database_url.config(default=os.environ.get("DATABASE_URL1"))
     }
 if not DEBUG:
     AUTH_PASSWORD_VALIDATORS = [
