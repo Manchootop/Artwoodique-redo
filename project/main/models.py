@@ -14,7 +14,7 @@ from project.shared.models import TimeBaseModel
 
 
 def upload_image_product_url(instance, filename):
-    return f'product/{instance.name}-product/images/default-image/{filename}'
+    return f'product/{instance.title}-product/images/default-image/{filename}'
 
 
 ADDRESS_CHOICES = (
@@ -111,6 +111,7 @@ class Product(models.Model):
         })
 
     def get_add_to_cart_url(self):
+        print('lolol')
         return reverse("add-to-cart", kwargs={
             'slug': self.slug
         })

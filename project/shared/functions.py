@@ -30,7 +30,7 @@ def delete_all_photos(model, object_pk):
 
 # Sort default image dirs of products by name
 def upload_image_product_url(instance, filename):
-    return f'product/{instance.name}-/default-image/{filename}'
+    return f'product/{instance.title}-/default-image/{filename}'
 
 
 # Sort other images dirs of products

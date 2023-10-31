@@ -20,6 +20,61 @@ body {
 }
 
 /* Navbar */
+.message {
+    list-style: none;
+    border-radius: 10px;
+    box-shadow: 3px 3px 4px 0px rgba(50, 50, 50, 0.75);
+    color: white;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+    width: 80%;
+}
+
+/*
+ * Give the various message types the correct colors
+ */
+.message.success {
+    background-color: green;
+}
+
+.message.error {
+    background-color: red;
+}
+
+.success {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Info Messages */
+.info {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Warning Messages */
+.warning {
+    background-color: #FF9800;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Error Messages */
+.error {
+    background-color: #F44336;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
 
 main .header h1 {
     font-size: 5.2rem;
@@ -44,6 +99,7 @@ main .header p {
 .slider-container {
     background: #efefef;
 }
+
 .slider {
     display: flex;
     justify-content: center;
@@ -57,7 +113,8 @@ main .header p {
 .slider ul li span {
     font-size: 2rem;
 }
-.slider ul li .slider-cta p a{
+
+.slider ul li .slider-cta p a {
     font-size: 1.4rem;
     color: black;
 }
@@ -75,7 +132,7 @@ main .header p {
     margin-top: 2em;
 }
 
-.container>* {
+.container > * {
     /* border: 1px solid black; */
     padding: 1em;
 }
@@ -207,7 +264,6 @@ th {
     margin: 2em 0 2em 0;
     justify-content: center;
 }
-
 
 
 .primary-cta {
