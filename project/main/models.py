@@ -44,10 +44,12 @@ class Product(models.Model):
     PRICE_MIN_VALUE = 0
 
     discount_price = models.FloatField(
+        default=0,
         blank=True,
         null=True
     )
     label = models.CharField(
+        default='S',
         choices=LABEL_CHOICES,
         max_length=1
     )
@@ -66,7 +68,9 @@ class Product(models.Model):
         max_length=100,
     )
 
-    slug = models.SlugField()
+    slug = models.SlugField(
+        default='default_text'
+    )
 
     size = models.CharField(
         max_length=100,
