@@ -36,35 +36,37 @@
                 </div>
             </div>
         </header>
-<div class="cards">
-    {% for product in products %}
-        <div class="card">
-            <a href="{% url 'catalog-details' pk=product.id %}">
-                <img src="{{ product.image.url }}" alt="product_image">
-                <div class="like-button">
-                    <i class="far fa-heart"></i> <!-- Font Awesome heart icon for like -->
-                </div>
-            </a>
-            <div class="card-details">
-                <div>
-                    <a href="{% url 'catalog-details' pk=product.id %}" class="product-title">{{ product.name }}</a>
-                    <p>{{ product.subheading }}</p>
-                </div>
-                <div class="product-rating">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
+        <div class="cards">
+            {% for product in products %}
+                <div class="card">
+                    <div class="like-button">
+                        <i class="far fa-heart"></i> <!-- Font Awesome heart icon for like -->
                     </div>
-                    <p class="average-score">4.5</p> <!-- Replace with the actual average score -->
+                    <a href="{% url 'catalog-details' pk=product.id %}">
+                        <img src="{{ product.image.url }}" alt="product_image">
+
+                    </a>
+                    <div class="card-details">
+                        <div>
+                            <a href="{% url 'catalog-details' pk=product.id %}"
+                               class="product-title">{{ product.name }}</a>
+                            <p>{{ product.subheading }}</p>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="average-score">4.5</p> <!-- Replace with the actual average score -->
+                        </div>
+                        <p class="product-price">${{ product.price }}</p>
+                    </div>
                 </div>
-                <p class="product-price">${{ product.price }}</p>
-            </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-</div>
 
 
 

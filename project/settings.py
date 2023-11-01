@@ -37,14 +37,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-if DEBUG:
+if not DEBUG:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     cloudinary.config(
         cloud_name="dzkpnriaw",
         api_key="549581289117547",
         api_secret="Jwd3ECNeENCxeCcEE3LZyx1DY14"
     )
-if DEBUG:
+if not DEBUG:
     MIDDLEWARE += 'whitenoise.middleware.WhiteNoiseMiddleware',
 ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
@@ -64,7 +64,7 @@ TEMPLATES = [
     },
 ]
 WSGI_APPLICATION = 'project.wsgi.application'
-if not DEBUG:
+if DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",

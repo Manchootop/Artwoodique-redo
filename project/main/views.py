@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.db.models import Avg
+from django.http import JsonResponse
 from django.views import generic as views
 import random
 import string
@@ -653,3 +654,22 @@ class RequestRefundView(View):
             except ObjectDoesNotExist:
                 messages.info(self.request, "This order does not exist.")
                 return redirect("request-refund")
+
+
+def like_button_view(request, pk):
+    if request.method == 'POST' and request.is_ajax():
+        obj = get_object_or_404(Product, pk=pk)  # Replace YourModel with your model class
+        liked = request.POST.get('liked') == 'true'
+
+        if liked:
+            # Handle like logic, e.g., increase the like count or mark as liked
+            obj.likes += 1
+            obj.save()
+        else:
+            # Handle dislike logic, e.g., decrease the like count or mark as not liked
+            obj.likes -= 1
+            obj.save()
+
+        return JsonResponse({'success': True, 'likes': obj.likes})
+
+    return JsonResponse({'success': False})

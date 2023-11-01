@@ -26,7 +26,7 @@ function updateMainImage() {
 }
 
 // Function to handle click on sidebar images
-function handleSidebarImageClick(index) {
+function handleSi3debarImageClick(index) {
     currentImageIndex = index;
     updateMainImage();
 }

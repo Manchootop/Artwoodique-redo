@@ -84,6 +84,10 @@ class Product(models.Model):
         default=0
     )
 
+    like = models.IntegerField(
+        default=0
+    )
+
     # details = hstore.DictionaryField(
     #     'details of product', default=dict
     # )
