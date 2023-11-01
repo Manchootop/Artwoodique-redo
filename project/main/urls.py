@@ -19,5 +19,10 @@ urlpatterns = [
     path('remove-item-from-cart/<slug>/', remove_single_item_from_cart,
          name='remove-single-item-from-cart'),
     path('payment/<payment_option>/', PaymentView.as_view(), name='payment'),
-    path('request-refund/', RequestRefundView.as_view(), name='request-refund')
+    path('request-refund/', RequestRefundView.as_view(), name='request-refund'),
+    path('like_button/<int:pk>/', views.like_button_view, name='like_button_view'),
+    path('like/', views.toggle_like, name='toggle-like'),
+
+    # URL pattern for adding/removing an item to/from the wishlist
+    path('wishlist/', views.toggle_wishlist, name='toggle-wishlist'),
 ]

@@ -169,7 +169,7 @@ main header .dropdown p {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr 1fr;
-    gap: 0em 4em;
+    gap: 0 4em;
     /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
 
     list-style: none;
@@ -279,6 +279,9 @@ nav ul li a:hover:before {
 
 .like-button.liked {
     color: red; /* Change the color to red when the button is liked */
+}
+.like-button.liked i {
+    color: red
 }
 
 /* Review stars */

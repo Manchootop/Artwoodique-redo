@@ -1,52 +1,43 @@
-// Get the current URL or page name
-const currentPage = window.location.pathname;
-
-// Find the corresponding breadcrumb link and highlight it
-document.querySelectorAll('.breadcrumbs a').forEach(link => {
-    if (link.getAttribute('href') === currentPage) {
-        link.classList.add('current-page');
-    }
-});
-
-
 document.addEventListener("DOMContentLoaded", function () {
-    const likeButton = document.querySelector(".like-button");
-    let isLiked = false;
+    // Find all like buttons
+    const likeButtons = document.querySelectorAll(".like-button");
 
-    likeButton.addEventListener("click", function () {
-        if (isLiked) {
-            // Handle the case when the button is already liked
-            toggleLike(false); // Call a function to toggle the like state and send an AJAX request
-        } else {
-            // Handle the case when the button is not liked
-            toggleLike(true); // Call a function to toggle the like state and send an AJAX request
-        }
+    likeButtons.forEach((likeButton) => {
+        likeButton.addEventListener("click", function () {
+            const itemID = likeButton.getAttribute("data-item-id"); // Get the item ID from the data attribute
+            console.log(itemID);
+            toggleLike(itemID, likeButton);
+        });
     });
 
-    function toggleLike(like) {
-        // Send an AJAX request to like/unlike the item on the server
-        fetch("/like", {
+    function toggleLike(itemID, likeButton) {
+        console.log(itemID);
+
+        // Toggle the "like" status on the server
+        fetch("/wishlist/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "X-CSRFToken": getCookie("csrftoken"),
             },
-            body: JSON.stringify({ item_id: 123, liked: like }), // Send item ID and liked status
+            body: JSON.stringify({ item_id: itemID }),
         })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.liked) {
-                    // Item is liked, update the UI
-                    likeButton.classList.add("liked");
-                } else {
-                    // Item is unliked, update the UI
-                    likeButton.classList.remove("liked");
-                }
-                isLiked = data.liked; // Update the liked state
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.liked) {
+                likeButton.classList.add("liked");
+                likeButton.children[0].classList.remove("far");
+                likeButton.children[0].classList.add("fa");
+
+            } else {
+                likeButton.classList.remove("liked");
+                likeButton.children[0].classList.add("far");
+                likeButton.children[0].classList.remove("fa");
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
     }
 
     function getCookie(name) {

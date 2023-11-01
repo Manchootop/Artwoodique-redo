@@ -11,7 +11,7 @@
     <link
             href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Poppins:wght@200;300;400;700&display=swap"
             rel="stylesheet">
-    <script src="{% static 'js/shop.js' %}"></script>
+    <script src="{% static 'js/shop.js' %}" defer></script>
     <link rel="shortcut icon" href="{% static 'images/AW-logo.svg' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
@@ -39,8 +39,10 @@
         <div class="cards">
             {% for product in products %}
                 <div class="card">
-                    <div class="like-button">
+                    <div class="like-button" data-item-id="{{ product.id }}">
                         <i class="far fa-heart"></i> <!-- Font Awesome heart icon for like -->
+{#                        <i class="fa fa-heart" aria-hidden="true"></i>#}
+
                     </div>
                     <a href="{% url 'catalog-details' pk=product.id %}">
                         <img src="{{ product.image.url }}" alt="product_image">
@@ -140,7 +142,8 @@
     }
 </style>
 
-<script>    function myFunction() {
+<script>
+    function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
@@ -162,26 +165,5 @@ function myFunction() {
     const dropdownContent = document.getElementById("myDropdown");
     dropdownContent.classList.toggle("show");
 }
-
-// Change the button text when an option is selected
-document.querySelectorAll(".dropdown-content a").forEach(function (option) {
-    option.addEventListener("click", function () {
-        const buttonText = option.getAttribute("data-option-text");
-        document.getElementById("dropdownButton").textContent = buttonText;
-    });
-});
-
-// Close the dropdown menu when clicking outside of it
-window.addEventListener('click', function (event) {
-    if (!event.target.matches('.dropbtn')) {
-        const dropdowns = document.getElementsByClassName("dropdown-content");
-        for (let i = 0; i < dropdowns.length; i++) {
-            const openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-});
 </script>
 </html>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from project.main.models import Product, ProductImage, ProductRating, Subscriber
+from project.main.models import Product, ProductImage, ProductRating, Subscriber, WishList, ItemLike
 from .models import OrderItem, Order, Payment, Coupon, Refund, Address, UserProfile
 
 
@@ -117,3 +117,5 @@ admin.site.register(Coupon)
 admin.site.register(Refund)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(UserProfile)
+admin.site.register(ItemLike)
+admin.site.register(WishList)

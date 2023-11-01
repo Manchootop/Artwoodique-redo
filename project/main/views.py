@@ -15,9 +15,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
+from django.views.decorators.http import require_POST
 from django.views.generic import ListView, DetailView, View
 from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
-from .models import Product, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile
+from .models import Product, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile, ItemLike, WishList
 from project import settings
 from .filters import ProductFilter
 from .forms import NewsletterSignupForm
@@ -673,3 +674,82 @@ def like_button_view(request, pk):
         return JsonResponse({'success': True, 'likes': obj.likes})
 
     return JsonResponse({'success': False})
+
+
+@require_POST
+def toggle_like(request):
+    item_id = request.POST.get('item_id')
+    liked = request.POST.get('liked')
+
+    if item_id and liked is not None:
+        item_id = int(item_id)
+        liked = int(liked)
+
+        user = request.user
+        item = Product.objects.get(id=item_id)
+
+        try:
+            item_like = ItemLike.objects.get(user=user, item=item)
+        except ItemLike.DoesNotExist:
+            item_like = None
+
+        if liked == 1:
+            # User wants to like the item
+            if not item_like:
+                item_like = ItemLike(user=user, item=item)
+                item_like.save()
+
+            # Add the item to the wishlist
+            wishlist_item, created = WishList.objects.get_or_create(user=user, item=item)
+        else:
+            # User wants to unlike the item
+            if item_like:
+                item_like.delete()
+
+            # Remove the item from the wishlist
+            WishList.objects.filter(user=user, item=item).delete()
+
+        return JsonResponse({'liked': liked == 1})
+    return JsonResponse({'error': 'Invalid data'}, status=400)
+
+
+from django.http import JsonResponse
+import json
+
+from django.http import JsonResponse
+import json
+from django.core.exceptions import ObjectDoesNotExist
+
+@require_POST
+def toggle_wishlist(request):
+    user = request.user
+
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+        item_id = data.get('item_id')
+
+        if item_id is None:
+            return JsonResponse({'error': 'Missing item_id in the request body'}, status=400)
+
+        # Try to find matching WishList objects for the user and item_id
+        wishlist_items = WishList.objects.filter(user=user, item_id=item_id)
+
+        if wishlist_items.exists():
+            # If there are matching objects, remove them
+            wishlist_items.delete()
+            liked = False
+        else:
+            try:
+                product = Product.objects.get(pk=item_id)
+                # If no matching objects, create a new one
+                WishList.objects.create(user=user, item=product)
+                liked = True
+            except Product.DoesNotExist:
+                return JsonResponse({'error': 'Product not found'}, status=400)
+
+        return JsonResponse({'liked': liked})
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON data in the request body'}, status=400)
+
+
+

@@ -12,7 +12,6 @@ from project.shared.functions import upload_other_images_product_url
 from project.shared.models import TimeBaseModel
 
 
-
 def upload_image_product_url(instance, filename):
     return f'product/{instance.title}-product/images/default-image/{filename}'
 
@@ -314,3 +313,19 @@ def userprofile_receiver(sender, instance, created, *args, **kwargs):
 
 
 post_save.connect(userprofile_receiver, sender=settings.AUTH_USER_MODEL)
+
+
+class ItemLike(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    item = models.ForeignKey(Product, on_delete=models.CASCADE)  # Assuming you have an `Item` model
+    liked = models.BooleanField(default=False)
+
+
+class WishList(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    item = models.ForeignKey(Product, on_delete=models.CASCADE)  # Assuming you have an `Item` model
+    added_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username}'s wishlist item: {self.item.title}"
