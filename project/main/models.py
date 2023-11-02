@@ -34,6 +34,8 @@ class UserProfile(models.Model):
     stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
     one_click_purchasing = models.BooleanField(default=False)
 
+
+
     def __str__(self):
         return self.user.username
 
@@ -127,6 +129,14 @@ class Product(models.Model):
         return reverse("remove-from-cart", kwargs={
             'slug': self.slug
         })
+
+    def is_liked_by_user(self, user):
+        try:
+            # Check if the user has liked the item
+            self.wishlist_set.get(user=user)
+            return True
+        except WishList.DoesNotExist:
+            return False
 
 
 class ProductImage(TimeBaseModel):

@@ -65,9 +65,12 @@ class CollectionView(views.ListView):
     context_object_name = 'products'
     paginate_by = 9
 
+
+
     def get_queryset(self):
         queryset = Product.objects.filter(in_stock=True)
         product_filter = ProductFilter(self.request.GET, queryset=queryset)
+
 
         sort_by = self.request.GET.get('sort_by')
         order = self.request.GET.get('order', 'asc')
@@ -90,6 +93,16 @@ class CollectionView(views.ListView):
         context['filter'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
         context['count'] = ProductFilter
         return context
+
+    # @login_required
+    # def dispatch(self, request, *args, **kwargs):
+    #     # Check if the user is authenticated
+    #
+    #     if request.user.is_authenticated:
+    #         context = self.get_context_data()
+    #         context['liked_products'] = WishList.objects.filter(user=request.user)
+    #         return super().dispatch(request, *args, **kwargs)
+    #     return super().dispatch(request, *args, **kwargs)
 
 
 class CatalogView(views.ListView):
@@ -751,5 +764,13 @@ def toggle_wishlist(request):
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid JSON data in the request body'}, status=400)
 
+def get_liked_status(request, item_id):
+    if request.user.is_authenticated:
+        # Check if the user has liked the product with the given item_id
+        liked = WishList.objects.filter(user=request.user, item_id=item_id).exists()
+    else:
+        liked = False
 
+    # Return the liked status as JSON
+    return JsonResponse({'liked': liked})
 
