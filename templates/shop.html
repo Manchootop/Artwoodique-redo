@@ -39,9 +39,15 @@
         <div class="cards">
             {% for product in products %}
                 <div class="card">
+                    <div class="card-badges">
+                        <div class="card-badge badge--discount" style="background-color: rgb(255,66,0);">
+                            <span class="badge-label">-7%</span>
+
+                        </div>
+                    </div>
                     <div class="like-button" data-item-id="{{ product.id }}">
-                        <i class="far fa-heart" ></i> <!-- Font Awesome heart icon for like -->
-{#                        <i class="fa fa-heart" aria-hidden="true"></i>#}
+                        <i class="far fa-heart"></i> <!-- Font Awesome heart icon for like -->
+                        {#                        <i class="fa fa-heart" aria-hidden="true"></i>#}
 
                     </div>
                     <a href="{% url 'catalog-details' pk=product.id %}">
@@ -50,21 +56,38 @@
                     </a>
                     <div class="card-details">
                         <div>
+
                             <a href="{% url 'catalog-details' pk=product.id %}"
-                               class="product-title">{{ product.name }}</a>
+                               class="product-title">{{ product.title }}</a>
                             <p>{{ product.subheading }}</p>
                         </div>
-                        <div class="product-rating">
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
+                        {#                        <div class="product-rating">#}
+                        {#                            <div class="stars">#}
+                        {#                                <i class="fas fa-star"></i>#}
+                        {#                                <i class="fas fa-star"></i>#}
+                        {#                                <i class="fas fa-star"></i>#}
+                        {#                                <i class="fas fa-star"></i>#}
+                        {#                                <i class="fas fa-star-half-alt"></i>#}
+                        {#                            </div>#}
+                        {#                            <p class="average-score">4.5</p> <!-- Replace with the actual average score -->#}
+                        {#                        </div>#}
+{#                        <p class="product-price">#}
+                        <div class="card-content">
+                            <div class="card-pricing">
+                                <div class="card-price-old"><s>469<sup><small class="mf-decimal">,</small>99</sup><span>лв.</span></s>
+                                </div>
+
+                                <div class="card-price-current">
+                                    439<sup><small class="mf-decimal">,</small>99</sup><span>лв.</span></div>
                             </div>
-                            <p class="average-score">4.5</p> <!-- Replace with the actual average score -->
+                            <div class="card-buy">
+                                <a href="/peralnja-heinner-6-kg-1000-ob-min-klas-d-led-displej-60-sm-bjal-hwm-v6010d/pd/DVPJ17MBM/?ref=prod_CMP-282857_6149_65514"
+                                   class="btn js-product-link" aria-label="Product details">
+                                    <i class="em em-double-right"></i>
+                                </a>
+                            </div>
                         </div>
-                        <p class="product-price">${{ product.price }}</p>
+{#                        </p>#}
                     </div>
                 </div>
             {% endfor %}
@@ -144,26 +167,26 @@
 
 <script>
     function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function (event) {
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
             }
         }
     }
-}
 
-function myFunction() {
-    const dropdownContent = document.getElementById("myDropdown");
-    dropdownContent.classList.toggle("show");
-}
+    function myFunction() {
+        const dropdownContent = document.getElementById("myDropdown");
+        dropdownContent.classList.toggle("show");
+    }
 </script>
 </html>
