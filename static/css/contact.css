@@ -121,64 +121,49 @@ body {
     right: 20px; /* Adjust as needed */
 }
 
-
-/* Navbar */
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav {
-    margin: 2em 0;
-}
-
-nav ul {
-    list-style-type: none;
-    display: flex;
-    gap: 4.1em;
-    margin: 0;
-}
-
-nav ul li a, .logo {
-    text-decoration: none;
-    color: black;
-    text-transform: uppercase;
-    font-size: 1.6rem;
-    position: relative;
-}
-
-.logo {
-    font-weight: 500;
-}
-
-nav ul li a.active:before {
-    position: absolute;
-    content: "";
-    width: 35%;
-    height: 1px;
-    border-bottom: 2px solid black;
-    bottom: -6px;
-}
-
-/* for microinteraction */
-
-nav ul li a:before {
-    position: absolute;
-    content: "";
-    width: 0%;
-    height: 1px;
-    border-bottom: 2px solid rgb(122, 122, 122);
-    bottom: -6px;
-    transition: width .3s;
-}
-
-/* Hero Section */
-
 main {
     display: flex;
     flex-wrap: nowrap;
     gap: 8em;
     margin: 0 0 10em 0;
+}
+
+.left-col {
+    width: 47%;
+    background-color: red;
+}
+
+
+.right-col {
+    flex-grow: 1;
+}
+
+h1 {
+    font-size: 5.2rem;
+    font-family: 'Playfair Display SC', sans-serif;
+    font-weight: normal;
+    margin: 0;
+    text-align: center;
+}
+.contacts-card {
+    display: flex;
+    justify-content: space-around;
+    gap: 2em;
+
+}
+
+
+.first-row, .second-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10em
+
+}
+
+section {
+    margin: 1em;
+    background-color: #b5b7ae;
+    padding: 1em;
+
 }

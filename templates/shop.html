@@ -56,29 +56,18 @@
                     </a>
                     <div class="card-details">
                         <div>
-
                             <a href="{% url 'catalog-details' pk=product.id %}"
                                class="product-title">{{ product.title }}</a>
                             <p>{{ product.subheading }}</p>
-                        </div>
-                        {#                        <div class="product-rating">#}
-                        {#                            <div class="stars">#}
-                        {#                                <i class="fas fa-star"></i>#}
-                        {#                                <i class="fas fa-star"></i>#}
-                        {#                                <i class="fas fa-star"></i>#}
-                        {#                                <i class="fas fa-star"></i>#}
-                        {#                                <i class="fas fa-star-half-alt"></i>#}
-                        {#                            </div>#}
-                        {#                            <p class="average-score">4.5</p> <!-- Replace with the actual average score -->#}
-                        {#                        </div>#}
-{#                        <p class="product-price">#}
-                        <div class="card-content">
+                            <div class="card-content">
                             <div class="card-pricing">
-                                <div class="card-price-old"><s>469<sup><small class="mf-decimal">,</small>99</sup><span>лв.</span></s>
+                                <div class="card-price-old"><s>{{ product.price }}<sup><small
+                                        class="mf-decimal">,</small>99</sup><span>лв.</span></s>
                                 </div>
 
                                 <div class="card-price-current">
-                                    439<sup><small class="mf-decimal">,</small>99</sup><span>лв.</span></div>
+                                    {{ product.discount_price }}<sup><small class="mf-decimal">,</small>99</sup><span>лв.</span>
+                                </div>
                             </div>
                             <div class="card-buy">
                                 <a href="/peralnja-heinner-6-kg-1000-ob-min-klas-d-led-displej-60-sm-bjal-hwm-v6010d/pd/DVPJ17MBM/?ref=prod_CMP-282857_6149_65514"
@@ -87,7 +76,9 @@
                                 </a>
                             </div>
                         </div>
-{#                        </p>#}
+                        </div>
+
+                        {#                        </p>#}
                     </div>
                 </div>
             {% endfor %}
