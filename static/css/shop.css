@@ -20,6 +20,7 @@ body {
     /*background-image: url('https://www.xlab.design/wp-content/uploads/2019/05/xlab-pattern.jpg');*/
     background-image: url('https://www.xlab.design/wp-content/uploads/2019/05/xlab-pattern.jpg');
 
+    /*background-repeat: no-repeat;*/
 
 }
 
@@ -42,7 +43,7 @@ body {
 
 h1 {
     font-size: 5.2rem;
-    font-family: 'Playfair Display SC';
+    font-family: 'Playfair Display SC', sans-serif;
     font-weight: normal;
     margin: 0 auto;
     text-align: center;
@@ -173,7 +174,7 @@ main header .dropdown p {
 .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: repeat(auto-fill, minmax(auto, 1fr));
     gap: 0 4em;
     /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
 
@@ -207,8 +208,8 @@ main header .dropdown p {
 
 
 .card-details {
-    display: flex;
-    justify-content: space-between;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
     /*border: 1px solid black;*/
     background: white;
     border-radius: .6em;
@@ -476,7 +477,7 @@ aside {
 .card {
     overflow: hidden;
     transition: transform 0.3s;
-    box-shadow: 0 3px 12px -2px rgba(0,0,0,.25);
+    box-shadow: 0 3px 12px -2px rgba(0, 0, 0, .25);
 }
 
 .card:hover {
@@ -505,7 +506,8 @@ aside {
 .card-badges .card-badge {
     margin: 0;
     width: 100%;
-    border-radius: 0
+    border-radius: 0;
+    padding: .25em 0;
 }
 
 .card-badges .badge--offer,
@@ -556,7 +558,7 @@ span.badge-label {
     text-align: center;
     justify-self: center;
     color: white;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
 }
 
 .card-pricing .card-price-old {
@@ -570,3 +572,11 @@ span.badge-label {
     font-weight: 800;
     color: #ef2809;
 }
+
+
+/* styles.css */
+
+/* Container styling */
+
+
+/* Footer styling */

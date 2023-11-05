@@ -39,12 +39,14 @@
         <div class="cards">
             {% for product in products %}
                 <div class="card">
-                    <div class="card-badges">
-                        <div class="card-badge badge--discount" style="background-color: rgb(255,66,0);">
-                            <span class="badge-label">-7%</span>
+                    {% if product.discount_price != product.discount_price.default and product.discount_price != 0 %}
+                        <div class="card-badges">
+                            <div class="card-badge badge--discount" style="background-color: rgb(255,66,0);">
+                                <span class="badge-label">-{{ product.discount_price|floatformat:0 }} лв.</span>
 
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                     <div class="like-button" data-item-id="{{ product.id }}">
                         <i class="far fa-heart"></i> <!-- Font Awesome heart icon for like -->
                         {#                        <i class="fa fa-heart" aria-hidden="true"></i>#}
@@ -57,25 +59,29 @@
                     <div class="card-details">
                         <div>
                             <a href="{% url 'catalog-details' pk=product.id %}"
-                               class="product-title">{{ product.title }}</a>
-                            <p>{{ product.subheading }}</p>
+                               class="product-title"
+                               style=" display: -webkit-box; max-width: 20ch; -webkit-line-clamp: 2">{{ product.title }}
+                                ASDASDASDASDASDASDASDSAASD</a>
+                            {#                            <p>{{ product.subheading }}ASDADASDASDASASASDAS</p>#}
                             <div class="card-content">
-                            <div class="card-pricing">
-                                <div class="card-price-old"><s>{{ product.price }}<sup><small
-                                        class="mf-decimal">,</small>99</sup><span>лв.</span></s>
+                                <div class="card-pricing">
+                                    {% if product.discount_price %}
+                                        <div class="card-price-old"><s>{{ product.price }}<sup><small
+                                                class="mf-decimal">,</small>99</sup><span>лв.</span></s>
+                                        </div>
+                                    {% endif %}
+                                    <div class="card-price-current">
+                                        {{ product.discount_price }}<sup><small
+                                            class="mf-decimal">,</small>99</sup><span>лв.</span>
+                                    </div>
                                 </div>
-
-                                <div class="card-price-current">
-                                    {{ product.discount_price }}<sup><small class="mf-decimal">,</small>99</sup><span>лв.</span>
+                                <div class="card-buy">
+                                    <a href="/peralnja-heinner-6-kg-1000-ob-min-klas-d-led-displej-60-sm-bjal-hwm-v6010d/pd/DVPJ17MBM/?ref=prod_CMP-282857_6149_65514"
+                                       class="btn js-product-link" aria-label="Product details">
+                                        <i class="em em-double-right"></i>
+                                    </a>
                                 </div>
                             </div>
-                            <div class="card-buy">
-                                <a href="/peralnja-heinner-6-kg-1000-ob-min-klas-d-led-displej-60-sm-bjal-hwm-v6010d/pd/DVPJ17MBM/?ref=prod_CMP-282857_6149_65514"
-                                   class="btn js-product-link" aria-label="Product details">
-                                    <i class="em em-double-right"></i>
-                                </a>
-                            </div>
-                        </div>
                         </div>
 
                         {#                        </p>#}
@@ -112,23 +118,13 @@
 </div>
 
 </main>
-
-</div>
-
+{% include 'footer.html' %}
 
 </body>
 
 
 <style>
-    input[type="text"],
-    input[type="number"] {
-        width: 100%;
-        padding: 10px;
-        margin: .8em 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 14px;
-    }
+
 
     label {
         font-size: 1.6rem
@@ -141,19 +137,6 @@
     .card {
     }
 
-    button {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
 </style>
 
 <script>

@@ -264,61 +264,7 @@
 </div>
 
 
-<div class="container">
-    <hr>
-    <footer>
-        <div class="left-col">
-            <div class="contact-item">
-                <div class="icon">
-                    <img src="{% static 'images/email.png' %}" alt="Phone Icon">
-                </div>
-                <div class="text">
-                    <h3>Client Service</h3>
-                    <span>+359 878 130 052</span>
-                </div>
-            </div>
-            <div class="contact-item">
-                <div class="icon">
-                    <img src="{% static 'images/email.png' %}" alt="Email Icon">
-                </div>
-                <div class="text">
-                    <h3>Request an offer</h3>
-                    <span>info@artwoodique.com</span>
-                </div>
-            </div>
-            <div class="contact-item">
-                <div class="icon">
-                    <img src="{% static 'images/withdraw.png' %}" alt="Withdraw Icon">
-                </div>
-                <div class="text">
-                    <h3>Right of Withdrawal</h3>
-                    <span>Within 14 days of delivery</span>
-                </div>
-            </div>
-            <div class="contact-item">
-                <div class="icon">
-                    <img src="{% static 'images/faq.png' %}" alt="FAQ Icon">
-                </div>
-                <div class="text">
-                    <h3>FAQ</h3>
-                    <span>Need help? Click <em><a href="{% url 'faq' %}">here</a></em></span>
-                </div>
-            </div>
-        </div>
-        <div class="right-col">
-            <div class="newsletter">
-                <h2>Subscribe to Our Newsletter</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </footer>
-        <h4 class="full-width-heading">Copyrights reserved 2023©</h4>
 
-</div>
 
 <style>
     .container {
@@ -423,6 +369,7 @@
         });
     });
 </script>
+{% include 'footer.html' %}
 
 </body>
 

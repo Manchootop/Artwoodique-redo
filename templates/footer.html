@@ -1,48 +1,57 @@
-<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<div class="container">
+    <hr>
+    <footer class="bg-img">
+        <div class="left-col">
+            <div class="contact-item">
+                <div class="icon">
+                    <img src="{% static 'images/email.png' %}" alt="Phone Icon">
+                </div>
+                <div class="text">
+                    <h3>Client Service</h3>
+                    <span>+359 878 130 052</span>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="icon">
+                    <img src="{% static 'images/email.png' %}" alt="Email Icon">
+                </div>
+                <div class="text">
+                    <h3>Request an offer</h3>
+                    <span>info@artwoodique.com</span>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="icon">
+                    <img src="{% static 'images/withdraw.png' %}" alt="Withdraw Icon">
+                </div>
+                <div class="text">
+                    <h3>Right of Withdrawal</h3>
+                    <span>Within 14 days of delivery</span>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="icon">
+                    <img src="{% static 'images/faq.png' %}" alt="FAQ Icon">
+                </div>
+                <div class="text">
+                    <h3>FAQ</h3>
+                    <span>Need help? Click <em><a href="{% url 'faq' %}">here</a></em></span>
+                </div>
+            </div>
+        </div>
+        <div class="right-col">
+            <div class="newsletter">
+                <h2>Subscribe to Our Newsletter</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+        <h4 class="full-width-heading">Copyrights reserved 2023©</h4>
 
-    <hr class="my-4">
-
-    <!-- Social icons -->
-    <div class="pb-4">
-      <a href="https://www.facebook.com/mdbootstrap" target="_blank">
-        <i class="fab fa-facebook-f mr-3"></i>
-      </a>
-
-      <a href="https://twitter.com/MDBootstrap" target="_blank">
-        <i class="fab fa-twitter mr-3"></i>
-      </a>
-
-      <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
-        <i class="fab fa-youtube mr-3"></i>
-      </a>
-
-      <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
-        <i class="fab fa-google-plus-g mr-3"></i>
-      </a>
-
-      <a href="https://dribbble.com/mdbootstrap" target="_blank">
-        <i class="fab fa-dribbble mr-3"></i>
-      </a>
-
-      <a href="https://pinterest.com/mdbootstrap" target="_blank">
-        <i class="fab fa-pinterest mr-3"></i>
-      </a>
-
-      <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
-        <i class="fab fa-github mr-3"></i>
-      </a>
-
-      <a href="http://codepen.io/mdbootstrap/" target="_blank">
-        <i class="fab fa-codepen mr-3"></i>
-      </a>
-    </div>
-    <!-- Social icons -->
-
-    <!--Copyright-->
-    <div class="footer-copyright py-3">
-      © 2019 Copyright:
-      <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
-    </div>
-    <!--/.Copyright-->
-
-  </footer>
+</div>

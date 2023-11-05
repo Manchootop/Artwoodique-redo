@@ -25,6 +25,7 @@ from .forms import NewsletterSignupForm
 from .models import Product, ProductImage, ProductRating, Subscriber
 
 
+
 class HomeView(views.TemplateView):
     template_name = 'index.html'
 
@@ -65,12 +66,9 @@ class CollectionView(views.ListView):
     context_object_name = 'products'
     paginate_by = 9
 
-
-
     def get_queryset(self):
         queryset = Product.objects.filter(in_stock=True)
         product_filter = ProductFilter(self.request.GET, queryset=queryset)
-
 
         sort_by = self.request.GET.get('sort_by')
         order = self.request.GET.get('order', 'asc')
@@ -733,6 +731,7 @@ from django.http import JsonResponse
 import json
 from django.core.exceptions import ObjectDoesNotExist
 
+
 @require_POST
 def toggle_wishlist(request):
     user = request.user
@@ -764,6 +763,7 @@ def toggle_wishlist(request):
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid JSON data in the request body'}, status=400)
 
+
 def get_liked_status(request, item_id):
     if request.user.is_authenticated:
         # Check if the user has liked the product with the given item_id
@@ -773,4 +773,3 @@ def get_liked_status(request, item_id):
 
     # Return the liked status as JSON
     return JsonResponse({'liked': liked})
-

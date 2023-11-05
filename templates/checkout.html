@@ -1,9 +1,11 @@
-{% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+<div class="wrapper">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% include 'header.html' %}
 
-{% block content %}
-
-  <main >
+ <main >
     <div class="container wow fadeIn">
       <h2 class="my-5 h2 text-center">Checkout form</h2>
       <div class="row">
@@ -138,10 +140,9 @@
 
     </div>
   </main>
+</div>
 
-{% endblock content %}
-
-{% block extra_scripts %}
+{#{% block extra_scripts %}#}
 <script>
 var hideable_shipping_form = $('.hideable_shipping_form');
 var hideable_billing_form = $('.hideable_billing_form');
@@ -166,4 +167,4 @@ use_default_billing.addEventListener('change', function() {
 })
 
 </script>
-{% endblock extra_scripts %}
+{#{% endblock extra_scripts %}#}

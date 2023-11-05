@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import cloudinary
 import dj_database_url
+import sys
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Read SECRET_KEY from the file
@@ -55,6 +56,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'project.main.context_processors.newsletter_signup_form',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',

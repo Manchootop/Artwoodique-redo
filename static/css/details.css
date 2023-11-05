@@ -271,9 +271,9 @@ th {
     font-size: 1.8rem;
 }
 
-.details p.description {
+.details p {
     font-weight: lighter;
-    font-size: 2rem;
+    font-size: 1.6rem;
 
 }
 
@@ -281,9 +281,11 @@ th {
 
 .cta-btns {
     display: flex;
+    flex-direction: column;
     gap: 2em;
     margin: 2em 0 2em 0;
     justify-content: center;
+    text-align: center;
 }
 
 
@@ -301,9 +303,11 @@ th {
     font-size: 1.8rem;
     text-decoration: none;
     color: black;
-    display: block;
+    display: inline-block;
     padding: 1em 0;
     align-items: center;
+    border: 1px solid #F1E2D1;
+    border-radius: .8em;
 }
 
 
@@ -387,3 +391,4 @@ th {
         opacity: 1;
     }
 }
+
