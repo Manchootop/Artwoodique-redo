@@ -16,10 +16,25 @@ class NewsletterSignupForm(forms.Form):
     )
 
 
+class ContactForm(forms.Form):
+    heading = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'heading'
+            }
+        )
+    )
+
+    email = forms.EmailField(
+        widget=forms.TextInput(attrs={'placeholder': 'email'})
+    )
+
+    message = forms.Textarea()
+
+
 from django.forms.models import inlineformset_factory
 
 ProductImageFormSet = inlineformset_factory(Product, ProductImage, fields=('image', 'name'), extra=1)
-
 
 PAYMENT_CHOICES = (
     ('S', 'Stripe'),

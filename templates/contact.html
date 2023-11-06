@@ -31,6 +31,7 @@
     </div>
 
     {% include 'header.html' %}
+
     <div class="container">
         <div class="messages custom-message">
             {% for message in messages %}
@@ -66,9 +67,7 @@
             {% endfor %}
         </div>
     </div>
-    <main style="">
-
-
+    <main>
         <div class="left-col">
             <h1>Contacts</h1>
             <div class="contacts-card">
@@ -83,23 +82,31 @@
                     </section>
 
                 </div>
-                 <div class="second-row">
-                        <section class="contact-block">
-                            <img src="" alt="">
-                            <span>+359 878 130 052</span>
-                        </section>
-                        <section class="contact-block">
-                            <img src="" alt="">
-                            <span>artwoodique@gmail.com</span>
-                        </section>
-                    </div>
+                <div class="second-row">
+                    <section class="contact-block">
+                        <img src="" alt="">
+                        <span>+359 878 130 052</span>
+                    </section>
+                    <section class="contact-block">
+                        <img src="" alt="">
+                        <span>artwoodique@gmail.com</span>
+                    </section>
+                </div>
 
 
-        </div>
-        <div class="right-col"></div>
+            </div>
+            <div class="right-col"></div>
 
     </main>
 
+    <div class="right-col">
+        <div class="contact-us-wrapper">
+            {{ form }}
+            {% csrf_token %}
+        </div>
+    </div>
+</div>
+</main>
 </div>
 </body>
 </html>
