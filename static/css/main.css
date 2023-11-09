@@ -7,7 +7,7 @@ html {
 }
 
 :root {
-    --main-bg-color-light: #bfa271;
+    --main-bg-color-light: #F1E2D1;
     --main-bg-color-dark: #583d22;
 
     --header-font: 'Playfair Display SC';
@@ -172,7 +172,7 @@ main {
     display: flex;
     flex-wrap: nowrap;
     gap: 8em;
-    margin: 0 0 10em 0;
+    margin: 0;
 }
 
 .left-col {
@@ -565,7 +565,7 @@ h3 {
 
 
 .products-services {
-    margin: 4em 0;
+    margin: 4em 0 20em 0;
     font-family: var(--header-font);
 
 }
@@ -626,9 +626,67 @@ h3 {
     margin: 5em 0;
 }
 
+hr {
+    margin-top: 15em;
+}
 
 .section {
     margin: 8em 0;
+}
+@media (max-width: 1250px) {
+    .what-you-get {
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+@media (max-width: 900px) {
+    main {
+        display: inline-block;
+        margin: 0 auto;
+        padding: 1em;
+
+    }
+
+    .cta-btns {
+        justify-content: center;
+    }
+
+    .primary-cta {
+        padding: .8em .1em .8em .1em;
+    }
+
+    .card0:before {
+        width: 100%;
+        height: 100%;
+        top: -70px;
+        left: -50px;
+    }
+
+    .left-col {
+        align-self: center;
+        text-align: center;
+        margin: 0 auto;
+        width: 80%;
+    }
+
+    .right-col {
+        /*height: 100%;*/
+        /*background: red;*/
+        margin: 0 3em 3em 3em;
+        padding: 0 3em 3em 3em;
+    }
+
+    .card {
+        height: 100%;
+        margin: 8em 0;
+        padding: 2em;
+    }
+
+    .card img {
+        background-size: cover;
+    }
+
 }
 
 @media (max-width: 768px) {
@@ -636,10 +694,56 @@ h3 {
         padding: 1em; /* Reduce padding for smaller screens */
     }
 
-    .right-col {
-        grid-template-columns: 1fr; /* Single column layout on smaller screens */
-        text-align: center; /* Center text in right column */
+    .cta-btns {
+        gap: 3em;
     }
+
+    .primary-cta {
+        text-align: center;
+        padding: .8em;
+    }
+
+    .secondary-cta svg {
+        margin: 0 auto;
+    }
+
+    /*.right-col {*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*    align-items: normal;*/
+    /*    justify-content: space-between;*/
+    /*    !*grid-template-columns: 1fr; !* Single column layout on smaller screens *!*!*/
+    /*    !*grid-template-rows: none;*!*/
+    /*    text-align: center; !* Center text in right column *!*/
+    /*    margin: 0;*/
+    /*}*/
+    .right-col {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        margin: 1em auto;
+
+    }
+
+    .card {
+        flex-direction: column;
+        max-height: 500px;
+        min-height: 350px;
+        margin: 1em 0;
+    }
+
+    .card img {
+        height: 300px;
+    }
+    .card {
+        flex-direction: column-reverse;
+
+    }
+
+    .card-details {
+        /*display: block;*/
+    }
+
 
     .what-you-get {
         grid-template-columns: 1fr; /* Single column layout on smaller screens */
@@ -668,8 +772,7 @@ h3 {
 
 /* Media Queries */
 
-/* Small screens (up to 768px) */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (max-height: 768px) {
     .offerings {
         flex-direction: column; /* Stack items in the offerings section */
         align-items: center; /* Center items horizontally */
@@ -677,11 +780,6 @@ h3 {
         padding: 1em; /* Reduce padding for smaller screens */
     }
 
-    .right-col,
-    .left-col {
-        width: 100%; /* Make columns full width on smaller screens */
-        max-width: none; /* Remove max-width */
-    }
 
     .what-you-get {
         grid-template-columns: 1fr; /* Single column layout on smaller screens */
@@ -762,47 +860,16 @@ h4 {
     }
 }
 
-@media (max-width: 900px) {
-    main {
-        flex-direction: column;
-        margin: 2em;
-        padding: 3em;
-    }
-
-    .primary-cta {
-        padding: .8em .1em .8em .1em;
-    }
-
-    .card0:before {
-        width: 100%;
-        height: 100%;
-        top: -70px;
-        left: -50px;
-    }
-
-    .left-col {
-        margin-right: 0;
-        align-self: center;
-        width: 80%;
-    }
-    .right-col {
-        height: 100%;
-        margin: 0 3em 3em 3em;
-        padding: 0 3em 3em 3em;
-    }
-    .card {
-        height: 100%;
-        margin: 8em 0;
-        padding: 2em;
-    }
-    .card img {
-        background-size: cover;
-    }
-}
 
 .why-choose-us, h4, body, .bg-pattern {
     background-image: url("https://www.xlab.design/wp-content/uploads/2019/05/xlab-pattern.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+@media (max-width: 900px) {
+    .what_do_you_get {
+        margin-top: 5em;
+    }
 }
 

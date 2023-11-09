@@ -123,34 +123,45 @@ body {
 
 main {
     display: flex;
+    flex-direction: column;
     flex-wrap: nowrap;
     gap: 8em;
     margin: 0 0 10em 0;
 }
 
-.left-col {
-    width: 47%;
-    background-color: red;
+main .left-col {
+    background-color: var(--main-bg-color-light);
+    border-radius: .8em;
+    margin: auto;
+
 }
 
 
-.right-col {
-    flex-grow: 1;
+main .right-col {
+    background-color: var(--main-bg-color-dark);
+    border-radius: .8em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    min-width: 500px;
+
 }
 
-h1 {
+h1 {    
     font-size: 5.2rem;
     font-family: 'Playfair Display SC', sans-serif;
     font-weight: normal;
     margin: 0;
     text-align: center;
 }
+
 .contacts-card {
     display: flex;
     justify-content: space-around;
     gap: 2em;
 
-}
+    }
 
 
 .first-row, .second-row {
@@ -163,7 +174,58 @@ h1 {
 
 section {
     margin: 1em;
-    background-color: #b5b7ae;
+    background-color: white;
     padding: 1em;
 
+}
+
+.right-col input[type="text"],
+.right-col input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: .8em 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.right-col button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.right-col button:hover {
+    background-color: #0056b3;
+}
+
+.contact-us-wrapper  {
+    margin: auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2em;
+}
+
+.contact-us-wrapper span {
+    color: white;
+    font-family: "Playfair Display SC", sans-serif;
+    font-size: 5.2rem;
+    text-align: center;
+    margin-bottom: .5em;
+}
+
+.contact-us-wrapper div:first-child {
+    margin-bottom: 1em;
+}
+
+
+.contact-us-wrapper label {
+    color: white;
+    text-align: center;
+    display: none;
 }

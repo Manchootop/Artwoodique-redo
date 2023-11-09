@@ -392,3 +392,14 @@ th {
     }
 }
 
+.card-pricing .card-price-old {
+    color: #888;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.card-pricing .card-price-current {
+    font-size: 16px;
+    font-weight: 800;
+    color: #ef2809;
+}

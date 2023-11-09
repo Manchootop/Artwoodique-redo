@@ -1,4 +1,6 @@
+{% load crispy_forms_filters %}
 {% load static %}
+{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -97,16 +99,19 @@
             </div>
             <div class="right-col"></div>
 
+        </div>
+        <div class="right-col">
+            <div class="contact-us-wrapper">
+                <span>Write us</span>
+                {{ form|crispy }}
+                {% csrf_token %}
+                <button style="margin-top: 1em">Submit</button>
+            </div>
+        </div>
     </main>
 
-    <div class="right-col">
-        <div class="contact-us-wrapper">
-            {{ form }}
-            {% csrf_token %}
-        </div>
-    </div>
-</div>
-</main>
+
+    {% include 'footer.html' %}
 </div>
 </body>
 </html>

@@ -21,7 +21,11 @@
 
 <div class="wrapper">
     {% include 'header.html' %}
+{% if is_catalog %}
+    <h1>Catalog</h1>
+{% else %}
     <h1>Store</h1>
+{% endif %}
     <main>
         <header>
             <span>{{ products|length }}  results found</span>

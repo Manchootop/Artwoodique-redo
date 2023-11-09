@@ -1,9 +1,13 @@
 # forms.py
 from django import forms
 from django import forms
+from django.contrib import messages
+from django.core.mail import send_mail
+
+from project import settings
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
-from project.main.models import Product, ProductImage
+from project.main.models import Product, ProductImage, Subscriber
 
 
 class NewsletterSignupForm(forms.Form):

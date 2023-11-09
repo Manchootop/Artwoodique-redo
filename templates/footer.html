@@ -46,7 +46,8 @@
                 <h2>Subscribe to Our Newsletter</h2>
                 <form method="post">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {{ newsletter_signup_form.as_p }}
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
                     <button type="submit">Subscribe</button>
                 </form>
             </div>

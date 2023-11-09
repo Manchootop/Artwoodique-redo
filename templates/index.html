@@ -54,6 +54,7 @@
     </div>
 
     {% include 'header.html' %}
+{% if messages %}
     <div class="container">
         <div class="messages custom-message">
             {% for message in messages %}
@@ -89,6 +90,7 @@
             {% endfor %}
         </div>
     </div>
+{% endif %}
     <main>
         <div class="left-col">
             <h1>Elegance Unveiled - Wood & Resin Masterpieces</h1>

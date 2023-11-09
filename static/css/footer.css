@@ -2,17 +2,19 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    /*background-color: white;*/
     padding: 20px;
     color: black;
 
+    background-color: #F1E2D1;
+
 }
 
-.bg-img {
-        background-image: url('/static/images/_8622b691-9eae-44a1-9e37-2699d2d8bac1.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-}
+/*.bg-img {*/
+/*        background-image: url('/static/images/_8622b691-9eae-44a1-9e37-2699d2d8bac1.jpg');*/
+/*        background-repeat: no-repeat;*/
+/*        background-size: cover;*/
+/*}*/
 
 
 /* Left column styling */

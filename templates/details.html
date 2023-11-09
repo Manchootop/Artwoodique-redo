@@ -34,39 +34,39 @@
     {#        </div>#}
     {#        <!-- Repeat this structure for each new arrival -->#}
     {#    </div>#}
-<div class="messages custom-message">
-            {% for message in messages %}
-                {% if message.tags == 'success' %}
-                    <div class="alert alert-success">
-                        {{ message }}
-                        <button type="button" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% elif message.tags == 'info' %}
-                    <div class="alert alert-info">
-                        {{ message }}
-                        <button type="button" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% elif message.tags == 'warning' %}
-                    <div class="alert alert-warning">
-                        {{ message }}
-                        <button type="button" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% elif message.tags == 'error' %}
-                    <div class="alert alert-danger">
-                        {{ message }}
-                        <button type="button" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
+    <div class="messages custom-message">
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-success">
+                    {{ message }}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message.tags == 'info' %}
+                <div class="alert alert-info">
+                    {{ message }}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message.tags == 'warning' %}
+                <div class="alert alert-warning">
+                    {{ message }}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message.tags == 'error' %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
     <main>
 
 
@@ -102,20 +102,43 @@
 
 
             <div class="details">
-                <span style="font-size: 1.4rem; color: red; margin-top: -1em; margin-bottom: 1em">Catalog</span>
-                <h2>{{ product.name }}</h2>
+                {% if product.in_stock %}
+                    <span style="font-size: 1.4rem; color: red; margin-top: -1em; margin-bottom: 1em">Store</span>
+                {% else %}
+                    <span style="font-size: 1.4rem; color: red; margin-top: -1em; margin-bottom: 1em">Catalog</span>
+                {% endif %}
+                <h2>{{ product.title }}</h2>
                 <span>{{ product.subheading }}</span>
                 <br>
-                <span>{{ product.price|floatformat:2 }}</span>
+                {#                <span>{{ product.price|floatformat:2 }}</span>#}
+                <div class="card-content">
+                    <div class="card-pricing">
+                        {% if product.discount_price %}
+                            <div class="card-price-old"><s>{{ product.price }}<sup><small
+                                    class="mf-decimal">,</small>99</sup><span>лв.</span></s>
+                            </div>
+                        {% endif %}
+                        <div class="card-price-current">
+                            {{ product.discount_price }}<sup><small
+                                class="mf-decimal">,</small>99</sup><span>лв.</span>
+                        </div>
+                    </div>
+                    <div class="card-buy">
+                        <a href="/peralnja-heinner-6-kg-1000-ob-min-klas-d-led-displej-60-sm-bjal-hwm-v6010d/pd/DVPJ17MBM/?ref=prod_CMP-282857_6149_65514"
+                           class="btn js-product-link" aria-label="Product details">
+                            <i class="em em-double-right"></i>
+                        </a>
+                    </div>
+                </div>
                 <p>{{ product.description }}</p>
 
 
                 <div class="cta-btns">
-                    <a href="{{ product.add_to_cart_url }}" class="primary-cta" id="contactLink">Contact us</a>
-                    <a href="{{ product.get_add_to_cart_url }}" class="secondary-cta" id="contactLink">
-                        <img src="/static/images/cart.svg" alt="cart_icon">
-                        Add to cart
-                    </a>
+                    <a href="#" class="primary-cta" id="contactLink">Contact us</a>
+                    {#                    <a href="{{ product.get_add_to_cart_url }}" class="secondary-cta" id="contactLink">#}
+                    {#                        <img src="/static/images/cart.svg" alt="cart_icon">#}
+                    {#                        Add to cart#}
+                    {#                    </a>#}
 
 
                     <div id="popup" class="popup">
@@ -181,14 +204,14 @@
 
                     <!-- Add more rows for other details -->
 
-                    <tr>
-                        <td><strong>Review:</strong></td>
-                        <td>
-                            <div class="star-rating">
-                                <!-- Add your star rating spans here -->
-                            </div>
-                        </td>
-                    </tr>
+                    {#                    <tr>#}
+                    {#                        <td><strong>Review:</strong></td>#}
+                    {#                        <td>#}
+                    {#                            <div class="star-rating">#}
+                    {#                                <!-- Add your star rating spans here -->#}
+                    {#                            </div>#}
+                    {#                        </td>#}
+                    {#                    </tr>#}
                     <tr>
                         <td><strong>Material:</strong></td>
                         <td>{{ product.material }}</td>
@@ -305,7 +328,6 @@
 
     </style>
 </div>
-
 
 
 </body>

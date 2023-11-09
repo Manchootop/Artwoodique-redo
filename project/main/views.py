@@ -25,6 +25,7 @@ from .forms import NewsletterSignupForm
 from .models import Product, ProductImage, ProductRating, Subscriber
 
 
+
 class HomeView(views.TemplateView):
     template_name = 'index.html'
 
@@ -69,6 +70,7 @@ class CollectionView(views.ListView):
         queryset = Product.objects.filter(in_stock=True)
         product_filter = ProductFilter(self.request.GET, queryset=queryset)
 
+
         sort_by = self.request.GET.get('sort_by')
         order = self.request.GET.get('order', 'asc')
 
@@ -89,6 +91,9 @@ class CollectionView(views.ListView):
         context = super().get_context_data(**kwargs)
         context['filter'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
         context['count'] = ProductFilter
+        is_catalog = any(not product.in_stock for product in context['products'])
+        context['is_catalog'] = is_catalog
+
         return context
 
     # @login_required
@@ -104,7 +109,7 @@ class CollectionView(views.ListView):
 
 class CatalogView(views.ListView):
     model = Product
-    template_name = 'catalog.html'
+    template_name = 'shop.html'
     context_object_name = 'products'
 
     def get_queryset(self):
@@ -130,6 +135,9 @@ class CatalogView(views.ListView):
         context = super().get_context_data(**kwargs)
         context['filter'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
         context['count'] = ProductFilter
+        is_catalog = any(not product.in_stock for product in context['products'])
+        context['is_catalog'] = is_catalog
+        print(is_catalog)
         return context
 
 
@@ -186,6 +194,7 @@ class ContactsView(views.TemplateView):
         else:
             messages.warning(request, 'Please fill in the required fields correctly.')
             return render(request, self.template_name, {'form': form})
+
 
 class FAQView(views.TemplateView):
     template_name = 'faq.html'
