@@ -166,10 +166,8 @@ h1 {
 
 .first-row, .second-row {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 10em
-
+    flex-direction: row;
+    justify-content: start;
 }
 
 section {

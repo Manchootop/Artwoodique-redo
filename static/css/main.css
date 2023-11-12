@@ -381,7 +381,7 @@ nav ul li a:hover:before {
 .what_do_you_get {
     background-color: var(--main-bg-color-light);
     max-width: 4300px;
-    margin: 0 auto;
+    margin: 2em auto;
     padding: 8em 0;
 }
 
@@ -391,7 +391,7 @@ nav ul li a:hover:before {
     gap: 2.3em;
     flex-wrap: wrap;
     max-width: 1300px;
-    margin: 2em auto;
+    margin: 5em auto;
     padding: 2em 0;
 }
 
@@ -565,7 +565,7 @@ h3 {
 
 
 .products-services {
-    margin: 4em 0 20em 0;
+    margin: 4em 0 10em 0;
     font-family: var(--header-font);
 
 }
@@ -854,8 +854,8 @@ h4 {
 
 @media (max-width: 950px) {
     main {
-        padding: 2em;
-        margin: 1em;
+        padding: 0;
+        margin: 1em auto;
         gap: 5em;
     }
 }
