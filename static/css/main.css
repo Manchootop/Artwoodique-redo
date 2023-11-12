@@ -391,8 +391,8 @@ nav ul li a:hover:before {
     gap: 2.3em;
     flex-wrap: wrap;
     max-width: 1300px;
-    margin: 5em auto;
-    padding: 2em 0;
+    /*margin: 5em auto;*/
+    padding: 1.5em 0;
 }
 
 .benefit {
@@ -660,8 +660,8 @@ hr {
     }
 
     .card0:before {
-        width: 100%;
-        height: 100%;
+        width: 70%;
+        height: 70%;
         top: -70px;
         left: -50px;
     }
@@ -691,6 +691,13 @@ hr {
     }
 
 }
+
+@media (max-width: 900px) {
+    .what_do_you_get {
+        margin-top: 4em;
+    }
+}
+
 
 @media (max-width: 768px) {
     .offerings {
@@ -727,6 +734,10 @@ hr {
         margin: 0 auto;
         font-size: .8rem;
 
+    }
+
+    .what_do_you_get {
+        margin-top: 2em;
     }
 
     /*.right-col {*/
@@ -809,13 +820,6 @@ hr {
         align-items: center; /* Center items horizontally */
         text-align: center; /* Center text */
         padding: 1em; /* Reduce padding for smaller screens */
-    }
-
-    .card0:before {
-        width: 100%;
-        height: 100%;
-        top: -70px;
-        left: -20px;
     }
 
 
@@ -905,9 +909,4 @@ h4 {
     background-size: cover;
 }
 
-@media (max-width: 900px) {
-    .what_do_you_get {
-        margin-top: 4em;
-    }
-}
 
