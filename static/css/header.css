@@ -30,6 +30,7 @@ body {
 }
 
 header {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,6 +45,7 @@ header {
 } */
 
 nav {
+
     margin: 2em 0;
 
 }
@@ -190,7 +192,8 @@ search-box-button {
         background-color: #fff;
         overflow-y: auto;
         transition: 0.4s;
-        z-index: 10000;
+        z-index: 999999;
+
     }
 
     .side-nav ul {

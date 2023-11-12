@@ -103,10 +103,10 @@ class Product(models.Model):
             MinValueValidator(PRICE_MIN_VALUE)
         ])
 
-    # def current_price(self):
-    #     if self.sale and not self.sale.has_expired():
-    #         return self.price - (self.price * (self.sale.sale_percentage / 100))
-    #     return self.price
+    def current_price(self):
+        if self.discount_price:
+            return f"{self.price - self.discount_price}"
+        return self.price
 
     class Meta:
         db_table = 'product'

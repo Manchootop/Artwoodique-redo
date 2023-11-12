@@ -21,11 +21,11 @@
 
 <div class="wrapper">
     {% include 'header.html' %}
-{% if is_catalog %}
-    <h1>Catalog</h1>
-{% else %}
-    <h1>Store</h1>
-{% endif %}
+    {% if is_catalog %}
+        <h1>Catalog</h1>
+    {% else %}
+        <h1>Store</h1>
+    {% endif %}
     <main>
         <header>
             <span>{{ products|length }}  results found</span>
@@ -65,18 +65,18 @@
                             <a href="{% url 'catalog-details' pk=product.id %}"
                                class="product-title"
                                style=" display: -webkit-box; max-width: 20ch; -webkit-line-clamp: 2">{{ product.title }}
-                                ASDASDASDASDASDASDASDSAASD</a>
+                                </a>
                             {#                            <p>{{ product.subheading }}ASDADASDASDASASASDAS</p>#}
                             <div class="card-content">
                                 <div class="card-pricing">
                                     {% if product.discount_price %}
-                                        <div class="card-price-old"><s>{{ product.price }}<sup><small
-                                                class="mf-decimal">,</small>99</sup><span>лв.</span></s>
+                                        <div class="card-price-old">
+                                            <s><span>{{ product.price|floatformat:0 }}лв.</span></s>
+                                            {# class="mf-decimal">,</small>99</sup><span>лв.</span></s>#}
                                         </div>
                                     {% endif %}
                                     <div class="card-price-current">
-                                        {{ product.discount_price }}<sup><small
-                                            class="mf-decimal">,</small>99</sup><span>лв.</span>
+                                        <span>{{ product.current_price|floatformat:0 }}лв.</span>
                                     </div>
                                 </div>
                                 <div class="card-buy">
@@ -123,6 +123,7 @@
 
 </main>
 {% include 'footer.html' %}
+
 
 </body>
 

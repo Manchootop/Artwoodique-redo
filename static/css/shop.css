@@ -66,7 +66,7 @@ main header .dropdown {
     position: relative;
     display: flex;
     gap: 1rem;
-    z-index: 10000000000;
+    z-index: 10000;
 }
 
 main header .dropdown p {
@@ -85,7 +85,7 @@ main header .dropdown p {
 /* Dropdown button on hover & focus */
 .dropbtn:hover,
 .dropbtn:focus {
-    background-color: var(--main-bg-color-dark);
+    background-color: #e5d4c0;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -211,13 +211,16 @@ main header .dropdown p {
     /*display: flex;*/
     /*justify-content: space-between;*/
     /*border: 1px solid black;*/
+    display: flex;
+    flex-direction: column-reverse;
     background: white;
     border-radius: .6em;
     padding: 2em;
     width: 100%;
-    align-items: center;
+    /*justify-content: c;*/
     transition: transform 800ms;
-    box-shadow: rgb(208, 208, 208) 0px 8px 24px;
+    box-shadow: rgb(208, 208, 208) 0 8px 24px;
+    min-height: 120px;
 }
 
 .card-details a {

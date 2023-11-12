@@ -20,6 +20,7 @@
 <body>
 <div class="wrapper">
     {% include 'header.html' %}
+
     {#    <div class="slider-container">#}
     {#        <div class="slider">#}
     {#            <ul>#}
@@ -114,13 +115,15 @@
                 <div class="card-content">
                     <div class="card-pricing">
                         {% if product.discount_price %}
-                            <div class="card-price-old"><s>{{ product.price }}<sup><small
-                                    class="mf-decimal">,</small>99</sup><span>лв.</span></s>
+                            <div class="card-price-old"><s>
+                                {{ product.price|floatformat:0 }} лв.
+{#                                <sup><small class="mf-decimal">,</small>99</sup><span>лв.</span>#}
+                            </s>
                             </div>
                         {% endif %}
                         <div class="card-price-current">
-                            {{ product.discount_price }}<sup><small
-                                class="mf-decimal">,</small>99</sup><span>лв.</span>
+                            {{ product.discount_price|floatformat:0 }} лв.
+{#                            <sup><small class="mf-decimal">,</small>99</sup><span>лв.</span>#}
                         </div>
                     </div>
                     <div class="card-buy">
@@ -171,6 +174,7 @@
 
                     <a href="{% url 'store' %}" class="secondary-cta">Explore in-stock</a>
                 </div>
+            {% if not product.in_stock %}
                 <div class="disclaimer">
                     <img
                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAB/CAMAAADxY+0hAAAAY1BMVEX///8AAADJyclhYWGampr09PS4uLj7+/vv7+/j4+MRERHc3NzDw8PQ0NDn5+cjIyNra2uUlJQwMDCMjIw7OzuDg4MKCgpAQEBbW1uhoaF1dXUXFxewsLAqKirW1tZQUFBISEiHYq6NAAAD9UlEQVRoge1aa3eqMBAsUOQpClVEser//5W9bd0ByeYBBHruOZlvBsiQZB+zi29vDg4ODg4ODg4O/w2iJLtlSfRH7HEZVKmXVkEZ/gF7ePQ6fMRr0ycHr49Tsi591nqv2GVr0oepN0S7phEcBXrPO65HnzP0nuevxn8CZ13VnQ2uRX8G5ebfrw1+XdehjysizH9+4wWqdaIAjO/yHLggDK1Bf4Pv0XIL+OAaQWBPbCWGPmhovzw9fO/UBZwQDpEvTR/e+7ZPgAnel46C8L3gZbih4fOy9CGcffsyvsX4shsg+B4BPrhoGsAyP4vBlWLHb4xdwPjehUvvdKlZjv6K5TMXsQEb5qIVhA8VBXzwsZQJYov5MIfAKB6OFSTYYV5sZnR5t4wY1brYUXfDLMD3qqHvEQoIg9sC/IE+xEqCsxXA9+69ei/0c79n7REcxL4Ug87spdjim+/ROw4k59Q2fclsbfy73EdP9uGQSnGKOUC91ZdYubgjWcrcZwGILX2JSfGoH2+WkWI417o/yvGzdjIXEfLei12z/KyfzAT8unmZk+WP7EuxruB51RYsfy9O2iqHZKKL57deDiU03zCvSfh1eXIspHldwt/FKis+CF1zGuoaGX+I3pQNKfbJ+p6Kv/PBaj49RNddeknUWwqdPBIFli9qCjm/vE4YC5XokvPL66SR6Oo6Jpoq+CM8N68cQj7nDlLBr9PqhlDX9Sp+da1iCE1fQ8XfpewZ5ZAmkCn5LUixmGZIeT2v5hf7ZGOhS2Rq/tk+6NPzskROskQiNGKErmmdaRifTMgw+pd9v2md6av26af+l/fcsIIJ5VCMJCoXsj9KQ1FtwwcP403QzHrys1JmT5diKGS8ORlsemeaLXjG48NoF0XA907zRHRnRaN8UFLwCCjKY6k+n2nlUFfwKG/LNf7xjSnlUKcelLv21GbSftAPcJK1+QYYRm5SB+oMP94Hkbla9dlS/lHvbEKtC0kWFWGqnnXxf/Capp1pRE1d9RD+2lagEzjIg0YtiQjCRavcim/vPmgDJFRkYGKCaOOaKNdsYxBYIwRTkyh8HnOzGbAkkxhA22+ziUw+aNKXJeFu83M+mfTD4N6naKltfkeiIGgixMj7bX7GoSwk1vAi6KwOFvmpgWaiAhB+7ra+ItwQUE0CUPclsW0CHhfuzW4Xyd0N/iu0MxIz0EwKiMax0T9kmAHjWj+TkBkT8R9JAlJDLXfVTyVsgMnyjauQs36uYSSd8IgCpXayoQVutU+MasXdGvVkl2Em7XIcj2ZkNov8fdXKDLHdi4k83A//kkeo22rvT/kYkWx9HrziKCR3b1f+b6KDg4ODg4ODg4ODgwRf9gIoOKaA6/cAAAAASUVORK5CYII="
@@ -198,6 +202,7 @@
 
 
             </div>
+        {% endif %}
 
             <div class="details-tb">
                 <table>

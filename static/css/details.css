@@ -9,9 +9,10 @@ html {
 
 body {
     margin: 0;
-    font-family: 'Poppins';
-    animation: expandBody 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    /*animation: expandBody 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;*/
+    /*height: 100vh;*/
+    /*width: 100vw;*/
 }
 
 .wrapper {
@@ -213,7 +214,7 @@ main .header p {
     grid-area: side;
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: .7em;
     margin: 1em;
     font-family: 'Poppins', sans-serif;
     line-height: 1.8rem;
@@ -273,7 +274,7 @@ th {
 
 .details p {
     font-weight: lighter;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
 
 }
 
@@ -286,6 +287,13 @@ th {
     margin: 2em 0 2em 0;
     justify-content: center;
     text-align: center;
+}
+@media (max-width:810px) {
+    .cta-btns {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+    }
 }
 
 
@@ -365,17 +373,17 @@ th {
     .container {
         display: grid;
         grid-template-columns: .1fr 7fr;
-        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-rows: none;
         grid-template-areas:
             "images main"
             "side side"
             "table table";
         justify-content: initial;
         align-items: start;
-        margin: 0 0 2em 0;
+        margin: 2em auto;
     }
     .details {
-        margin-top: -5em;
+        margin-top: 2em;
     }
 }
 .fade-in {

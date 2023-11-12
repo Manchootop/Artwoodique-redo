@@ -633,6 +633,7 @@ hr {
 .section {
     margin: 8em 0;
 }
+
 @media (max-width: 1250px) {
     .what-you-get {
         flex-direction: column;
@@ -640,7 +641,9 @@ hr {
     }
 
 }
+
 @media (max-width: 900px) {
+
     main {
         display: inline-block;
         margin: 0 auto;
@@ -694,17 +697,36 @@ hr {
         padding: 1em; /* Reduce padding for smaller screens */
     }
 
-    .cta-btns {
-        gap: 3em;
+    .left-col p {
+        font-size: 1.2rem;
     }
+
+    .cta-btns {
+        gap: 1em;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
 
     .primary-cta {
         text-align: center;
         padding: .8em;
+        font-size: 1rem;
+        margin: auto;
+    }
+
+    .secondary-cta {
+        margin: 0 auto;
+        font-size: 1rem;
+
     }
 
     .secondary-cta svg {
         margin: 0 auto;
+        font-size: .8rem;
+
     }
 
     /*.right-col {*/
@@ -735,6 +757,7 @@ hr {
     .card img {
         height: 300px;
     }
+
     .card {
         flex-direction: column-reverse;
 
@@ -755,6 +778,14 @@ hr {
 
     .why-choose-us {
         text-align: center; /* Center text in "Why Choose Us" section */
+    }
+
+    .what-you-get {
+        padding: 1em;
+    }
+
+    .social-icons {
+        left: 4px;
     }
 }
 
@@ -778,6 +809,13 @@ hr {
         align-items: center; /* Center items horizontally */
         text-align: center; /* Center text */
         padding: 1em; /* Reduce padding for smaller screens */
+    }
+
+    .card0:before {
+        width: 100%;
+        height: 100%;
+        top: -70px;
+        left: -20px;
     }
 
 
@@ -869,7 +907,7 @@ h4 {
 
 @media (max-width: 900px) {
     .what_do_you_get {
-        margin-top: 5em;
+        margin-top: 4em;
     }
 }
 
