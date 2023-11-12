@@ -25,7 +25,6 @@ from .forms import NewsletterSignupForm
 from .models import Product, ProductImage, ProductRating, Subscriber
 
 
-
 class HomeView(views.TemplateView):
     template_name = 'index.html'
 
@@ -69,7 +68,6 @@ class CollectionView(views.ListView):
     def get_queryset(self):
         queryset = Product.objects.filter(in_stock=True)
         product_filter = ProductFilter(self.request.GET, queryset=queryset)
-
 
         sort_by = self.request.GET.get('sort_by')
         order = self.request.GET.get('order', 'asc')

@@ -134,7 +134,7 @@ LOGIN_REDIRECT_URL = '/'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 if not DEBUG:
-    SECURE_SSL_REDIRECT = True
+    # SECURE_SSL_REDIRECT = True
 
     SECURE_SSL_CERTIFICATE = '../ssl_cert/certificate.crt'
     SECURE_SSL_KEY = '../ssl_cert/private.key'
