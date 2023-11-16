@@ -59,7 +59,6 @@
                 </div>
                 <a href="{% url 'catalog-details' pk=product.id %}">
                     <img src="{{ product.image.url }}" alt="product_image">
-
                 </a>
                 <div class="card-details">
                     <div>
@@ -67,7 +66,6 @@
                            class="product-title"
                            style=" display: -webkit-box; max-width: 20ch; -webkit-line-clamp: 2">{{ product.title }}
                         </a>
-                        {#                            <p>{{ product.subheading }}ASDADASDASDASASASDAS</p>#}
                         <div class="card-content">
                             <div class="card-pricing">
                                 {% if product.discount_price %}
@@ -76,19 +74,22 @@
                                         {# class="mf-decimal">,</small>99</sup><span>лв.</span></s>#}
                                     </div>
                                 {% endif %}
-
                                 <div class="card-price-current">
                                     <span>{{ product.current_price|floatformat:0 }}лв.</span>
-                                    <a type="submit"
-                                            class="btn"
-                                            data-pnk="DQNDNNMBM" data-offer-id="121851370" data-category-id="1537"
-                                            style="position: relative"
-                                    href="{% url 'add-to-cart' product.slug %}">
+                                    <a type="submit" class="btn" data-pnk="DQNDNNMBM" data-offer-id="121851370"
+                                       data-category-id="1537" style="position: relative"
+                                       href="{% url 'add-to-cart' product.slug %}">
+                                        <i class="em em-cart_fill ">
+                                            {% if request.path == '/store/' %}
+                                                <img src="{% static 'images/cart.svg' %}" alt="add_to_cart"
+                                                     style="width: 30px; height:30px; min-height: 30px; color: white; position: absolute; top: 5px; left: 5px;">
+                                            {% else %}
+                                                <img src="{% static 'images/double-arrows-black.png' %}"
+                                                     alt="view model"
+                                                     style="width: 30px; height:30px; min-height: 30px; color: white; position: absolute; top: 5px; left: 5px;">
 
-                                            <i class="em em-cart_fill "><img src="{% static 'images/cart.svg' %}"
-                                                                             alt="add_to_cart"
-                                                                             style="width: 30px; height:30px; min-height: 30px; color: white; position: absolute; top: 5px; left: 5px;"></i>
-
+                                            {% endif %}
+                                        </i>
                                     </a>
                                 </div>
                             </div>

@@ -19,8 +19,64 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 
-
 <body>
+{% include "header.html" %}
+
+
+
+<div class="container">
+    <div class="messages custom-message">
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-success">
+                    {{ message }}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message.tags == 'info' %}
+                <div class="alert alert-info">
+                    {{ message }}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message.tags == 'warning' %}
+                <div class="alert alert-warning">
+                    {{ message }}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message.tags == 'error' %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="wrapper">
+    {% block content %}
+    {% endblock content %}
+
+</div>
+    {% include 'footer.html' %}
+
+{% block extra_body %}
+{% endblock %}
+
+
+{#{% include "footer.html" %}#}
+{% include "scripts.html" %}
+
+{% block extra_scripts %}
+{% endblock extra_scripts %}
+
 <style>
     .container {
         padding: 0;
@@ -123,60 +179,6 @@
         });
     });
 </script>
-{% include "header.html" %}
-
-<div class="container">
-    <div class="messages custom-message">
-        {% for message in messages %}
-            {% if message.tags == 'success' %}
-                <div class="alert alert-success">
-                    {{ message }}
-                    <button type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            {% elif message.tags == 'info' %}
-                <div class="alert alert-info">
-                    {{ message }}
-                    <button type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            {% elif message.tags == 'warning' %}
-                <div class="alert alert-warning">
-                    {{ message }}
-                    <button type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            {% elif message.tags == 'error' %}
-                <div class="alert alert-danger">
-                    {{ message }}
-                    <button type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            {% endif %}
-        {% endfor %}
-    </div>
-</div>
-
-<div class="wrapper">
-    {% block content %}
-    {% endblock content %}
-    {% include 'footer.html' %}
-
-</div>
-
-{% block extra_body %}
-{% endblock %}
-
-
-{#{% include "footer.html" %}#}
-{% include "scripts.html" %}
-
-{% block extra_scripts %}
-{% endblock extra_scripts %}
 </body>
 </html>
 
