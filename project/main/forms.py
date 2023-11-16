@@ -33,7 +33,9 @@ class ContactForm(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': 'email'})
     )
 
-    message = forms.Textarea()
+    message = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 5, 'cols': 40}),  # You can adjust 'rows' and 'cols' as needed
+    )
 
 
 from django.forms.models import inlineformset_factory

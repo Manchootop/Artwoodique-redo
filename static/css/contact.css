@@ -122,22 +122,24 @@ body {
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*flex-wrap: nowrap;*/
     gap: 8em;
-    margin: 0 0 10em 0;
+    margin: 0 auto;
 }
 
 main .left-col {
+    display: block;
     background-color: var(--main-bg-color-light);
     border-radius: .8em;
-    margin: auto;
+    margin: 0 auto;
 
 }
 
 
 main .right-col {
+
     background-color: var(--main-bg-color-dark);
     border-radius: .8em;
     display: flex;
@@ -148,7 +150,7 @@ main .right-col {
 
 }
 
-h1 {    
+h1 {
     font-size: 5.2rem;
     font-family: 'Playfair Display SC', sans-serif;
     font-weight: normal;
@@ -161,7 +163,7 @@ h1 {
     justify-content: space-around;
     gap: 2em;
 
-    }
+}
 
 
 .first-row, .second-row {
@@ -201,8 +203,8 @@ section {
     background-color: #0056b3;
 }
 
-.contact-us-wrapper  {
-    margin: auto 0;
+.contact-us-wrapper {
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

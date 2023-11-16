@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #     with open('secret_key.txt') as f:
 #         SECRET_KEY = f.read().strip()
 SECRET_KEY = 'django-insecure-=(!&olqxy6ni=d_7_)#x6#9rhs9(oad+@h%f1(+utjc-8k99a+'
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -25,6 +25,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
     'django_countries',
     'crispy_bootstrap5',
 ]
@@ -126,6 +128,16 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_FROM_EMAIL = "mariqn5000@gmail.com"
 
+# settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smpt.gmail.com'
+EMAIL_PORT = 587  # Use the appropriate port for your email provider
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'mariqn5000@gmail.com'
+EMAIL_HOST_PASSWORD = 'your-email-password'
+
+
 STRIPE_SECRET_KEY = "sk_test_Thatshurt74408K"
 
 # settings.py
@@ -138,3 +150,46 @@ if not DEBUG:
 
     SECURE_SSL_CERTIFICATE = '../ssl_cert/certificate.crt'
     SECURE_SSL_KEY = '../ssl_cert/private.key'
+
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+
+# Set email as the required field for registration
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'APP': {
+#             'client_id': 'your-google-client-id',
+#             'secret': 'your-google-client-secret',
+#             'key': '',
+#         }
+#     },
+#     'facebook': {
+#         'APP': {
+#             'client_id': 'your-facebook-app-id',
+#             'secret': 'your-facebook-app-secret',
+#             'key': '',
+#             'scope': ['email', 'public_profile'],
+#             'fields': [
+#                 'id',
+#                 'email',
+#                 'name',
+#                 'first_name',
+#                 'last_name',
+#                 'verified',
+#                 'locale',
+#                 'timezone',
+#                 'link',
+#                 'gender',
+#                 'updated_time',
+#             ],
+#             'version': 'v12.0',
+#         }
+#     },
+#     # Add other providers if needed
+# }
+CONTACT_EMAIL = 'artwoodique@gmail.com'

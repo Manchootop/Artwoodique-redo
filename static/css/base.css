@@ -1,0 +1,92 @@
+.wrapper {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --main-bg-color-light: #F1E2D1;
+    --main-bg-color-dark: #583d22;
+
+    --header-font: 'Playfair Display SC';
+    --main-font: 'Poppins';
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Styling for the close button */
+.close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 10px;
+    color: #333;
+}
+
+.message {
+    list-style: none;
+    border-radius: 10px;
+    box-shadow: 3px 3px 4px 0px rgba(50, 50, 50, 0.75);
+    color: white;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+    width: 80%;
+}
+
+/*
+ * Give the various message types the correct colors
+ */
+.message.success {
+    background-color: green;
+}
+
+.message.error {
+    background-color: red;
+}
+
+.success {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Info Messages */
+.info {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Warning Messages */
+.warning {
+    background-color: #FF9800;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Error Messages */
+.error {
+    background-color: #F44336;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+

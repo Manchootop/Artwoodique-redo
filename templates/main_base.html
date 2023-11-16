@@ -1,0 +1,184 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block head_title %}{% endblock %}</title>
+    {% block extra_head %}
+    {% endblock %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+
+<body>
+<style>
+    .container {
+        padding: 0;
+        margin: 0;
+    }
+
+
+    .custom-message {
+        display: flex;
+        flex-direction: column;
+        padding: 3em;
+        border: 1px solid transparent;
+        font-size: 1.4rem;
+        width: 100%;
+        margin: -2em auto;
+    }
+
+    /* Individual messages */
+    .custom-message .alert {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em;
+        border-radius: 0.25rem;
+        font-size: 2rem;
+        margin: -2em auto;
+    }
+
+    /* Close button */
+    .custom-message .close {
+        font-size: 1.6rem;
+        font-weight: bold;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.3rem 0.5rem;
+        transition: color 0.3s;
+        margin: 0;
+    }
+
+    .custom-message .close:hover {
+        color: red; /* Change color on hover for better visibility */
+        margin: 0;
+    }
+
+    /* Different message tags */
+    .custom-message .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        margin: 0;
+    }
+
+    .custom-message .alert-info {
+        color: #0c5460;
+        background-color: #cce5ff;
+        border-color: #b8daff;
+        margin: 0;
+    }
+
+    .custom-message .alert-warning {
+        color: #856404;
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+        margin: 0;
+    }
+
+    .custom-message .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        margin: 0;
+    }
+
+
+</style>
+<script>
+    // Get all close buttons by class name
+    var closeButtons = document.getElementsByClassName('close');
+
+    // Add click event listeners to close buttons
+    document.addEventListener('DOMContentLoaded', function () {
+        var closeButtons = document.querySelectorAll('.close');
+
+        closeButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var message = this.parentElement;
+                if (message.style.display === 'none' || message.style.display === '') {
+                    message.style.display = 'flex';
+                } else {
+                    message.style.display = 'none';
+                }
+            });
+        });
+
+        // Show messages with class 'alert' by setting display to 'flex'
+        var alertMessages = document.querySelectorAll('.custom-message .alert');
+        alertMessages.forEach(function (message) {
+            message.style.display = 'flex';
+        });
+    });
+</script>
+{% include "header.html" %}
+
+<div class="container">
+    <div class="messages custom-message">
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-success">
+                    {{ message }}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message.tags == 'info' %}
+                <div class="alert alert-info">
+                    {{ message }}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message.tags == 'warning' %}
+                <div class="alert alert-warning">
+                    {{ message }}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message.tags == 'error' %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="wrapper">
+    {% block content %}
+    {% endblock content %}
+    {% include 'footer.html' %}
+
+</div>
+
+{% block extra_body %}
+{% endblock %}
+
+
+{#{% include "footer.html" %}#}
+{% include "scripts.html" %}
+
+{% block extra_scripts %}
+{% endblock extra_scripts %}
+</body>
+</html>
+
+
+

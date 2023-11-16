@@ -19,7 +19,8 @@ body {
     font-family: 'Poppins', sans-serif;
     /*background-image: url('https://www.xlab.design/wp-content/uploads/2019/05/xlab-pattern.jpg');*/
     background-image: url('https://www.xlab.design/wp-content/uploads/2019/05/xlab-pattern.jpg');
-
+    background-repeat: no-repeat;
+    background-size: cover;
     /*background-repeat: no-repeat;*/
 
 }
@@ -58,7 +59,7 @@ main header {
 
 main header span {
     font-size: 1.8rem;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-weight: lighter;
 }
 
@@ -76,9 +77,10 @@ main header .dropdown p {
 
 
 .dropbtn {
-    padding: 0 1em;
-    font-size: 1.2em;
-    border: 1px solid black;
+    padding: .5em .75em;
+    font-size: 1.5rem;
+    /*border: 1px solid black;*/
+    border-radius: .8em;
     cursor: pointer;
 }
 
@@ -100,7 +102,8 @@ main header .dropdown p {
     position: absolute;
     background-color: var(--main-bg-color-light);
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 1.8em;
     z-index: 1;
 }
 
@@ -190,6 +193,7 @@ main header .dropdown p {
     position: relative;
     z-index: 1;
     padding: 1em;
+    border-radius: .8em;
 }
 
 
@@ -219,8 +223,11 @@ main header .dropdown p {
     width: 100%;
     /*justify-content: c;*/
     transition: transform 800ms;
-    box-shadow: rgb(208, 208, 208) 0 8px 24px;
+    box-shadow: rgb(208, 208, 208) 0 4px 12px;
     min-height: 120px;
+}
+.card-details:hover {
+    cursor: default;
 }
 
 .card-details a {
@@ -243,7 +250,15 @@ p.product-price {
 .left-col {
     width: 100%;
 }
-
+.card-details div a.product-title {
+    box-sizing: content-box;
+    align-self: start;
+    max-width: 100%; /* Set the maximum width to 100% */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflowing content */
+    text-overflow: ellipsis; /* Display an ellipsis (...) to indicate text overflow */
+    flex: 0 0 auto;
+}
 
 /* Microinteractions */
 nav ul li a:hover:before {
@@ -252,7 +267,7 @@ nav ul li a:hover:before {
 
 .card:hover {
     /*transform: scale(1.1);*/
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 /*
@@ -480,11 +495,11 @@ aside {
 .card {
     overflow: hidden;
     transition: transform 0.3s;
-    box-shadow: 0 3px 12px -2px rgba(0, 0, 0, .25);
+    box-shadow: 0 3px 12px -2px rgba(0, 0, 0, .1);
 }
 
 .card:hover {
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    box-shadow: 0 3px 12px -2px rgba(0, 0, 0, .3);
 }
 
 .card img {
@@ -569,6 +584,10 @@ span.badge-label {
     font-size: 12px;
     font-weight: 600;
 }
+.card-price-old {
+    margin-top: 1em;
+    margin-bottom: -1em;
+}
 
 .card-pricing .card-price-current {
     font-size: 16px;
@@ -581,5 +600,45 @@ span.badge-label {
 
 /* Container styling */
 
+.card-price-current {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 /* Footer styling */
+.card-price-current .btn i {
+    font-size: 22px;
+    display: inline-block;
+    background: #F1E2D1;
+    /*background: -webkit-linear-gradient(left, #4a60c1 10%, #3985e0);*/
+    /*background: linear-gradient(to right, #4a60c1 10%, #3985e0);*/
+
+    border-radius: 0 !important;
+    padding: 0;
+    color: white;
+    width: 42px;
+    height: 42px;
+}
+.card-price-current .btn:hover {
+    cursor: pointer;
+    color: #f5d5bc;
+}
+
+i img {
+    width: 42px;
+    height: 42px;
+    min-height: 42px;
+}
+
+.card-price-current .btn {
+    height: 100%;
+    font-size: 0 !important;
+    background: transparent;
+    text-align: right;
+    width: 42px;
+    display: block;
+    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
+}

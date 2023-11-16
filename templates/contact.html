@@ -1,27 +1,12 @@
+{% extends 'main_base.html' %}
 {% load crispy_forms_filters %}
 {% load static %}
 {% load crispy_forms_tags %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Artwoodique</title>
+{% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/contact.css' %}">
-    <link
-            href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Poppins:wght@200;300;400;700&display=swap"
-            rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
+{% endblock %}
 
-<!--Start of Tawk.to Script-->
-
-<!--End of Tawk.to Script-->
-<div class="wrapper">
+{% block content %}
     <div class="social-icons">
         <ul>
             <li><a href="#"><i class="fab fa-facebook-f fa-2x" style="color: var(--main-bg-color-dark)"></i></a></li>
@@ -30,44 +15,6 @@
 
             <!-- Add more social icons as needed -->
         </ul>
-    </div>
-
-    {% include 'header.html' %}
-
-    <div class="container">
-        <div class="messages custom-message">
-            {% for message in messages %}
-                {% if message.tags == 'success' %}
-                    <div class="alert alert-success">
-                        {{ message }}
-                        <button type="button" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% elif message.tags == 'info' %}
-                    <div class="alert alert-info">
-                        {{ message }}
-                        <button type="button" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% elif message.tags == 'warning' %}
-                    <div class="alert alert-warning">
-                        {{ message }}
-                        <button type="button" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% elif message.tags == 'error' %}
-                    <div class="alert alert-danger">
-                        {{ message }}
-                        <button type="button" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
     </div>
     <main>
         <div class="left-col">
@@ -84,16 +31,16 @@
                     </section>
 
                 </div>
-{#                <div class="second-row">#}
-{#                    <section class="contact-block">#}
-{#                        <img src="" alt="">#}
-{#                        <span>+359 878 130 052</span>#}
-{#                    </section>#}
-{#                    <section class="contact-block">#}
-{#                        <img src="" alt="">#}
-{#                        <span>artwoodique@gmail.com</span>#}
-{#                    </section>#}
-{#                </div>#}
+                {#                <div class="second-row">#}
+                {#                    <section class="contact-block">#}
+                {#                        <img src="" alt="">#}
+                {#                        <span>+359 878 130 052</span>#}
+                {#                    </section>#}
+                {#                    <section class="contact-block">#}
+                {#                        <img src="" alt="">#}
+                {#                        <span>artwoodique@gmail.com</span>#}
+                {#                    </section>#}
+                {#                </div>#}
 
 
             </div>
@@ -103,15 +50,15 @@
         <div class="right-col">
             <div class="contact-us-wrapper">
                 <span>Write us</span>
-                {{ form|crispy }}
-                {% csrf_token %}
-                <button style="margin-top: 1em">Submit</button>
+                <form action="{% url 'contacts' %}" method="POST">
+                    {{ form|crispy }}
+                    {% csrf_token %}
+                    <button style="margin-top: 1em">Submit</button>
+
+                </form>
             </div>
         </div>
     </main>
+{% endblock %}
 
 
-    {% include 'footer.html' %}
-</div>
-</body>
-</html>

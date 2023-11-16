@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
-from django.db.models import Avg
+from django.db.models import Avg, ExpressionWrapper, F, FloatField
+from django.db.models.functions import Coalesce
 from django.http import JsonResponse
 from django.views import generic as views
 import random
@@ -72,16 +73,24 @@ class CollectionView(views.ListView):
         sort_by = self.request.GET.get('sort_by')
         order = self.request.GET.get('order', 'asc')
 
+        queryset = queryset.annotate(
+            calculated_price=ExpressionWrapper(
+                Coalesce(F('price') - F('discount_price'), F('price')),
+                output_field=FloatField()
+            )
+        )
+
         if sort_by == 'price':
-            if order == 'desc':
-                queryset = queryset.order_by('-price')
-            else:
-                queryset = queryset.order_by('price')
+            sort_field = 'calculated_price'
         elif sort_by == 'views':
-            if order == 'desc':
-                queryset = queryset.order_by('-views')
-            else:
-                queryset = queryset.order_by('views')
+            sort_field = 'views'
+        else:
+            sort_field = 'calculated_price'  # Replace 'default_sort_field' with the actual default sort field
+
+        if order == 'desc':
+            queryset = queryset.order_by(f'-{sort_field}')
+        else:
+            queryset = queryset.order_by(sort_field)
 
         return queryset
 
@@ -188,7 +197,7 @@ class ContactsView(views.TemplateView):
             # Send a thank you message to the user
             messages.success(request, 'Thank you for contacting us!')
 
-            return redirect('contact-success')  # You should define a URL for the success page
+            return redirect('contacts')  # You should define a URL for the success page
         else:
             messages.warning(request, 'Please fill in the required fields correctly.')
             return render(request, self.template_name, {'form': form})
