@@ -137,9 +137,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mariqn5000@gmail.com'
 EMAIL_HOST_PASSWORD = 'your-email-password'
 
-
 STRIPE_SECRET_KEY = "sk_test_Thatshurt74408K"
-
+STRIPE_PUBLIC_KEY = "bla bla bla "
 # settings.py
 LOGIN_REDIRECT_URL = '/'
 # AUTH_USER_MODEL = 'accounts.ArtwoodiqueUser'
@@ -150,7 +149,6 @@ if not DEBUG:
 
     SECURE_SSL_CERTIFICATE = '../ssl_cert/certificate.crt'
     SECURE_SSL_KEY = '../ssl_cert/private.key'
-
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True

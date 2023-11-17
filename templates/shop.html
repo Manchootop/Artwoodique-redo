@@ -44,9 +44,9 @@
                 <div class="card">
                     {% if product.discount_price != product.discount_price.default and product.discount_price != 0 %}
                         <div class="card-badges">
-                            <div class="card-badge badge--discount"
+                            <div class="card-badge badge--discount">
                             {#                                 style="background-color: rgb(255,66,0);#}
-                            ">
+
                             <span class="badge-label">-{{ product.discount_price|floatformat:0 }} лв.</span>
 
                         </div>
@@ -78,7 +78,8 @@
                                     <span>{{ product.current_price|floatformat:0 }}лв.</span>
                                     <a type="submit" class="btn" data-pnk="DQNDNNMBM" data-offer-id="121851370"
                                        data-category-id="1537" style="position: relative"
-                                       href="{% url 'add-to-cart' product.slug %}">
+                                       href="
+                                               {% if request.path == 'store' %}{% url 'add-to-cart' product.slug %}{% else %} {% url 'catalog-details' product.id %} {% endif %}">
                                         <i class="em em-cart_fill ">
                                             {% if request.path == '/store/' %}
                                                 <img src="{% static 'images/cart.svg' %}" alt="add_to_cart"

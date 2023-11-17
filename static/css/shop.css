@@ -296,6 +296,7 @@ nav ul li a:hover:before {
 
 .like-button:hover {
     transform: scale(1.2);
+    cursor: pointer;
 }
 
 .like-button i {
