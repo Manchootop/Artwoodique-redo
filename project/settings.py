@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #     with open('secret_key.txt') as f:
 #         SECRET_KEY = f.read().strip()
 SECRET_KEY = 'django-insecure-=(!&olqxy6ni=d_7_)#x6#9rhs9(oad+@h%f1(+utjc-8k99a+'
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,14 +41,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if not DEBUG:
+if DEBUG:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     cloudinary.config(
         cloud_name="dzkpnriaw",
         api_key="549581289117547",
         api_secret="Jwd3ECNeENCxeCcEE3LZyx1DY14"
     )
-if not DEBUG:
+if DEBUG:
     MIDDLEWARE += 'whitenoise.middleware.WhiteNoiseMiddleware',
 ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 WSGI_APPLICATION = 'project.wsgi.application'
-if DEBUG:
+if not DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -120,7 +120,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-if not DEBUG:
+if DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
