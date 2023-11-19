@@ -68,8 +68,6 @@ class CollectionView(views.ListView):
 
     def get_queryset(self):
         queryset = Product.objects.filter(in_stock=True)
-        product_filter = ProductFilter(self.request.GET, queryset=queryset)
-
         sort_by = self.request.GET.get('sort_by')
         order = self.request.GET.get('order', 'asc')
 
@@ -96,8 +94,7 @@ class CollectionView(views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filter'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
-        context['count'] = ProductFilter
+        context['count'] = context['paginator'].count
         is_catalog = any(not product.in_stock for product in context['products'])
         context['is_catalog'] = is_catalog
 
@@ -118,6 +115,7 @@ class CatalogView(views.ListView):
     model = Product
     template_name = 'shop.html'
     context_object_name = 'products'
+    paginate_by = 9
 
     def get_queryset(self):
         queryset = Product.objects.all()
@@ -125,6 +123,12 @@ class CatalogView(views.ListView):
         sort_by = self.request.GET.get('sort_by')
         order = self.request.GET.get('order', 'asc')  # Default to ascending order
 
+        queryset = queryset.annotate(
+            calculated_price=ExpressionWrapper(
+                Coalesce(F('price') - F('discount_price'), F('price')),
+                output_field=FloatField()
+            )
+        )
         if sort_by == 'price':
             if order == 'desc':
                 queryset = queryset.order_by('-price')
@@ -140,8 +144,7 @@ class CatalogView(views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filter'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
-        context['count'] = ProductFilter
+        context['count'] = context['paginator'].count
         is_catalog = any(not product.in_stock for product in context['products'])
         context['is_catalog'] = is_catalog
         print(is_catalog)

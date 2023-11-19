@@ -426,6 +426,7 @@ aside {
 .pagination {
     text-align: center;
     margin-top: 2em; /* Adjust margin as needed */
+    margin-bottom: 3em;
 }
 
 .pagination ul {
@@ -438,6 +439,19 @@ aside {
     display: inline;
     margin-right: 1em; /* Adjust spacing between page links */
 }
+.pagination .active {
+    font-size: 2rem;
+    text-decoration: none;
+    color: #333333;
+    background-color: #F1E2D1;
+    font-weight: bold;
+    padding: 0.3em 0.6em;
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+    transition: background-color 0.3s ease;
+    margin-right: .5em;
+}
+
 
 .pagination a {
     font-size: 2rem;
@@ -453,7 +467,9 @@ aside {
 .pagination a:hover {
     background-color: #f0f0f0;
 }
-
+.disabled, .disabled span {
+    display: none;
+}
 
 /* Breadcrumb Navigation Styles */
 .breadcrumbs {

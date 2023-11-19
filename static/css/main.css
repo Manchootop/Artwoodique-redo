@@ -393,6 +393,7 @@ nav ul li a:hover:before {
     max-width: 1300px;
     /*margin: 5em auto;*/
     padding: 1.5em 0;
+    margin: 0 auto
 }
 
 .benefit {

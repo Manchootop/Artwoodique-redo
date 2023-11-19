@@ -27,14 +27,11 @@ LABEL_CHOICES = (
     ('D', 'danger')
 )
 
-
 class UserProfile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
     one_click_purchasing = models.BooleanField(default=False)
-
-
 
     def __str__(self):
         return self.user.username
@@ -55,18 +52,18 @@ class Product(models.Model):
         max_length=1
     )
     title = models.CharField(
-        max_length=125,
+        max_length=400,
     )
 
     subheading = models.CharField(
-        max_length=125,
+        max_length=400,
     )
     description = models.TextField(
         max_length=400,
     )
 
     material = models.CharField(
-        max_length=100,
+        max_length=400,
     )
 
     slug = models.SlugField(
@@ -74,7 +71,7 @@ class Product(models.Model):
     )
 
     size = models.CharField(
-        max_length=100,
+        max_length=400,
     )
 
     image = models.ImageField(

@@ -27,113 +27,116 @@
         <h1>Store</h1>
     {% endif %}
     <main>
-        <header>
-            <span>{{ products|length }}  results found</span>
-            <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Sort by</button>
-                <div id="myDropdown" class="dropdown-content">
-                    <a href="?sort_by=default&order=asc">Default</a>
-                    <a href="?sort_by=price&order=asc">Price (Low to High)</a>
-                    <a href="?sort_by=price&order=desc">Price (High to Low)</a>
-                    <a href="?sort_by=views&order=desc">Most Views</a>
+        <div class="wrapper">
+            <header>
+                <span>{{ products|length }}  results found</span>
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">Sort by</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="?sort_by=default&order=asc">Default</a>
+                        <a href="?sort_by=price&order=asc">Price (Low to High)</a>
+                        <a href="?sort_by=price&order=desc">Price (High to Low)</a>
+                        <a href="?sort_by=views&order=desc">Most Views</a>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        </div>
         <div class="cards">
             {% for product in products %}
                 <div class="card">
                     {% if product.discount_price != product.discount_price.default and product.discount_price != 0 %}
                         <div class="card-badges">
                             <div class="card-badge badge--discount">
-                            {#                                 style="background-color: rgb(255,66,0);#}
+                                {#                                 style="background-color: rgb(255,66,0);#}
 
-                            <span class="badge-label">-{{ product.discount_price|floatformat:0 }} лв.</span>
+                                <span class="badge-label">-{{ product.discount_price|floatformat:0 }} лв.</span>
 
-                        </div>
+                            </div>
                         </div>
                     {% endif %}
-                <div class="like-button" data-item-id="{{ product.id }}">
-                    <i class="far fa-heart"></i> <!-- Font Awesome heart icon for like -->
-                    {#                        <i class="fa fa-heart" aria-hidden="true"></i>#}
+                    <div class="like-button" data-item-id="{{ product.id }}">
+                        <i class="far fa-heart"></i> <!-- Font Awesome heart icon for like -->
+                        {#                        <i class="fa fa-heart" aria-hidden="true"></i>#}
 
-                </div>
-                <a href="{% url 'catalog-details' pk=product.id %}">
-                    <img src="{{ product.image.url }}" alt="product_image">
-                </a>
-                <div class="card-details">
-                    <div>
-                        <a href="{% url 'catalog-details' pk=product.id %}"
-                           class="product-title"
-                           style=" display: -webkit-box; max-width: 20ch; -webkit-line-clamp: 2">{{ product.title }}
-                        </a>
-                        <div class="card-content">
-                            <div class="card-pricing">
-                                {% if product.discount_price %}
-                                    <div class="card-price-old">
-                                        <s><span>{{ product.price|floatformat:0 }}лв.</span></s>
-                                        {# class="mf-decimal">,</small>99</sup><span>лв.</span></s>#}
+                    </div>
+                    <a href="{% url 'catalog-details' pk=product.id %}">
+                        <img src="{{ product.image.url }}" alt="product_image">
+                    </a>
+                    <div class="card-details">
+                        <div>
+                            <a href="{% url 'catalog-details' pk=product.id %}"
+                               class="product-title"
+                               style=" display: -webkit-box; max-width: 20ch; -webkit-line-clamp: 2">{{ product.title }}
+                            </a>
+                            <div class="card-content">
+                                <div class="card-pricing">
+                                    {% if product.discount_price %}
+                                        <div class="card-price-old">
+                                            <s><span>{{ product.price|floatformat:0 }}лв.</span></s>
+                                            {# class="mf-decimal">,</small>99</sup><span>лв.</span></s>#}
+                                        </div>
+                                    {% endif %}
+                                    <div class="card-price-current">
+                                        <span>{{ product.current_price|floatformat:0 }}лв.</span>
+                                        <a type="submit" class="btn" data-pnk="DQNDNNMBM" data-offer-id="121851370"
+                                           data-category-id="1537" style="position: relative"
+                                           href="
+
+                                                   {% if request.path == '/store/' %}{% url 'add-to-cart' product.slug %}{% else %} {% url 'catalog-details' product.id %} {% endif %}">
+                                            <i class="em em-cart_fill ">
+                                                {% if request.path == '/store/' %}
+                                                    <img src="{% static 'images/cart.svg' %}" alt="add_to_cart"
+                                                         style="width: 30px; height:30px; min-height: 30px; color: white; position: absolute; top: 5px; left: 5px;">
+                                                {% else %}
+                                                    <img src="{% static 'images/double-arrows-black.png' %}"
+                                                         alt="view model"
+                                                         style="width: 30px; height:30px; min-height: 30px; color: white; position: absolute; top: 5px; left: 5px;">
+
+                                                {% endif %}
+                                            </i>
+                                        </a>
                                     </div>
-                                {% endif %}
-                                <div class="card-price-current">
-                                    <span>{{ product.current_price|floatformat:0 }}лв.</span>
-                                    <a type="submit" class="btn" data-pnk="DQNDNNMBM" data-offer-id="121851370"
-                                       data-category-id="1537" style="position: relative"
-                                       href="
-                                               {% if request.path == '/store/' %}{% url 'add-to-cart' product.slug %}{% else %} {% url 'catalog-details' product.id %} {% endif %}">
-                                        <i class="em em-cart_fill ">
-                                            {% if request.path == '/store/' %}
-                                                <img src="{% static 'images/cart.svg' %}" alt="add_to_cart"
-                                                     style="width: 30px; height:30px; min-height: 30px; color: white; position: absolute; top: 5px; left: 5px;">
-                                            {% else %}
-                                                <img src="{% static 'images/double-arrows-black.png' %}"
-                                                     alt="view model"
-                                                     style="width: 30px; height:30px; min-height: 30px; color: white; position: absolute; top: 5px; left: 5px;">
-
-                                            {% endif %}
-                                        </i>
+                                </div>
+                                <div class="card-buy">
+                                    <a href="/peralnja-heinner-6-kg-1000-ob-min-klas-d-led-displej-60-sm-bjal-hwm-v6010d/pd/DVPJ17MBM/?ref=prod_CMP-282857_6149_65514"
+                                       class="btn js-product-link" aria-label="Product details">
+                                        <i class="em em-double-right"></i>
                                     </a>
                                 </div>
                             </div>
-                            <div class="card-buy">
-                                <a href="/peralnja-heinner-6-kg-1000-ob-min-klas-d-led-displej-60-sm-bjal-hwm-v6010d/pd/DVPJ17MBM/?ref=prod_CMP-282857_6149_65514"
-                                   class="btn js-product-link" aria-label="Product details">
-                                    <i class="em em-double-right"></i>
-                                </a>
-                            </div>
                         </div>
-                    </div>
 
-                    {#                        </p>#}
-                </div>
+                        {#                        </p>#}
+                    </div>
                 </div>
             {% endfor %}
-</div>
+        </div>
 
 
 
-{% if is_paginated %}
-    <ul class="pagination">
-        {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-        {% else %}
-            <li class="disabled"><span>&laquo;</span></li>
+        {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
         {% endif %}
-        {% for i in paginator.page_range %}
-            {% if page_obj.number == i %}
-                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-            {% else %}
-                <li><a href="?page={{ i }}">{{ i }}</a></li>
-            {% endif %}
-        {% endfor %}
-        {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-        {% else %}
-            <li class="disabled"><span>&raquo;</span></li>
-        {% endif %}
-    </ul>
-{% endif %}
 
-</main>
+    </main>
 </div>
 
 </main>

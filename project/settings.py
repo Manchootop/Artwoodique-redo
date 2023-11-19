@@ -41,14 +41,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if DEBUG:
+if not DEBUG:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     cloudinary.config(
         cloud_name="dzkpnriaw",
         api_key="549581289117547",
         api_secret="Jwd3ECNeENCxeCcEE3LZyx1DY14"
     )
-if DEBUG:
+if not DEBUG:
     MIDDLEWARE += 'whitenoise.middleware.WhiteNoiseMiddleware',
 ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 WSGI_APPLICATION = 'project.wsgi.application'
-if not DEBUG:
+if DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -120,7 +120,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-if DEBUG:
+if not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
@@ -131,12 +131,12 @@ DEFAULT_FROM_EMAIL = "mariqn5000@gmail.com"
 # settings.py
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = 'smpt.gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587  # Use the appropriate port for your email provider
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mariqn5000@gmail.com'
-EMAIL_HOST_PASSWORD = 'your-email-password'
-
+EMAIL_HOST_PASSWORD = 'mgtn nqyr leaz sidv '
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 STRIPE_SECRET_KEY = "sk_test_Thatshurt74408K"
 STRIPE_PUBLIC_KEY = "bla bla bla "
 # settings.py
