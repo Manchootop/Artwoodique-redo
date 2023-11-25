@@ -321,7 +321,6 @@ def userprofile_receiver(sender, instance, created, *args, **kwargs):
 
 post_save.connect(userprofile_receiver, sender=settings.AUTH_USER_MODEL)
 
-
 class ItemLike(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     item = models.ForeignKey(Product, on_delete=models.CASCADE)  # Assuming you have an `Item` model
