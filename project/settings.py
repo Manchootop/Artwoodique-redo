@@ -42,14 +42,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if not IS_PRODUCTION:
+if IS_PRODUCTION:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     cloudinary.config(
         cloud_name="dzkpnriaw",
         api_key="549581289117547",
         api_secret="Jwd3ECNeENCxeCcEE3LZyx1DY14"
     )
-if not IS_PRODUCTION:
+if IS_PRODUCTION:
     MIDDLEWARE += 'whitenoise.middleware.WhiteNoiseMiddleware',
 ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
@@ -76,27 +76,27 @@ if IS_PRODUCTION:
         "default": {
             "ENGINE": "django.db.backends.postgresql",
             "NAME": "artwoodique-original_db",
-            "USER": "postgres",
-            "PASSWORD": "Thatshurt",
-            "HOST": "127.0.0.1",
-            "PORT": "5432",
-        }
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "artwoodique-original_db",
             "USER": "mkaurgxzzuaiyu",
             "PASSWORD": "dc5916eff18122b15dfbdc152cc06ddf9215f66fd4e616c9b77de0f3d3ba9b27",
             "HOST": "ec2-34-251-233-253.eu-west-1.compute.amazonaws.com",
             "PORT": "5432",
         }
     }
-
     DATABASES = {
         "default": dj_database_url.config(default=os.environ.get("DATABASE_URL1"))
     }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "artwoodique-original_db",
+            "USER": "postgres",
+            "PASSWORD": "Thatshurt",
+            "HOST": "127.0.0.1",
+            "PORT": "5432",
+        }
+    }
+
 if not IS_PRODUCTION:
     AUTH_PASSWORD_VALIDATORS = [
         {
@@ -112,6 +112,7 @@ if not IS_PRODUCTION:
             'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
         },
     ]
+
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -121,7 +122,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-if not IS_PRODUCTION:
+if IS_PRODUCTION:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
@@ -145,7 +146,7 @@ LOGIN_REDIRECT_URL = '/'
 # AUTH_USER_MODEL = 'accounts.ArtwoodiqueUser'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
-if not IS_PRODUCTION:
+if IS_PRODUCTION:
     # SECURE_SSL_REDIRECT = True
 
     SECURE_SSL_CERTIFICATE = '../ssl_cert/certificate.crt'
