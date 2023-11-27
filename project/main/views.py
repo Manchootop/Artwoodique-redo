@@ -175,35 +175,35 @@ class ProductDetailsView(views.DetailView):
 
 class ContactsView(views.TemplateView):
     template_name = 'contact.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = ContactForm()
-        return context
-
-    def post(self, request, *args, **kwargs):
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            # Process the form data
-            heading = form.cleaned_data['heading']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
-
-            # You can handle sending the email here similar to the newsletter signup view
-            subject = 'Contact Form Submission'
-            message = f'Heading: {heading}\nEmail: {email}\nMessage: {message}'
-            from_email = settings.DEFAULT_FROM_EMAIL
-            recipient_list = [settings.CONTACT_EMAIL]  # Replace with the recipient's email address
-
-            send_mail(subject, message, from_email, recipient_list, fail_silently=True)
-
-            # Send a thank you message to the user
-            messages.success(request, 'Thank you for contacting us!')
-
-            return redirect('contacts')  # You should define a URL for the success page
-        else:
-            messages.warning(request, 'Please fill in the required fields correctly.')
-            return render(request, self.template_name, {'form': form})
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['form'] = ContactForm()
+    #     return context
+    #
+    # def post(self, request, *args, **kwargs):
+    #     form = ContactForm(request.POST)
+    #     if form.is_valid():
+    #         # Process the form data
+    #         heading = form.cleaned_data['heading']
+    #         email = form.cleaned_data['email']
+    #         message = form.cleaned_data['message']
+    #
+    #         # You can handle sending the email here similar to the newsletter signup view
+    #         subject = 'Contact Form Submission'
+    #         message = f'Heading: {heading}\nEmail: {email}\nMessage: {message}'
+    #         from_email = settings.DEFAULT_FROM_EMAIL
+    #         recipient_list = [settings.CONTACT_EMAIL]  # Replace with the recipient's email address
+    #
+    #         send_mail(subject, message, from_email, recipient_list, fail_silently=True)
+    #
+    #         # Send a thank you message to the user
+    #         messages.success(request, 'Thank you for contacting us!')
+    #
+    #         return redirect('contacts')  # You should define a URL for the success page
+    #     else:
+    #         messages.warning(request, 'Please fill in the required fields correctly.')
+    #         return render(request, self.template_name, {'form': form})
 
 
 class FAQView(views.TemplateView):
