@@ -1,0 +1,913 @@
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --main-bg-color-light: #F1E2D1;
+    --main-bg-color-dark: #583d22;
+
+    --header-font: 'Playfair Display SC';
+    --main-font: 'Poppins';
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Styling for the close button */
+.close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 10px;
+    color: #333;
+}
+
+.message {
+    list-style: none;
+    border-radius: 10px;
+    box-shadow: 3px 3px 4px 0px rgba(50, 50, 50, 0.75);
+    color: white;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+    width: 80%;
+}
+
+/*
+ * Give the various message types the correct colors
+ */
+.message.success {
+    background-color: green;
+}
+
+.message.error {
+    background-color: red;
+}
+
+.success {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Info Messages */
+.info {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Warning Messages */
+.warning {
+    background-color: #FF9800;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Error Messages */
+.error {
+    background-color: #F44336;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.wrapper {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/*.social-icons {*/
+/*    position: fixed;*/
+/*    top: 50%;*/
+/*    left: 20px; !* Adjust as needed *!*/
+/*    z-index: 1000;*/
+/*}*/
+
+.social-icons ul {
+    list-style: none;
+    padding: 0;
+}
+
+.social-icons li {
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.social-icons {
+    position: fixed;
+    top: 20%; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+    z-index: 10000000;
+}
+
+
+/* Navbar */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    margin: 2em 0;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 4.1em;
+    margin: 0;
+}
+
+nav ul li a, .logo {
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    position: relative;
+}
+
+.logo {
+    font-weight: 500;
+}
+
+nav ul li a.active:before {
+    position: absolute;
+    content: "";
+    width: 35%;
+    height: 1px;
+    border-bottom: 2px solid black;
+    bottom: -6px;
+}
+
+/* for microinteraction */
+
+nav ul li a:before {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 1px;
+    border-bottom: 2px solid rgb(122, 122, 122);
+    bottom: -6px;
+    transition: width .3s;
+}
+
+/* Hero Section */
+
+main {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8em;
+    margin: 0;
+}
+
+.left-col {
+    width: 47%;
+}
+
+.right-col {
+    flex-grow: 1;
+}
+
+h1 {
+    font-size: 5.2rem;
+    font-family: 'Playfair Display SC', sans-serif;
+    font-weight: normal;
+    margin: 0;
+}
+
+.subhead {
+    font-size: 1.8rem;
+    color: #C78B5F;
+}
+
+.cta-btns, .secondary-cta {
+    display: flex;
+    gap: 2em;
+}
+
+.cta-btns {
+    margin: 5em 0;
+}
+
+.primary-cta {
+    background-color: #F1E2D1;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    border-radius: 0.8em;
+    padding: 1em 2em;
+}
+
+.secondary-cta {
+    font-size: 1.8rem;
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 1em 0;
+    align-items: center;
+}
+
+.secondary-cta svg {
+    width: 20px;
+    transition: transform .3s;
+}
+
+/* offerings card section */
+/* TODO add parent to offerings so that by adding line height u center the percentage 100% */
+.offerings {
+    display: flex;
+    gap: 3em;
+    padding: 5em;
+    border: 1px solid black;
+    border-radius: .8em;
+    position: relative;
+}
+
+.offerings:before {
+    position: absolute;
+    content: "";
+    background: url("../images/hammer_icon.274d5cfed45d.png");
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    top: -20px;
+    left: -20px;
+    z-index: 2;
+}
+
+p.percentage {
+    font-size: 3.3rem;
+    margin: 0;
+    font-weight: 200;
+}
+
+p.details {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+/* Right column gallery */
+
+.right-col {
+    display: grid;
+    gap: 2.3em;
+    grid-template-columns: repeat(2, auto);
+    grid-template-areas:
+        "top right"
+        "left right"
+        "left bottom"
+
+}
+
+.card {
+    border-radius: 0.8em;
+    padding: 1.1em;
+    display: flex;
+    align-items: end;
+    background-size: cover;
+    background-position: center center;
+    transition: transform 800ms;
+}
+
+.card1 {
+    grid-area: left;
+    background-image: url("../images/table1.e4fc91c27435.png");
+    background-repeat: no-repeat;
+}
+
+.card2 {
+    grid-area: right;
+    background-image: url("../images/table2.9f8b1ce2c521.png");
+    background-repeat: no-repeat;
+}
+
+.card3 {
+    grid-area: bottom;
+    background-image: url("../images/table3.66aa6db4d1b6.png");
+    background-repeat: no-repeat;
+}
+
+.card0 {
+    grid-area: top;
+    background-image: url("../images/table0.aafca4f4436b.png");
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.card-details {
+    background: white;
+    border-radius: .6em;
+    padding: 2em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 800ms;
+    opacity: 70%;
+}
+
+.card-details a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.card-details p {
+    font-size: 1.4rem;
+    margin: 0;
+    font-weight: lighter;
+}
+
+p.product-price {
+    font-size: 1.8rem;
+}
+
+.card0:before {
+    position: absolute;
+    content: "";
+    background: url("../images/tag.1096606d581c.svg") no-repeat;
+    width: 100%;
+    height: 100%;
+    top: -50px;
+    left: -90px;
+    pointer-events: none;
+}
+
+/* Microinteractions */
+
+nav ul li a:hover:before {
+    width: 35%;
+}
+
+.primary-cta:hover {
+    background-color: #E2D1BD;
+}
+
+.secondary-cta:hover svg {
+    transform: translateX(10px);
+}
+
+.secondary-cta:hover {
+    text-decoration: underline;
+}
+
+/* TODO Fix % when fix cards images */
+.card:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.card:hover .card-details {
+    transform: translateY(-20px);
+}
+
+.what_do_you_get {
+    background-color: var(--main-bg-color-light);
+    max-width: 4300px;
+    margin: 3em auto;
+    padding: 8em 0;
+}
+
+.what-you-get {
+    display: flex;
+    justify-content: center;
+    gap: 2.3em;
+    flex-wrap: wrap;
+    max-width: 1300px;
+    /*margin: 5em auto;*/
+    padding: 1.5em 0;
+    margin: 0 auto
+}
+
+.benefit {
+    background: none;
+    padding: 1.2em;
+    border-radius: .8em;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    max-width: 40em;
+    background: white;
+}
+
+h2 {
+    font-size: 2rem;
+    font-family: 'Playfair Display SC';
+
+}
+
+.benefit p {
+    font-family: 'Poppins';
+    font-size: 1.6rem;
+}
+
+.benefit .icon img {
+    width: 3em;
+    height: 3em;
+    position: relative;
+    top: 1px;
+}
+
+.benefit:hover {
+    background: #E2D1BD;
+}
+
+.cta-button {
+    padding: .8em;
+    background-color: #faf4ee;
+    color: black;
+    text-decoration: none;
+    border-radius: .8em;
+    font-size: 1.8rem;
+    transition: background-color 0.3s ease;
+    max-height: 6rem;
+    font-family: 'Poppins';
+    margin-top: 1.2em;
+}
+
+#order-now {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    background-color: white;
+    font-weight: bold;
+    gap: .8em;
+}
+
+#order-now img {
+    width: 2.4em;
+    height: 2.4em;
+}
+
+#order-now:hover {
+    background-color: rgb(255, 232, 232);
+    font-weight: bold;
+
+}
+
+#gallery {
+    grid-area: buttons;
+    background: none;
+    border: 3px solid white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5em 2em;
+}
+
+#gallery img {
+    width: 24px;
+    height: 24px;
+}
+
+
+#gallery:hover {
+    text-decoration: underline;
+}
+
+
+#gallery svg {
+    width: 20px;
+    transition: transform .3s;
+}
+
+#gallery:hover svg {
+    transform: translateX(8px);
+}
+
+/* footer */
+
+footer div img {
+    width: 60px;
+    height: 60px;
+
+}
+
+footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+footer .left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2em
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+.text span {
+    font-size: 1.6rem;
+}
+
+.FAQ .text a {
+    /* text-decoration: none; */
+    color: black;
+
+}
+
+/* Additional styles for the "Why Choose Us" section */
+
+.why-choose-us {
+    background-color: #fff;
+    padding: 1em 7em 7em 7em;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 15em 10em;
+
+}
+
+
+.why-choose-us h2 {
+    font-size: 3rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.why-choose-us p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.why-choose-us ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.why-choose-us li {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Rest of your existing styles... */
+
+
+/* Additional styles for the "Products/Services" section */
+
+
+.products-services {
+    margin: 4em 0 10em 0;
+    font-family: var(--header-font);
+
+}
+
+.products-services h2 {
+    text-align: center;
+    font-size: 4rem;
+    padding: 1em 0 0 0;
+}
+
+.product {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 4em;
+}
+
+.product-image {
+    flex: 1;
+}
+
+.product-image img {
+    width: 250px;
+    height: 300px;
+    background-size: 100%;
+    border-radius: 0.8em;
+}
+
+.product-description {
+    flex: 2;
+}
+
+.product-description h3 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.product-description p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.product-description a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+.product-description a:hover {
+    color: #0055ff;
+    text-decoration: underline;
+}
+
+.background {
+    background-color: var(--main-bg-color-light);
+    margin: 5em 0;
+}
+
+hr {
+    margin-top: 15em;
+}
+
+.section {
+    margin: 8em 0;
+}
+
+@media (max-width: 1250px) {
+    .what-you-get {
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    main {
+        display: inline-block;
+        margin: 0 auto;
+        padding: 1em;
+
+    }
+
+    .cta-btns {
+        justify-content: center;
+    }
+
+    .primary-cta {
+        padding: .8em .1em .8em .1em;
+    }
+
+    .card0:before {
+        width: 70%;
+        height: 70%;
+        top: -70px;
+        left: -50px;
+    }
+
+    .left-col {
+        align-self: center;
+        text-align: center;
+        margin: 0 auto;
+        width: 80%;
+    }
+
+    .right-col {
+        /*height: 100%;*/
+        /*background: red;*/
+        margin: 0 3em 3em 3em;
+        padding: 0 3em 3em 3em;
+    }
+
+    .card {
+        height: 100%;
+        margin: 8em 0;
+        padding: 2em;
+    }
+
+    .card img {
+        background-size: cover;
+    }
+
+}
+
+@media (max-width: 900px) {
+    .what_do_you_get {
+        margin-top: 4em;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .offerings {
+        padding: 1em; /* Reduce padding for smaller screens */
+    }
+
+    .left-col p {
+        font-size: 1.2rem;
+    }
+
+    .cta-btns {
+        gap: 1em;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+
+    .primary-cta {
+        text-align: center;
+        padding: .8em;
+        font-size: 1rem;
+        margin: auto;
+    }
+
+    .secondary-cta {
+        margin: 0 auto;
+        font-size: 1rem;
+
+    }
+
+    .secondary-cta svg {
+        margin: 0 auto;
+        font-size: .8rem;
+
+    }
+
+    .what_do_you_get {
+        margin-top: 2em;
+    }
+
+    /*.right-col {*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*    align-items: normal;*/
+    /*    justify-content: space-between;*/
+    /*    !*grid-template-columns: 1fr; !* Single column layout on smaller screens *!*!*/
+    /*    !*grid-template-rows: none;*!*/
+    /*    text-align: center; !* Center text in right column *!*/
+    /*    margin: 0;*/
+    /*}*/
+    .right-col {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        margin: 1em auto;
+
+    }
+
+    .card {
+        flex-direction: column;
+        max-height: 500px;
+        min-height: 350px;
+        margin: 1em 0;
+    }
+
+    .card img {
+        height: 300px;
+    }
+
+    .card {
+        flex-direction: column-reverse;
+
+    }
+
+    .card-details {
+        /*display: block;*/
+    }
+
+
+    .what-you-get {
+        grid-template-columns: 1fr; /* Single column layout on smaller screens */
+    }
+
+    footer .left-col {
+        text-align: center; /* Center text in left column of footer */
+    }
+
+    .why-choose-us {
+        text-align: center; /* Center text in "Why Choose Us" section */
+    }
+
+    .what-you-get {
+        padding: 1em;
+    }
+
+    .social-icons {
+        left: 4px;
+    }
+}
+
+/* Medium screens (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Add your specific styles for medium-sized screens here */
+}
+
+/* Large screens (1025px and above) */
+@media (min-width: 1025px) {
+    /* Add your specific styles for large-sized screens here */
+}
+
+/* ... (previous CSS rules) ... */
+
+/* Media Queries */
+
+@media (max-width: 768px) and (max-height: 768px) {
+    .offerings {
+        flex-direction: column; /* Stack items in the offerings section */
+        align-items: center; /* Center items horizontally */
+        text-align: center; /* Center text */
+        padding: 1em; /* Reduce padding for smaller screens */
+    }
+
+
+    .what-you-get {
+        grid-template-columns: 1fr; /* Single column layout on smaller screens */
+    }
+
+    footer .left-col {
+        text-align: center; /* Center text in left column of footer */
+    }
+
+    .why-choose-us {
+        text-align: center; /* Center text in "Why Choose Us" section */
+    }
+
+    /* Adjust products/services section */
+    .product {
+        flex-direction: column; /* Stack products in a single column */
+    }
+}
+
+/* Medium screens (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Add your specific styles for medium-sized screens here */
+}
+
+/* Large screens (1025px and above) */
+@media (min-width: 1025px) {
+    /* Add your specific styles for large-sized screens here */
+}
+
+
+h4 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin-top: 4em;
+}
+
+/* Add your existing CSS styles here */
+
+/* Style the mobile menu container */
+
+@media (max-width: 450px) {
+    main {
+        flex-direction: column;
+        margin: 20px;
+    }
+
+
+}
+
+
+@media (max-width: 615px) {
+    .why-choose-us {
+        padding: 3em;
+        margin: 2em;
+    }
+}
+
+@media (max-width: 775px) {
+    .why-choose-us ul {
+        list-style: none;
+        padding: 0;
+    }
+}
+
+@media (max-width: 1250px) {
+    main {
+        padding: 3em;
+        margin: 2em;
+    }
+}
+
+@media (max-width: 950px) {
+    main {
+        padding: 0;
+        margin: 1em auto;
+        gap: 5em;
+    }
+}
+
+
+.why-choose-us, h4, body, .bg-pattern {
+    background-image: url("https://www.xlab.design/wp-content/uploads/2019/05/xlab-pattern.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
