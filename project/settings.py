@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #     with open('secret_key.txt') as f:
 #         SECRET_KEY = f.read().strip()
 SECRET_KEY = 'django-insecure-=(!&olqxy6ni=d_7_)#x6#9rhs9(oad+@h%f1(+utjc-8k99a+'
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,14 +41,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if DEBUG:
+if not DEBUG:
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     cloudinary.config(
         cloud_name="dzkpnriaw",
         api_key="549581289117547",
         api_secret="Jwd3ECNeENCxeCcEE3LZyx1DY14"
     )
-if DEBUG:
+if not DEBUG:
     MIDDLEWARE += 'whitenoise.middleware.WhiteNoiseMiddleware',
 ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 WSGI_APPLICATION = 'project.wsgi.application'
-if not DEBUG:
+if DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -96,7 +96,7 @@ else:
     DATABASES = {
         "default": dj_database_url.config(default=os.environ.get("DATABASE_URL1"))
     }
-if DEBUG:
+if not DEBUG:
     AUTH_PASSWORD_VALIDATORS = [
         {
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -120,7 +120,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-if DEBUG:
+if not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
@@ -144,7 +144,7 @@ LOGIN_REDIRECT_URL = '/'
 # AUTH_USER_MODEL = 'accounts.ArtwoodiqueUser'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
-if DEBUG:
+if not DEBUG:
     # SECURE_SSL_REDIRECT = True
 
     SECURE_SSL_CERTIFICATE = '../ssl_cert/certificate.crt'
