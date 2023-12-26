@@ -9,7 +9,6 @@ from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from project.main.models import Product, ProductImage, Subscriber
 
-
 class NewsletterSignupForm(forms.Form):
     email = forms.EmailField(
         widget=forms.TextInput(attrs={'placeholder': 'email'})
@@ -98,3 +97,5 @@ class PaymentForm(forms.Form):
     stripeToken = forms.CharField(required=False)
     save = forms.BooleanField(required=False)
     use_default = forms.BooleanField(required=False)
+
+

@@ -16,8 +16,8 @@
             <!-- Add more social icons as needed -->
         </ul>
     </div>
-    <main>
-        <div class="left-col">
+    <main style="margin-bottom: 8em">
+        <div class="left-col" >
             <h1>Contacts</h1>
             <div class="contacts-card">
                 <div class="first-row">
@@ -27,7 +27,15 @@
                     </section>
                     <section class="contact-block">
                         <img src="" alt="">
-                        <span>Facebook</span>
+                        <span>Facebook Group</span>
+                    </section>
+                    <section class="contact-block">
+                        <img src="" alt="">
+                        <span>Facebook Page</span>
+                    </section>
+                    <section class="contact-block">
+                        <img src="" alt="">
+                        <span>+359 878 130 052</span>
                     </section>
 
                 </div>
@@ -44,18 +52,17 @@
 
 
             </div>
-            <div class="right-col"></div>
 
         </div>
         <div class="right-col">
             <div class="contact-us-wrapper">
                 <span>Write us</span>
-{#                <form action="{% url 'contacts' %}" method="POST">#}
-{#                    {{ form|crispy }}#}
-{#                    {% csrf_token %}#}
-{#                    <button style="margin-top: 1em">Submit</button>#}
-{##}
-{#                </form>#}
+                <form action="{% url 'contacts' %}" method="POST">
+                    {{ form|crispy }}
+                    {% csrf_token %}
+                    <button style="margin-top: 1em">Submit</button>
+
+                </form>
             </div>
         </div>
     </main>

@@ -6,6 +6,7 @@ html {
     box-sizing: border-box;
 }
 
+
 :root {
     --main-bg-color-light: #bfa271;
     --main-bg-color-dark: #583d22;
@@ -20,6 +21,7 @@ body {
 }
 
 /* Styling for the close button */
+
 .close {
     float: right;
     font-size: 20px;
@@ -46,6 +48,7 @@ body {
 /*
  * Give the various message types the correct colors
  */
+
 .message.success {
     background-color: green;
 }
@@ -62,6 +65,7 @@ body {
 }
 
 /* Info Messages */
+
 .info {
     background-color: #2196F3;
     color: white;
@@ -70,6 +74,7 @@ body {
 }
 
 /* Warning Messages */
+
 .warning {
     background-color: #FF9800;
     color: white;
@@ -78,6 +83,7 @@ body {
 }
 
 /* Error Messages */
+
 .error {
     background-color: #F44336;
     color: white;
@@ -122,8 +128,8 @@ body {
 }
 
 main {
-    /*display: flex;*/
-    /*flex-direction: column;*/
+    display: flex;
+    flex-direction: column;
     /*flex-wrap: nowrap;*/
     gap: 8em;
     margin: 0 auto;
@@ -134,20 +140,20 @@ main .left-col {
     background-color: var(--main-bg-color-light);
     border-radius: .8em;
     margin: 0 auto;
-
+    min-width: 500px;
 }
 
 
 main .right-col {
 
-    background-color: var(--main-bg-color-dark);
-    border-radius: .8em;
+    border: 1px solid var(--main-bg-color-dark);
+    border-top: none;
+    border-radius: 0 0 .8em .8em;
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin: 0 auto;
     min-width: 500px;
-
 }
 
 h1 {
@@ -162,14 +168,13 @@ h1 {
     display: flex;
     justify-content: space-around;
     gap: 2em;
-
 }
 
 
 .first-row, .second-row {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: space-between;
 }
 
 section {
@@ -212,7 +217,6 @@ section {
 }
 
 .contact-us-wrapper span {
-    color: white;
     font-family: "Playfair Display SC", sans-serif;
     font-size: 5.2rem;
     text-align: center;
@@ -228,4 +232,100 @@ section {
     color: white;
     text-align: center;
     display: none;
+}
+
+.form_wrap {
+    height: 300px;
+    width: 500px;
+    background: white;
+    margin: 50px auto;
+    padding: 125px 0px 0px 100px;
+    outline: 5px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+input[type="text"] {
+    border: 2px solid #afbdcf;
+    border-radius: 5px;
+    height: 47px;
+    width: 300px;
+    color: #000000;
+    font-size: 14px;
+    padding-left: 20px;
+    box-shadow: none;
+}
+
+/* Label style after Input feild is in focus. Can also use input:focus ~ label to select sibling. */
+
+input:focus + label, input:valid + label {
+    font-size: 12px;
+    color: #afbdcf;
+    top: -5px;
+    left: 10px;
+    background: #ffffff;
+    padding: 0px 5px 0px 5px;
+}
+
+.input_wrap {
+    width: auto;
+    height: auto;
+    position: relative;
+}
+
+.input_wrap label {
+    font-family: arial, sans-serif;
+    font-size: 16px;
+    color: #afbdcf;
+    padding: 14px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+    pointer-events: none;
+
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+/* floating fieldsss... */
+
+
+.floating-placeholder-container {
+    position: relative;
+    margin-bottom: 25px; /* Adjust as needed */
+}
+
+.floating-placeholder {
+    font-size: 16px; /* Adjust as needed */
+    padding: 10px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc; /* Adjust as needed */
+    transition: all 0.3s;
+}
+
+.floating-placeholder:focus,
+.floating-placeholder:not(:placeholder-shown) {
+    outline: none;
+    border-bottom: 2px solid #007BFF; /* Adjust as needed */
+}
+
+.floating-placeholder-label {
+    position: absolute;
+    pointer-events: none;
+    left: 10px;
+    top: 10px;
+    transition: all 0.3s;
+}
+
+.floating-placeholder:focus ~ .floating-placeholder-label,
+.floating-placeholder:not(:placeholder-shown) ~ .floating-placeholder-label {
+    font-size: 12px; /* Adjust as needed */
+    top: -15px; /* Adjust as needed */
+    color: #007BFF; /* Adjust as needed */
 }
