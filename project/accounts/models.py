@@ -69,7 +69,6 @@ class ArtwoodiqueUserProfile(models.Model):
         null=True,
         blank=True,
         default=DO_NOT_SHOW,
-        related_name='user_profile_gender'
     )
 
     # phone_number = PhoneNumberField()
