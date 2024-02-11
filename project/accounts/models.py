@@ -1,5 +1,5 @@
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin, User
+from django.contrib.auth.models import PermissionsMixin, User, Group, Permission
 from django.core.exceptions import ValidationError
 from django.core.validators import MinLengthValidator
 from django.db import models
@@ -26,6 +26,22 @@ class ArtwoodiqueUser(AbstractBaseUser, PermissionsMixin):
     )
 
     USERNAME_FIELD = 'email'
+
+    groups = models.ManyToManyField(
+        Group,
+        verbose_name=_('groups'),
+        blank=True,
+        related_name='artwoodiqueuser_set',  # Change this to a unique name
+        related_query_name='user',
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        verbose_name=_('user permissions'),
+        blank=True,
+        related_name='artwoodiqueuser_set',  # Change this to a unique name
+        related_query_name='user',
+        help_text=_('Specific permissions for this user.'),
+    )
 
     objects = ArtwoodiqueUserManager()
 
