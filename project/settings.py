@@ -10,8 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #     with open('secret_key.txt') as f:
 #         SECRET_KEY = f.read().strip()
 SECRET_KEY = 'django-insecure-=(!&olqxy6ni=d_7_)#x6#9rhs9(oad+@h%f1(+utjc-8k99a+'
-DEBUG = True
-IS_PRODUCTION = False
+DEBUG = False
+IS_PRODUCTION = True
 ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'django.contrib.admin',
