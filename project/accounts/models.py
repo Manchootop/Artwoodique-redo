@@ -19,7 +19,6 @@ class ArtwoodiqueUser(AbstractBaseUser, PermissionsMixin):
 
     date_joined = models.DateTimeField(
         auto_now_add=True,
-        related_name='user_date_joined'
     )
 
     is_staff = models.BooleanField(
