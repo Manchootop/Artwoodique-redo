@@ -44,7 +44,6 @@ class ArtwoodiqueUserProfile(models.Model):
 
     first_name = models.CharField(
         max_length=FIRST_NAME_MAX_LENGTH,
-        related_name='user_profile_first_name',
         validators=(
             MinLengthValidator(FIRST_NAME_MIN_LENGTH),
             validate_only_letters,
@@ -53,7 +52,6 @@ class ArtwoodiqueUserProfile(models.Model):
 
     last_name = models.CharField(
         max_length=LAST_NAME_MAX_LENGTH,
-        related_name='user_profile_last_name',
         validators=(
             MinLengthValidator(LAST_NAME_MIN_LENGTH),
             validate_only_letters,
@@ -71,7 +69,6 @@ class ArtwoodiqueUserProfile(models.Model):
         null=True,
         blank=True,
         default=DO_NOT_SHOW,
-        related_name='user_profile_gender'
     )
 
     # phone_number = PhoneNumberField()
