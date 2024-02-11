@@ -35,7 +35,7 @@ class ArtwoodiqueUser(AbstractBaseUser, PermissionsMixin):
         blank=True,
         related_name='artwoodiqueuser_set',  # Change this to a unique name
         related_query_name='user',
-    )
+    )       
     user_permissions = models.ManyToManyField(
         Permission,
         verbose_name=_('user permissions'),
