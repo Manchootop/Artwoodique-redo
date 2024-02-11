@@ -15,7 +15,6 @@ def validate_only_letters(value):
 class ArtwoodiqueUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         unique=True,
-        related_name='user_email'
     )
 
     date_joined = models.DateTimeField(
