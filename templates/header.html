@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </a></li>
-                    <li><a href="{% url 'account_login' %}"
+                    <li><a href="{% url 'login' %}"
                    class="{% if request.path == '/accounts/user_profile/' %}active{% endif %}">
                 {% if request.user.is_authenticated %}
                     <img src="{% static 'images/user.svg' %}" alt="user-profile-icon">
