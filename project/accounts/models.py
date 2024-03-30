@@ -5,6 +5,7 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, Group, Permission
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from project.accounts.managers import ArtwoodiqueUserManager
 
@@ -14,36 +15,78 @@ def validate_only_letters(value):
         raise ValidationError('Value must contain only letters')
 
 
+# class ArtwoodiqueUser(AbstractBaseUser, PermissionsMixin):
+#     email = models.EmailField(
+#         unique=True,
+#     )
+#
+#     date_joined = models.DateTimeField(
+#         auto_now_add=True,
+#     )
+#
+#     is_staff = models.BooleanField(
+#         default=False,
+#     )
+#
+#     USERNAME_FIELD = 'email'
+#
+#     groups = models.ManyToManyField(
+#         Group,
+#         verbose_name=_('groups'),
+#         blank=True,
+#         related_name='artwoodiqueuser_set',  # Change this to a unique name
+#         related_query_name='user',
+#     )
+#     user_permissions = models.ManyToManyField(
+#         Permission,
+#         verbose_name=_('user permissions'),
+#         blank=True,
+#         related_name='artwoodiqueuser_set',  # Change this to a unique name
+#         related_query_name='user',
+#         help_text=_('Specific permissions for this user.'),
+#     )
+#
+#     objects = ArtwoodiqueUserManager()
+
 class ArtwoodiqueUser(AbstractBaseUser, PermissionsMixin):
+    # password from `AbstractBaseUser`
+    # last_login from `AbstractBaseUser`
+
+    # groups = models.ManyToManyField(
+    #     Group,
+    #     verbose_name=_('groups'),
+    #     blank=True,
+    #     related_name='artwoodiqueuser_groups',  # Unique related_name
+    #     related_query_name='user',
+    # )
+    # user_permissions = models.ManyToManyField(
+    #     Permission,
+    #     verbose_name=_('user permissions'),
+    #     blank=True,
+    #     related_name='artwoodiqueuser_permissions',  # Unique related_name
+    #     related_query_name='user',
+    #     help_text=_('Specific permissions for this user.'),
+    # )
+
     email = models.EmailField(
+        _("email address"),
         unique=True,
+        error_messages={
+            "unique": _("A user with that email already exists."),
+        },
     )
 
-    date_joined = models.DateTimeField(
-        auto_now_add=True,
-    )
+    date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
 
     is_staff = models.BooleanField(
         default=False,
     )
 
-    USERNAME_FIELD = 'email'
-
-    groups = models.ManyToManyField(
-        Group,
-        verbose_name=_('groups'),
-        blank=True,
-        related_name='artwoodiqueuser_set',  # Change this to a unique name
-        related_query_name='user',
-    )       
-    user_permissions = models.ManyToManyField(
-        Permission,
-        verbose_name=_('user permissions'),
-        blank=True,
-        related_name='artwoodiqueuser_set',  # Change this to a unique name
-        related_query_name='user',
-        help_text=_('Specific permissions for this user.'),
+    is_active = models.BooleanField(
+        default=True,
     )
+
+    USERNAME_FIELD = 'email'
 
     objects = ArtwoodiqueUserManager()
 

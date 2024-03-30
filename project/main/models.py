@@ -10,7 +10,7 @@ from django_countries.fields import CountryField
 from django.conf import settings
 from project.shared.functions import upload_other_images_product_url
 from project.shared.models import TimeBaseModel
-
+UserModel = get_user_model()
 
 def upload_image_product_url(instance, filename):
     return f'product/{instance.title}-product/images/default-image/{filename}'
@@ -165,7 +165,7 @@ class ProductRating(TimeBaseModel):
         default=0
     )
     user = models.ForeignKey(
-        User,
+        UserModel,
         on_delete=models.CASCADE
     )
 

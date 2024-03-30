@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #         SECRET_KEY = f.read().strip()
 SECRET_KEY = 'django-insecure-=(!&olqxy6ni=d_7_)#x6#9rhs9(oad+@h%f1(+utjc-8k99a+'
 DEBUG = True
-IS_PRODUCTION = True
+IS_PRODUCTION = False
 ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -23,9 +23,9 @@ INSTALLED_APPS = [
     'project.main',
     'project.accounts',
     'crispy_forms',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.facebook',
     'django_countries',
@@ -37,7 +37,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
+    # 'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -72,16 +72,16 @@ TEMPLATES = [
 ]
 WSGI_APPLICATION = 'project.wsgi.application'
 if IS_PRODUCTION:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "artwoodique-original_db",
-            "USER": "mkaurgxzzuaiyu",
-            "PASSWORD": "dc5916eff18122b15dfbdc152cc06ddf9215f66fd4e616c9b77de0f3d3ba9b27",
-            "HOST": "ec2-34-251-233-253.eu-west-1.compute.amazonaws.com",
-            "PORT": "5432",
-        }
-    }
+    # DATABASES = {
+    #     "default": {
+    #         "ENGINE": "django.db.backends.postgresql",
+    #         "NAME": "artwoodique-original_db",
+    #         "USER": "mkaurgxzzuaiyu",
+    #         "PASSWORD": "dc5916eff18122b15dfbdc152cc06ddf9215f66fd4e616c9b77de0f3d3ba9b27",
+    #         "HOST": "ec2-34-251-233-253.eu-west-1.compute.amazonaws.com",
+    #         "PORT": "5432",
+    #     }
+    # }
     DATABASES = {
         "default": dj_database_url.config(default=os.environ.get("DATABASE_URL1"))
     }
@@ -97,7 +97,7 @@ else:
         }
     }
 
-if not IS_PRODUCTION:
+if not IS_PRODUCTION and not DEBUG:
     AUTH_PASSWORD_VALIDATORS = [
         {
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -143,7 +143,7 @@ STRIPE_SECRET_KEY = "sk_test_Thatshurt74408K"
 STRIPE_PUBLIC_KEY = "bla bla bla "
 # settings.py
 LOGIN_REDIRECT_URL = '/'
-# AUTH_USER_MODEL = 'accounts.ArtwoodiqueUser'
+AUTH_USER_MODEL = 'accounts.ArtwoodiqueUser'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 if IS_PRODUCTION:
