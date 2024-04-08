@@ -1,26 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artwoodique</title>
+{% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/shop.css' %}">
-    <link
-            href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Poppins:wght@200;300;400;700&display=swap"
-            rel="stylesheet">
     <script src="{% static 'js/shop.js' %}" defer></script>
-    <link rel="shortcut icon" href="{% static 'images/AW-logo.svg' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-</head>
+{% endblock %}
 
-<body>
-
-
-<div class="wrapper">
-    {% include 'header.html' %}
+{% block content %}
     {% if is_catalog %}
         <h1>Catalog</h1>
     {% else %}
@@ -31,7 +16,7 @@
             <header>
                 <span>{{ products|length }}  results found</span>
                 <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Sort by</button>
+                    <button onclick="dropList()" class="dropbtn">Sort by</button>
                     <div id="myDropdown" class="dropdown-content">
                         <a href="?sort_by=default&order=asc">Default</a>
                         <a href="?sort_by=price&order=asc">Price (Low to High)</a>
@@ -82,6 +67,8 @@
                                            data-category-id="1537" style="position: relative"
                                            href="
 
+
+
                                                    {% if request.path == '/store/' %}{% url 'add-to-cart' product.slug %}{% else %} {% url 'catalog-details' product.id %} {% endif %}">
                                             <i class="em em-cart_fill ">
                                                 {% if request.path == '/store/' %}
@@ -105,13 +92,10 @@
                                 </div>
                             </div>
                         </div>
-
-                        {#                        </p>#}
                     </div>
                 </div>
             {% endfor %}
         </div>
-
 
 
         {% if is_paginated %}
@@ -137,53 +121,51 @@
         {% endif %}
 
     </main>
+{% endblock %}
 </div>
 
-</main>
 {% include 'footer.html' %}
 
+{% block extra_scripts %}
 
-</body>
-
-
-<style>
+    <style>
 
 
-    label {
-        font-size: 1.6rem
-    }
+        label {
+            font-size: 1.6rem
+        }
 
-    aside {
-        background-color: #C78B5F;
-    }
+        aside {
+            background-color: #C78B5F;
+        }
 
-    .card {
-    }
+        .card {
+        }
 
-</style>
+    </style>
 
-<script>
-    function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
+    <script>
+        function dropList() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
 
-    // Close the dropdown menu if the user clicks outside of it
-    window.onclick = function (event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
                 }
             }
         }
-    }
 
-    function myFunction() {
-        const dropdownContent = document.getElementById("myDropdown");
-        dropdownContent.classList.toggle("show");
-    }
-</script>
-</html>
+        function myFunction() {
+            const dropdownContent = document.getElementById("myDropdown");
+            dropdownContent.classList.toggle("show");
+        }
+    </script>
+{% endblock %}

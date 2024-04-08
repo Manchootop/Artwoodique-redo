@@ -26,4 +26,5 @@ urlpatterns = [
     # URL patterns for adding/removing an item to/from the wishlist
     path('wishlist/', views.toggle_wishlist, name='toggle-wishlist'),
     path('get-liked-status/<int:item_id>/', views.get_liked_status, name='get_liked_status'),
+    path('cart/', views.CartView.as_view(), name='cart'),
 ]

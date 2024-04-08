@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="cart-wrapper">
+        <div class="left-col">
+            <div class="cart-header">
+                <a href="{% url 'store' %}" class="continue-shopping">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 9" fill="none">
+                        <path
+                                d="M23.3536 4.85355C23.5488 4.65829 23.5488 4.34171 23.3536 4.14645L20.1716 0.964466C19.9763 0.769204 19.6597 0.769204 19.4645 0.964466C19.2692 1.15973 19.2692 1.47631 19.4645 1.67157L22.2929 4.5L19.4645 7.32843C19.2692 7.52369 19.2692 7.84027 19.4645 8.03553C19.6597 8.2308 19.9763 8.2308 20.1716 8.03553L23.3536 4.85355ZM0 5H23V4H0V5Z"
+                                fill="black"/>
+                    </svg>
+                    <span>Continue shopping</span>
+                </a>
+                <hr>
+                <div class="main-header">
+                    <div class="header-left-col">
+                        <h1>Shopping cart</h1>
+                        <p class="subhead">You have 4 items in your cart</p>
+                    </div>
+
+                    <div class="header-right-col">
+                        <div>
+                            <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!"
+                                                                                        class="text-body">price
+                                <i class="fas fa-angle-down mt-1"></i></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-card">
+                <div class="card-body">
+                    <div class="item-details">
+                        <div class="main-product">
+                            <div class="img-container">
+                                <img
+                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                        class="img-fluid rounded-3" alt="Shopping item"
+                                        style="width: 65px;">
+                            </div>
+
+                            <div class="item-details">
+                                <div class="item-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit,
+                                    voluptate?
+                                </div>
+                                <div class="subhead">subhead</div>
+                            </div>
+                        </div>
+                        <div class="tags">
+                            <div class="tags">[oak]</div>
+                        </div>
+                    </div>
+
+                    <div class="other-info">
+                        <p class="price">1024$</p>
+                        <div class="qty">+ -</div>
+                        <div class="actions">
+                            <a href="" class="add-to-wishlist">add to WishList</a>
+                            <a href="" class="remove">remove</a>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="right-col">
+            <aside class="col-lg-5">
+
+                <div class="card bg-primary text-white rounded-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">Card details</h5>
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                                 class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
+                        </div>
+
+                        <p class="small mb-2">Card type</p>
+                        <a href="#!" type="submit" class="text-white"><i
+                                class="fab fa-cc-mastercard fa-2x me-2"></i></a>
+                        <a href="#!" type="submit" class="text-white"><i
+                                class="fab fa-cc-visa fa-2x me-2"></i></a>
+                        <a href="#!" type="submit" class="text-white"><i
+                                class="fab fa-cc-amex fa-2x me-2"></i></a>
+                        <a href="#!" type="submit" class="text-white"><i
+                                class="fab fa-cc-paypal fa-2x"></i></a>
+
+                        <form class="mt-4">
+                            <div class="form-outline form-white mb-4">
+                                <input type="text" id="typeName"
+                                       class="form-control form-control-lg" siez="17"
+                                       placeholder="Cardholder's Name"/>
+                                <label class="form-label" for="typeName">Cardholder's Name</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="text" id="typeText"
+                                       class="form-control form-control-lg" siez="17"
+                                       placeholder="1234 5678 9012 3457" minlength="19"
+                                       maxlength="19"/>
+                                <label class="form-label" for="typeText">Card Number</label>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-outline form-white">
+                                        <input type="text" id="typeExp"
+                                               class="form-control form-control-lg"
+                                               placeholder="MM/YYYY" size="7" id="exp" minlength="7"
+                                               maxlength="7"/>
+                                        <label class="form-label" for="typeExp">Expiration</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-outline form-white">
+                                        <input type="password" id="typeText"
+                                               class="form-control form-control-lg"
+                                               placeholder="&#9679;&#9679;&#9679;" size="1"
+                                               minlength="3" maxlength="3"/>
+                                        <label class="form-label" for="typeText">Cvv</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Subtotal</p>
+                            <p class="mb-2">$4798.00</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Shipping</p>
+                            <p class="mb-2">$20.00</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-4">
+                            <p class="mb-2">Total(Incl. taxes)</p>
+                            <p class="mb-2">$4818.00</p>
+                        </div>
+
+                        <button type="button" class="btn btn-info btn-block btn-lg">
+                            <div class="d-flex justify-content-between">
+                                <span>$4818.00</span>
+                                <span>Checkout <i
+                                        class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                            </div>
+                        </button>
+
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block extra_scripts %}
+
+{% endblock %}

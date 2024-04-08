@@ -1,0 +1,118 @@
+.cart-wrapper {
+    margin: auto 0;
+    display: flex;
+    justify-content: space-around;
+    gap: 8em;
+
+}
+
+body {
+    color: #222222
+}
+
+.left-col {
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 0.8em;
+    padding: 1rem;
+}
+
+/* Cart Header should be here: */
+/* Continue shopping text */
+.left-col .cart-header a.continue-shopping {
+    font-size: 2rem;
+    text-decoration: none;
+    color: black;
+    display: block;
+    /*padding: 1em 0;*/
+    align-items: center;
+    font-weight: 600;
+    padding: .5em .5em;
+}
+
+
+.left-col .cart-header a.continue-shopping svg {
+    width: 20px;
+    transition: transform .3s;
+    transform: rotate(180deg);
+    margin-right: 10px;
+}
+
+.right-col {
+    flex-grow: 1;
+}
+
+.left-col .cart-header h1 {
+    font-size: 5.2rem;
+    font-family: 'Playfair Display SC', sans-serif;
+    font-weight: normal;
+    margin: 0;
+}
+
+.left-col .cart-header p.subhead {
+    font-size: 1.8rem;
+    color: #C78B5F;
+}
+
+.cart-header .main-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-col .cart-card {
+    /*border: 1px solid black;*/
+    border-radius: 0.8em;
+}
+
+.left-col .cart-card .card-body {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    border: 1px solid #eee;
+    border-radius: 1.2em;
+}
+
+.item-details {
+    -webkit-box-flex: 4;
+    flex: 4;
+}
+
+.main-product {
+    display: flex;
+    -webkit-box-align: start;
+    align-items: flex-start;
+}
+
+.main-product .img-container {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.item-details {
+    padding-left: 1.5rem;
+}
+
+.item-details .item-title {
+    font-size: 1.4rem;
+    color: inherit;
+    display: inline-block;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.other-info {
+    -webkit-box-flex: 1;
+    flex: 1;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+

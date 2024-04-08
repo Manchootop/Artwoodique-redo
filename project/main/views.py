@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.db.models import Avg, ExpressionWrapper, F, FloatField
 from django.db.models.functions import Coalesce
 from django.http import JsonResponse
+from django.urls import reverse_lazy
 from django.views import generic as views
 import random
 import string
@@ -62,7 +63,7 @@ class HomeView(views.TemplateView):
 
 class CollectionView(views.ListView):
     model = Product
-    template_name = 'shop.html'
+    template_name = 'store.html'
     context_object_name = 'products'
     paginate_by = 9
 
@@ -113,7 +114,7 @@ class CollectionView(views.ListView):
 
 class CatalogView(views.ListView):
     model = Product
-    template_name = 'shop.html'
+    template_name = 'store.html'
     context_object_name = 'products'
     paginate_by = 9
 
@@ -175,6 +176,7 @@ class ProductDetailsView(views.DetailView):
 
 class ContactsView(views.TemplateView):
     template_name = 'contact.html'
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -549,6 +551,25 @@ class PaymentView(View):
 
         messages.warning(self.request, "Invalid data received")
         return redirect("/payment/stripe/")
+class CartView(ListView):
+    model = OrderItem
+    template_name = 'cart.html'
+    context_object_name = 'tables'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        # get tables from base if the user is authenticated
+        if self.request.user.is_authenticated:
+            tables = OrderItem.objects.filter(user=self.request.user, ordered=False)
+
+        # get tables from session if the user is not authenticated
+        else:
+            cart_item_ids = self.request.session.get('cart', [])
+            tables = OrderItem.objects.filter(pk__in=cart_item_ids)
+
+        context['tables'] = tables
+        return context
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -567,34 +588,74 @@ class OrderSummaryView(LoginRequiredMixin, View):
 @login_required
 def add_to_cart(request, slug):
     item = get_object_or_404(Product, slug=slug)
-    order_item, created = OrderItem.objects.get_or_create(
-        item=item,
-        user=request.user,
-        ordered=False
-    )
-    order_qs = Order.objects.filter(user=request.user, ordered=False)
-    if order_qs.exists():
-        order = order_qs[0]
-        # check if the order item is in the order
-        if order.items.filter(item__slug=item.slug).exists():
-            order_item.quantity += 1
-            order_item.save()
-            messages.info(request, "This item quantity was updated.")
-            return redirect("order-summary")
+    if request.user.is_authenticated:
+        order_item, created = OrderItem.objects.get_or_create(
+            item=item,
+            user=request.user,
+            ordered=False
+        )
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if order_qs.exists():
+            order = order_qs[0]
+            # check if the order item is in the order
+            if order.items.filter(item__slug=item.slug).exists():
+                order_item.quantity += 1
+                order_item.save()
+                messages.info(request, "This item quantity was updated.")
+                return redirect("cart")
+            else:
+                order.items.add(order_item)
+                messages.info(request, "This item was added to your cart.")
+                return redirect("cart")
         else:
+            ordered_date = timezone.now()
+            order = Order.objects.create(
+                user=request.user, ordered_date=ordered_date)
             order.items.add(order_item)
             messages.info(request, "This item was added to your cart.")
-            return redirect("order-summary")
+            return redirect("store")
     else:
-        ordered_date = timezone.now()
-        order = Order.objects.create(
-            user=request.user, ordered_date=ordered_date)
-        order.items.add(order_item)
-        messages.info(request, "This item was added to your cart.")
-        return redirect("order-summary")
+        cart = request.session.get('cart', [])
+        if item.pk not in cart:
+            cart.append(item.pk)
+            request.session['cart'] = cart
+            messages.info(request, f"{item.title} was added to your cart.")
 
 
 @login_required
+class RemoveFromCart(LoginRequiredMixin, views.DeleteView):
+    model = OrderItem
+    success_url = reverse_lazy('store')  # Redirect to the store after removal
+    template_name = 'cart.html'  # A confirmation template
+
+    def get_object(self, queryset=None):
+        # Retrieve the OrderItem to be removed
+        item = get_object_or_404(
+            OrderItem,
+            item__slug=self.kwargs['slug'],
+            user=self.request.user,
+            ordered=False,
+        )
+        return item
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        order = self.object.order  # Get the associated order
+        order.items.remove(self.object)
+        self.object.delete()
+        messages.success(request, "This item was removed from your cart.")
+        return redirect(self.get_success_url())
+
+    def handle_no_permission(self):
+        # If the user is not authenticated, handle session cart removal
+        cart = self.request.session.get('cart', [])
+        item_pk = self.request.POST.get('pk', None)
+        if item_pk and int(item_pk) in cart:
+            cart.remove(int(item_pk))
+            self.request.session['cart'] = cart
+            messages.success(self.request, "This item was removed from your session cart.")
+        return super().handle_no_permission()
+
 def remove_from_cart(request, slug):
     item = get_object_or_404(Product, slug=slug)
     order_qs = Order.objects.filter(
@@ -613,13 +674,16 @@ def remove_from_cart(request, slug):
             order.items.remove(order_item)
             order_item.delete()
             messages.info(request, "This item was removed from your cart.")
-            return redirect("order-summary")
+            return redirect("store")
         else:
             messages.info(request, "This item was not in your cart")
             return redirect("product", slug=slug)
     else:
         messages.info(request, "You do not have an active order")
+
+
         return redirect("product", slug=slug)
+
 
 
 @login_required
