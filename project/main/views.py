@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
-from django.db.models import Avg, ExpressionWrapper, F, FloatField
+from django.db.models import Avg, ExpressionWrapper, F, FloatField, Sum
 from django.db.models.functions import Coalesce
 from django.http import JsonResponse
 from django.urls import reverse_lazy
@@ -551,10 +551,16 @@ class PaymentView(View):
 
         messages.warning(self.request, "Invalid data received")
         return redirect("/payment/stripe/")
+
+def previous_page_redirect(request, cart_url):
+    if request.META.get('HTTP_REFERER'):
+        request.session['previous_page'] = request.META.get('HTTP_REFERER')
+    return redirect(cart_url)
 class CartView(ListView):
     model = OrderItem
     template_name = 'cart.html'
     context_object_name = 'tables'
+    slug_url_kwarg = 'slug'
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -568,7 +574,10 @@ class CartView(ListView):
             cart_item_ids = self.request.session.get('cart', [])
             tables = OrderItem.objects.filter(pk__in=cart_item_ids)
 
+        total_price = tables.aggregate(total_price=Sum('item__discount_price'))['total_price']
+
         context['tables'] = tables
+        context['total'] = total_price if total_price else 0
         return context
 
 
@@ -622,45 +631,32 @@ def add_to_cart(request, slug):
             messages.info(request, f"{item.title} was added to your cart.")
 
 
-@login_required
-class RemoveFromCart(LoginRequiredMixin, views.DeleteView):
-    model = OrderItem
-    success_url = reverse_lazy('store')  # Redirect to the store after removal
-    template_name = 'cart.html'  # A confirmation template
-
-    def get_object(self, queryset=None):
+class RemoveFromCart(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
         # Retrieve the OrderItem to be removed
-        item = get_object_or_404(
-            OrderItem,
-            item__slug=self.kwargs['slug'],
-            user=self.request.user,
-            ordered=False,
-        )
-        return item
-
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        order = self.object.order  # Get the associated order
-        order.items.remove(self.object)
-        self.object.delete()
+        order_item = get_object_or_404(OrderItem, item__slug=self.kwargs['slug'], user=request.user)
+        order_item.delete()
         messages.success(request, "This item was removed from your cart.")
-        return redirect(self.get_success_url())
+        return redirect('cart')
 
-    def handle_no_permission(self):
-        # If the user is not authenticated, handle session cart removal
-        cart = self.request.session.get('cart', [])
-        item_pk = self.request.POST.get('pk', None)
-        if item_pk and int(item_pk) in cart:
-            cart.remove(int(item_pk))
-            self.request.session['cart'] = cart
-            messages.success(self.request, "This item was removed from your session cart.")
-        return super().handle_no_permission()
+    def post(self, request, *args, **kwargs):
+        return self.get(request, *args, **kwargs)
+
+    # def handle_no_permission(self):
+    #     # If the user is not authenticated, handle session cart removal
+    #     cart = self.request.session.get('cart', [])
+    #     item_pk = self.request.POST.get('pk', None)
+    #     if item_pk and int(item_pk) in cart:
+    #         cart.remove(int(item_pk))
+    #         self.request.session['cart'] = cart
+    #         messages.success(self.request, "This item was removed from your session cart.")
+    #     return super().handle_no_permission()
 
 def remove_from_cart(request, slug):
     item = get_object_or_404(Product, slug=slug)
     order_qs = Order.objects.filter(
         user=request.user,
-        ordered=False
+        # ordered=False
     )
     if order_qs.exists():
         order = order_qs[0]
@@ -677,7 +673,7 @@ def remove_from_cart(request, slug):
             return redirect("store")
         else:
             messages.info(request, "This item was not in your cart")
-            return redirect("product", slug=slug)
+            return redirect("cart"  )
     else:
         messages.info(request, "You do not have an active order")
 
@@ -883,3 +879,5 @@ def get_liked_status(request, item_id):
 
     # Return the liked status as JSON
     return JsonResponse({'liked': liked})
+
+

@@ -2,7 +2,7 @@ from django.urls import path
 
 from project.main import views
 from project.main.views import CheckoutView, OrderSummaryView, RequestRefundView, PaymentView, \
-    remove_single_item_from_cart, remove_from_cart, AddCouponView, add_to_cart
+    remove_single_item_from_cart, AddCouponView, add_to_cart, RemoveFromCart
 
 urlpatterns = [
     path('', views.HomeView.as_view(), name='index'),
@@ -15,7 +15,7 @@ urlpatterns = [
     path('order-summary/', OrderSummaryView.as_view(), name='order-summary'),
     path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart'),
     path('add-coupon/', AddCouponView.as_view(), name='add-coupon'),
-    path('remove-from-cart/<slug>/', remove_from_cart, name='remove-from-cart'),
+    path('remove-from-cart/<slug>/', RemoveFromCart.as_view(), name='remove-from-cart'),
     path('remove-item-from-cart/<slug>/', remove_single_item_from_cart,
          name='remove-single-item-from-cart'),
     path('payment/<payment_option>/', PaymentView.as_view(), name='payment'),
