@@ -35,7 +35,7 @@ class UserProfile(models.Model):
     one_click_purchasing = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.username
+        return self.user
 
 
 class Product(models.Model):
@@ -210,7 +210,9 @@ class Subscriber(models.Model):
 
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
+                             on_delete=models.CASCADE,
+                             null=True,
+    blank=True)
     ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
@@ -235,7 +237,9 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
+                             on_delete=models.CASCADE,
+                             null=True,
+    blank=True)
     ref_code = models.CharField(max_length=20, blank=True, null=True)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)

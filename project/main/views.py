@@ -148,7 +148,6 @@ class CatalogView(views.ListView):
         context['count'] = context['paginator'].count
         is_catalog = any(not product.in_stock for product in context['products'])
         context['is_catalog'] = is_catalog
-        print(is_catalog)
         return context
 
 
@@ -176,7 +175,6 @@ class ProductDetailsView(views.DetailView):
 
 class ContactsView(views.TemplateView):
     template_name = 'contact.html'
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -552,33 +550,47 @@ class PaymentView(View):
         messages.warning(self.request, "Invalid data received")
         return redirect("/payment/stripe/")
 
+
 def previous_page_redirect(request, cart_url):
     if request.META.get('HTTP_REFERER'):
         request.session['previous_page'] = request.META.get('HTTP_REFERER')
     return redirect(cart_url)
+
+
 class CartView(ListView):
-    model = OrderItem
     template_name = 'cart.html'
     context_object_name = 'tables'
     slug_url_kwarg = 'slug'
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-
-        # get tables from base if the user is authenticated
+    def get_queryset(self):
+        # If the user is authenticated, get the cart items from the database
         if self.request.user.is_authenticated:
-            tables = OrderItem.objects.filter(user=self.request.user, ordered=False)
-
-        # get tables from session if the user is not authenticated
+            return OrderItem.objects.filter(user=self.request.user, ordered=False)
+        # If the user is not authenticated, get the products from the session
         else:
+           return OrderItem.objects.none()
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        tables = context.get('tables', [])
+        total_price = 0
+
+        # If the user is authenticated, retrieve corresponding Product instances
+        if self.request.user.is_authenticated:
+            product_ids = [item.item_id for item in tables]
+            products = Product.objects.filter(pk__in=product_ids)
+            total_price = sum(float(product.current_price()) for product in products)
+        else:
+            # For unauthenticated users, retrieve Product instances from session['cart']
             cart_item_ids = self.request.session.get('cart', [])
-            tables = OrderItem.objects.filter(pk__in=cart_item_ids)
+            products = Product.objects.filter(pk__in=cart_item_ids)
+            total_price = sum(float(product.current_price()) for product in products)
 
-        total_price = tables.aggregate(total_price=Sum('item__discount_price'))['total_price']
+        context['total'] = total_price
+        context['tables'] = products
 
-        context['tables'] = tables
-        context['total'] = total_price if total_price else 0
         return context
+
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -594,41 +606,44 @@ class OrderSummaryView(LoginRequiredMixin, View):
             return redirect("/")
 
 
-@login_required
 def add_to_cart(request, slug):
     item = get_object_or_404(Product, slug=slug)
-    if request.user.is_authenticated:
-        order_item, created = OrderItem.objects.get_or_create(
-            item=item,
-            user=request.user,
-            ordered=False
-        )
-        order_qs = Order.objects.filter(user=request.user, ordered=False)
-        if order_qs.exists():
-            order = order_qs[0]
-            # check if the order item is in the order
-            if order.items.filter(item__slug=item.slug).exists():
-                order_item.quantity += 1
-                order_item.save()
-                messages.info(request, "This item quantity was updated.")
-                return redirect("cart")
-            else:
-                order.items.add(order_item)
-                messages.info(request, "This item was added to your cart.")
-                return redirect("cart")
-        else:
-            ordered_date = timezone.now()
-            order = Order.objects.create(
-                user=request.user, ordered_date=ordered_date)
-            order.items.add(order_item)
-            messages.info(request, "This item was added to your cart.")
-            return redirect("store")
-    else:
+    order_item, created = OrderItem.objects.get_or_create(
+        item=item,
+        user=request.user if request.user.is_authenticated else None,
+        ordered=False
+    )
+
+    if request.user.is_anonymous:
         cart = request.session.get('cart', [])
         if item.pk not in cart:
+            print('item not in cart')
             cart.append(item.pk)
             request.session['cart'] = cart
-            messages.info(request, f"{item.title} was added to your cart.")
+
+    order_qs = Order.objects.filter(
+        user=request.user if request.user.is_authenticated else None,
+        ordered=False
+    )
+
+    if order_qs.exists():
+        order = order_qs[0]
+
+        messages.info(request, "This item was added to your cart.")
+        return redirect("cart")
+
+    else:
+        ordered_date = timezone.now()
+        order = Order.objects.create(
+            user=request.user if request.user.is_authenticated else None,
+            ordered_date=ordered_date
+        )
+        if not request.user.is_authenticated:
+            request.session['order_id'] = order.id
+
+        order.items.add(order_item)
+        messages.info(request, "This item was added to your cart. ALABALA")
+        return redirect("store")
 
 
 class RemoveFromCart(LoginRequiredMixin, View):
@@ -642,44 +657,110 @@ class RemoveFromCart(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         return self.get(request, *args, **kwargs)
 
-    # def handle_no_permission(self):
-    #     # If the user is not authenticated, handle session cart removal
-    #     cart = self.request.session.get('cart', [])
-    #     item_pk = self.request.POST.get('pk', None)
-    #     if item_pk and int(item_pk) in cart:
-    #         cart.remove(int(item_pk))
-    #         self.request.session['cart'] = cart
-    #         messages.success(self.request, "This item was removed from your session cart.")
-    #     return super().handle_no_permission()
+    def handle_no_permission(self):
+        item_pk = self.kwargs['pk']
+        cart = self.request.session.get('cart', [])
+        if item_pk in cart:
+            cart.remove(item_pk)
+            self.request.session['cart'] = cart
+            messages.success(self.request, "This item was removed from your cart.")
+        else:
+            messages.warning(self.request, "This item was not in your cart.")
+        return redirect('cart')
+
+
+# class AddToCart(LoginRequiredMixin, View):
+#     def get(self, request, *args, **kwargs):
+#         # Retrieve the OrderItem to be removed
+#         order_item = get_object_or_404(OrderItem, item__slug=self.kwargs['slug'], user=request.user)
+#         order_item.delete()
+#         messages.success(request, "This item was removed from your cart.")
+#         return redirect('cart')
+#
+#     def post(self, request, *args, **kwargs):
+#         return self.get(request, *args, **kwargs)
+#
+#     def handle_no_permission(self):
+#         # item_pk = self.kwargs['slug']
+#         # order_item_pk = OrderItem.item.objects.filter(item__slug=self.kwargs['slug']).item.pk
+#         # cart = self.request.session.get('cart', [])
+#         # if item_pk in cart:
+#         #     cart.remove(item_pk)
+#         #     self.request.session['cart'] = cart
+#         #     messages.success(self.request, "This item was removed from your cart.")
+#         # else:
+#         #     messages.warning(self.request, "This item was not in your cart.")
+#         # return redirect('cart')
+#
+#         item = get_object_or_404(Product, slug=slug)
+#         order_item, created = OrderItem.objects.get_or_create(
+#             user=None,
+#             item=item,
+#         )
+#         print(order_item)
+#
+#         order_qs = Cart.objects.filter(user=None, ordered=False, session_key=request.session.session_key)
+#         if order_qs.exists():
+#             order = order_qs[0]
+#             # check if the order item is in the order
+#             if order.products.filter(item__slug=item.slug).exists():
+#                 order_item.quantity += 1
+#                 order_item.save()
+#                 print("1")
+#             else:
+#                 order.products.add(order_item)
+#         else:
+#             order = Cart.objects.create(
+#                 user=None, session_key=request.session.session_key
+#             )
+#             order.products.add(order_item)
+#             print("done")
+#         return redirect("cart:home")
 
 def remove_from_cart(request, slug):
     item = get_object_or_404(Product, slug=slug)
-    order_qs = Order.objects.filter(
-        user=request.user,
-        # ordered=False
-    )
-    if order_qs.exists():
-        order = order_qs[0]
-        # check if the order item is in the order
-        if order.items.filter(item__slug=item.slug).exists():
-            order_item = OrderItem.objects.filter(
-                item=item,
+
+    # For authenticated users, interact with the database
+    if request.user.is_authenticated:
+        order_item = OrderItem.objects.filter(
+            item=item,
+            user=request.user,
+            ordered=False
+        ).first()
+
+        if order_item:
+            order_qs = Order.objects.filter(
                 user=request.user,
                 ordered=False
-            )[0]
-            order.items.remove(order_item)
-            order_item.delete()
+            )
+
+            if order_qs.exists():
+                order = order_qs[0]
+                if order.items.filter(item__slug=item.slug).exists():
+                    order.items.remove(order_item)
+                    order_item.delete()
+                    messages.info(request, "This item was removed from your cart.")
+                    return redirect("cart")
+                else:
+                    messages.info(request, "This item was not in your cart")
+                    return redirect("cart")
+            else:
+                messages.info(request, "You do not have an active order")
+                return redirect("product", slug=slug)
+        else:
+            messages.info(request, "This item was not found in your cart")
+            return redirect("cart")
+
+    # For unauthenticated users, store data in session
+    else:
+        cart = request.session.get('cart', [])
+        if item.pk in cart:
+            cart.remove(item.pk)
+            request.session['cart'] = cart
             messages.info(request, "This item was removed from your cart.")
-            return redirect("store")
         else:
             messages.info(request, "This item was not in your cart")
-            return redirect("cart"  )
-    else:
-        messages.info(request, "You do not have an active order")
-
-
-        return redirect("product", slug=slug)
-
+        return redirect("cart")
 
 
 @login_required
@@ -733,10 +814,10 @@ class AddCouponView(View):
                 order.coupon = get_coupon(self.request, code)
                 order.save()
                 messages.success(self.request, "Successfully added coupon")
-                return redirect("checkout")
+                return redirect("cart")
             except ObjectDoesNotExist:
                 messages.info(self.request, "You do not have an active order")
-                return redirect("checkout")
+                return redirect("cart")
 
 
 class RequestRefundView(View):
@@ -879,5 +960,3 @@ def get_liked_status(request, item_id):
 
     # Return the liked status as JSON
     return JsonResponse({'liked': liked})
-
-

@@ -1,19 +1,20 @@
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-from project.accounts.forms import UserRegisterForm
+from project.accounts.forms import UserRegisterForm, LoginForm
 
 UserModel = get_user_model()
 
 
-class LoginView(auth_views.LoginView):
+class LoginView(auth_views.LoginView, SuccessMessageMixin):
     template_name = 'account/login.html'
     redirect_authenticated_user = True
-
+    authentication_form = LoginForm
     def get_success_url(self):
         return reverse_lazy('index')
 

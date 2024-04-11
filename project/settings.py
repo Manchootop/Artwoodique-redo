@@ -86,14 +86,21 @@ if IS_PRODUCTION:
         "default": dj_database_url.config(default=os.environ.get("DATABASE_URL1"))
     }
 else:
+    # DATABASES = {
+    #     "default": {
+    #         "ENGINE": "django.db.backends.postgresql",
+    #         "NAME": "artwoodique-original_db",
+    #         "USER": "postgres",
+    #         "PASSWORD": "Thatshurt",
+    #         "HOST": "127.0.0.1",
+    #         "PORT": "5432",
+    #     }
+    # }
+
     DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "artwoodique-original_db",
-            "USER": "postgres",
-            "PASSWORD": "Thatshurt",
-            "HOST": "127.0.0.1",
-            "PORT": "5432",
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 

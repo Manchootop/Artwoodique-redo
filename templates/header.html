@@ -48,12 +48,12 @@
             {#            </div>#}
             {##}
 
-            <li><a href="{% url 'checkout' %}" class="{% if request.path == '/checkout/' %}active{% endif %}">
+            <li><a href="{% url 'cart' %}" class="{% if request.path == '/checkout/' %}active{% endif %}">
                 <img src="{% static 'images/cart.svg' %}" alt="cart-icon">
             </a></li>
 
 
-            <li><a href="{% url 'checkout' %}"
+            <li><a href="{% url 'cart' %}"
                    class="{% if request.path == '/wishlist/' %}active{% endif %}">
                 <img src="{% static 'images/heart-icon.svg' %}" alt="user-profile-icon" style="">
                 <div class="liked-products">

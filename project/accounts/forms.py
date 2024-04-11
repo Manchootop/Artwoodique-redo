@@ -51,11 +51,23 @@ UserModel = get_user_model()
 #             user.save()
 #         return user
 
+
+
 class UserRegisterForm(auth_forms.UserCreationForm):
     user = None
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():  # Iterate over field values, not field names
+            field.widget.attrs['class'] = 'form-control'
+
     class Meta(auth_forms.UserCreationForm.Meta):
         model = UserModel
-        fields = ('email',)
+        fields = ('email', 'password1', 'password2')  # Include 'password1' and 'password2' fields
+        widgets = {
+            'email': forms.EmailInput(attrs={'placeholder': 'Enter email address'}),
+            'password1': forms.PasswordInput(attrs={'placeholder': 'Enter password'}),
+            'password2': forms.PasswordInput(attrs={'placeholder': 'Confirm password'}),
+        }
 # class UserRegisterForm(auth_forms.UserCreationForm):
 #     user = None
 #     # first_name = forms.CharField(max_length=ArtwoodiqueUserProfile.FIRST_NAME_MAX_LENGTH)
