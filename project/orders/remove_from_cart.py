@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 
-from project.main.models import Product, OrderItem
+from project.main.models import Product
+from project.orders.models import OrderItem
 
 
 def remove_cart(request, slug):

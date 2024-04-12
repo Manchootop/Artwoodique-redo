@@ -8,4 +8,6 @@ admin:
 	python manage.py createsuperuser
 collectstatic:
 	python manage.py collectstatic
-
+# createapp: # + appname
+#     python manage.py startapp $(appname)
+#     @echo "App $(appname) created successfully."

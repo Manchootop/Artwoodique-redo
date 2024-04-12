@@ -1,4 +1,5 @@
 {% load static %}
+{% load cart_item_count %}
 <link rel="stylesheet" href="{% static 'css/header.css' %}">
 <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Poppins:wght@200;300;400;700&display=swap"
@@ -48,9 +49,13 @@
             {#            </div>#}
             {##}
 
-            <li><a href="{% url 'cart' %}" class="{% if request.path == '/checkout/' %}active{% endif %}">
-                <img src="{% static 'images/cart.svg' %}" alt="cart-icon">
-            </a></li>
+            <li class="cart-icon">
+                <a href="{% url 'cart' %}" class="{% if request.path == '/checkout/' %}active{% endif %}">
+                    <span class="cart-count">{% load cart_item_count %}{{ request.user|cart_item_count }}</span>
+
+                    <img src="{% static 'images/cart.svg' %}" alt="cart-icon">
+                </a>
+            </li>
 
 
             <li><a href="{% url 'cart' %}"
@@ -64,7 +69,7 @@
                     </div>
                 </div>
             </a></li>
-                    <li><a href="{% url 'login' %}"
+            <li><a href="{% url 'login' %}"
                    class="{% if request.path == '/accounts/user_profile/' %}active{% endif %}">
                 {% if request.user.is_authenticated %}
                     <img src="{% static 'images/user.svg' %}" alt="user-profile-icon">
@@ -107,30 +112,29 @@
     </script>
 
 
-
     <script>
         // Replace this with your logic to check if there are liked products
-const hasLikedProducts = true; // Change to your actual condition
+        const hasLikedProducts = true; // Change to your actual condition
 
-const dropdownContent = document.querySelector('.dropdown .content');
+        const dropdownContent = document.querySelector('.dropdown .content');
 
-document.querySelector('.liked-products').addEventListener('mouseenter', () => {
-    if (hasLikedProducts) {
-        // Display liked products
-        dropdownContent.textContent = 'Liked Products Content'; // Replace with actual content
-    } else {
-        // Display message when no liked products
-        dropdownContent.textContent = "You don't have liked products.";
-    }
-    document.querySelector('.dropdown').style.display = 'block';
-});
+        document.querySelector('.liked-products').addEventListener('mouseenter', () => {
+            if (hasLikedProducts) {
+                // Display liked products
+                dropdownContent.textContent = 'Liked Products Content'; // Replace with actual content
+            } else {
+                // Display message when no liked products
+                dropdownContent.textContent = "You don't have liked products.";
+            }
+            document.querySelector('.dropdown').style.display = 'block';
+        });
 
-document.querySelector('.liked-products').addEventListener('mouseleave', () => {
-    // Hide the dropdown with a timeout
-    setTimeout(() => {
-        document.querySelector('.dropdown').style.display = 'none';
-    }, 500); // Adjust the timeout duration as needed
-});
+        document.querySelector('.liked-products').addEventListener('mouseleave', () => {
+            // Hide the dropdown with a timeout
+            setTimeout(() => {
+                document.querySelector('.dropdown').style.display = 'none';
+            }, 500); // Adjust the timeout duration as needed
+        });
     </script>
 </header>
 

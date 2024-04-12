@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load cart_template_tags %}
+{% load extract_decimal_part_from_a_number %}
 {% load static %}
 
 {% block extra_head %}
@@ -124,7 +124,7 @@
                     <section>
                         <p class="voucher-title">Have a voucher for discount?</p>
                         <form class="voucher-form form-control" action="">
-                            <input type="text">
+                            {{ coupon_form }}
                             <div>
                                 <button class="btn">></button>
                             </div>

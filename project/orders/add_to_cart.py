@@ -1,7 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
-from project.main.models import OrderItem, Product, Order
+
+from project.main.models import Product
+from project.orders.models import OrderItem, Order
 
 
 def add_cart(request, slug):
@@ -18,13 +20,11 @@ def add_cart(request, slug):
     # If the user is not authenticated, add the product to their cart in the session
     else:
         cart = request.session.get('cart', [])
-        request.session.save()
         if product.pk in cart:
             messages.info(request, 'This item is already in your cart.')
         else:
             cart.append(product.pk)
             request.session['cart'] = cart
-            request.session.save()
             messages.success(request, 'This item was added to your cart.')
 
     return redirect('store')

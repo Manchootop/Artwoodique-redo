@@ -49,3 +49,10 @@ def has_difference_images(img1, img2):
             return False
     # difference found
     return True
+
+def is_valid_form(values):
+    valid = True
+    for field in values:
+        if field == '':
+            valid = False
+    return valid

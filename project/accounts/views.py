@@ -1,12 +1,13 @@
-from django.contrib.auth import get_user_model, login
-from django.contrib.auth import views as auth_views
+from django.contrib import messages
+from django.contrib.auth import views as auth_views, logout, get_user_model, login, user_logged_in
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-from project.accounts.forms import UserRegisterForm, LoginForm
+from project.accounts.forms import UserRegisterForm
 
 UserModel = get_user_model()
 
@@ -14,9 +15,24 @@ UserModel = get_user_model()
 class LoginView(auth_views.LoginView, SuccessMessageMixin):
     template_name = 'account/login.html'
     redirect_authenticated_user = True
-    authentication_form = LoginForm
+
+    def form_valid(self, form):
+        """Security check complete. Log the user in."""
+        login(self.request, form.get_user())
+        messages.success(self.request, 'You have been logged in successfully')
+        success_url = self.get_success_url()
+        # Emit user_logged_in signal
+        user_logged_in.send(sender=self.request.user.__class__, request=self.request, user=self.request.user)
+        return HttpResponseRedirect(success_url)
+
     def get_success_url(self):
         return reverse_lazy('index')
+
+
+def logout_user(request):
+    logout(request)
+    messages.success(request, 'You have been logged out successfully')
+    return redirect('index')
 
 
 # class RegisterView(views.CreateView, SuccessMessageMixin):
