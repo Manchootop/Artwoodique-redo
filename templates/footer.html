@@ -44,7 +44,7 @@
         <div class="right-col">
             <div class="newsletter">
                 <h2>Subscribe to Our Newsletter</h2>
-                <form method="post">
+                <form method="post" action="{% url 'add_subscriber' %}">
                     {% csrf_token %}
                     {{ newsletter_signup_form.as_p }}
                     <input type="hidden" name="next" value="{{ request.get_full_path }}">

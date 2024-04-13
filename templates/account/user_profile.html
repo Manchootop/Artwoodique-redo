@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% block content %}
+    <section class="user-profile-container">
+        <div class="side-bar">
+            <div class="side-bar-menu">
+                <div class="user-sidebar-account">
+                    <div class="thumbnail-wrapper">
+                        <div class="thumbnail">
+                            <span class="ini">MG</span>
+                        </div>
+                    </div>
+                    <span class="user-sidebar-name">Mariyan Georgiev</span>
+                    <div class="user-sidebar-edit">
+                        <a href="#">
+                            <img src="{% static 'images/edit_icon.png' %}" alt="edit_icon">
+                        </a>
+                    </div>
+                </div>
+                <div class="user-sidebar-content">
+                    <nav class="users-features-list">
+                        <a href="#" class="feature-icon-orders">
+                            <span class="img-wrap first"><img src="{% static 'images/icons8-list-50.png' %}"
+                                                              alt="orders"></span>
+                            <span class="text-wrap">Orders</span>
+                        </a>
+                        <a href="#" class="feature-icon-orders">
+                            <span class="img-wrap second"><img src="{% static 'images/icons8-voucher-80.png' %}"
+                                                               alt="coupons"></span>
+                            <span class="text-wrap">Vouchers</span>
+                        </a>
+                        <a href="#" class="feature-icon-orders">
+                            <span class="img-wrap third"><img src="{% static 'images/icons8-heart-50.png' %}"
+                                                              alt="fav_items"></span>
+                            <span class="text-wrap">Favourites</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+            <div class="user-account-menu-box">
+                <a href="{% url 'logout' %}" id="logout" class="feature-icon-orders side-bar-line">
+                    <span class="img-wrap third"><img src="{% static 'images/icons8-power-off-button-50.png' %}"
+                                                      alt="coupons"></span>
+                    <span class="text-wrap">Log out</span>
+                </a>
+            </div>
+        </div>
+        <div class="page-container">
+            <div class="personal-data">
+                <div class="panel-body">
+                    <div class="title">Account information</div>
+                    <div class="personal-data-content">
+
+                        <div class="thumbnail">
+                            <div class="ini">MG</div>
+                        </div>
+                        <div class="col">
+                            <div class="line">
+                                <div class="field-name">Username:</div>
+                                <div class="field-data">Add username</div>
+                            </div>
+                            <div class="line">
+                                <div class="field-name">Name:</div>
+                                <div class="field-data">{{ profile.name }}</div>
+                            </div>
+                            <div class="line">
+                                <div class="field-name">Email:</div>
+                                <div class="field-data">{{ user.email }}</div>
+                            </div>
+
+                            <div class="line">
+                                <div class="field-name"></div>
+                                <div class="field-data"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <p id="open">Manage your personal data</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="modal-container">
+        <div class="container" id="a">
+
+        </div>
+        <div class="modal" id="b">
+            <div class="header">
+                <a href="#" class="cancel">X</a>
+            </div>
+            <div class="content">
+                <form method="post" action="{% url 'update_profile' pk=request.user.pk %}">
+                    {% csrf_token %}
+                    {{ profile_form }}
+                    <button type="submit" class="update btn">Update</button>
+                    <button type="submit" class="close">Cancel</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+        $("#open").click(function () {
+            $("#a").css("display", "block");
+            $("#b").css("display", "block");
+        });
+
+
+        $(".cancel").click(function () {
+            $("#a").fadeOut();
+            $("#b").fadeOut();
+        });
+    </script>
+{% endblock %}

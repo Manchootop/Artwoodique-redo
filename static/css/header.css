@@ -43,9 +43,9 @@ header {
 
 .cart-count {
     position: absolute;
-    top: 0;
-    left: 0;
-    background-color: red;
+    top: -18px;
+    left: -7px;
+    background: red;
     color: white;
     border-radius: 50%;
     width: 20px;

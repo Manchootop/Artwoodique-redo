@@ -52,5 +52,31 @@ form {
     border-radius: 21px;
 }
 label {
-    display: none;
+    /*margin-bottom: -50px;*/
+    float: left;
+    margin-left: 1em;
+    font-family: "Poppins", 'sans-serif';
+}
+#text {
+}
+.btn {
+    cursor: pointer;
+    width: 100%;
+    border-radius: 2em;
+    padding: .6em;
+    background: #C78B5F;
+    color: white;
+    font-size: 1.5rem;
+}
+.auth-text {
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+form .alert {
+    color: red;
+    font-size: 1.2rem;
+}
+form .alert * {
+    margin: 0 -1em -1em -1em;
 }

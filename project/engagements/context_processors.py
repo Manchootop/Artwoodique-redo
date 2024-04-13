@@ -1,4 +1,4 @@
-from project.main.forms import NewsletterSignupForm
+from project.engagements.forms import NewsletterSignupForm
 
 
 def newsletter_signup_form(request):

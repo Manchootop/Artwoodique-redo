@@ -1,5 +1,5 @@
 from django.contrib import admin
-from project.main.models import Product, ProductImage, ProductRating, Subscriber, WishList, ItemLike
+from project.main.models import Product, ProductImage, ProductRating
 
 
 class ProductImageInline(admin.TabularInline):  # Use TabularInline for a table-based layout
@@ -52,10 +52,3 @@ class ProductRatingAdmin(admin.ModelAdmin):
 #             'fields': ('has_expired',),
 #         }),
 #     )
-@admin.register(Subscriber)
-class SubscriberAdminModel(admin.ModelAdmin):
-    pass
-
-
-admin.site.register(ItemLike)
-admin.site.register(WishList)

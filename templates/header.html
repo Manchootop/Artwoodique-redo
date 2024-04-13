@@ -51,7 +51,9 @@
 
             <li class="cart-icon">
                 <a href="{% url 'cart' %}" class="{% if request.path == '/checkout/' %}active{% endif %}">
-                    <span class="cart-count">{% load cart_item_count %}{{ request.user|cart_item_count }}</span>
+                    <span class="cart-count">
+                        {{ request|cart_item_count }}
+                    </span>
 
                     <img src="{% static 'images/cart.svg' %}" alt="cart-icon">
                 </a>
@@ -69,14 +71,17 @@
                     </div>
                 </div>
             </a></li>
-            <li><a href="{% url 'login' %}"
-                   class="{% if request.path == '/accounts/user_profile/' %}active{% endif %}">
-                {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'details profile' pk=request.user.pk %}">
                     <img src="{% static 'images/user.svg' %}" alt="user-profile-icon">
-                {% else %}
-                    Log in
-                {% endif %}
+                </a></li>
+
+            {% else %}
+                <li><a href="{% url 'login' %}"
+                       class="{% if request.path == '/accounts/user_profile/' %}active{% endif %}">
+                Log in
             </a></li>
+        {% endif %}
         </ul>
 
 

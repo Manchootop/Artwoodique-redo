@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'project.payments',
     'crispy_forms',
     'project.shared',
+    'project.engagements',
     # 'allauth',
     # 'allauth.account',
     # 'allauth.socialaccount',
@@ -69,7 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'project.main.context_processors.newsletter_signup_form',
+                'project.engagements.context_processors.newsletter_signup_form',
             ],
             'builtins': [
                 'project.shared.templatetags.cart_item_count',

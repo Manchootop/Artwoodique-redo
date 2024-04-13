@@ -10,6 +10,7 @@ from django.utils.translation import gettext_lazy as _
 from project.accounts.managers import ArtwoodiqueUserManager
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
+
 ADDRESS_CHOICES = (
     ('B', 'Billing'),
     ('S', 'Shipping'),
@@ -102,6 +103,8 @@ class ArtwoodiqueUserProfile(models.Model):
     FIRST_NAME_MAX_LENGTH = 30
     LAST_NAME_MIN_LENGTH = 2
     LAST_NAME_MAX_LENGTH = 30
+    USERNAME_MIN_LENGTH = 2
+    USERNAME_MAX_LENGTH = 30
 
     MALE = 'Male'
     FEMALE = 'Female'
@@ -109,12 +112,23 @@ class ArtwoodiqueUserProfile(models.Model):
 
     GENDERS = [(x, x) for x in (MALE, FEMALE, DO_NOT_SHOW)]
 
+    username = models.CharField(
+        max_length=USERNAME_MAX_LENGTH,
+        validators=(
+            MinLengthValidator(USERNAME_MIN_LENGTH),
+            validate_only_letters,
+        ),
+        unique=True,
+    )
+
     first_name = models.CharField(
         max_length=FIRST_NAME_MAX_LENGTH,
         validators=(
             MinLengthValidator(FIRST_NAME_MIN_LENGTH),
             validate_only_letters,
-        )
+        ),
+        blank=False,
+        null=False,
     )
 
     last_name = models.CharField(
@@ -122,7 +136,9 @@ class ArtwoodiqueUserProfile(models.Model):
         validators=(
             MinLengthValidator(LAST_NAME_MIN_LENGTH),
             validate_only_letters,
-        )
+        ),
+        blank=False,
+        null=False,
     )
 
     date_of_birth = models.DateField(
@@ -136,6 +152,7 @@ class ArtwoodiqueUserProfile(models.Model):
         null=True,
         blank=True,
         default=DO_NOT_SHOW,
+
     )
 
     # phone_number = PhoneNumberField()
@@ -146,12 +163,8 @@ class ArtwoodiqueUserProfile(models.Model):
         primary_key=True
     )
 
-    stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
-
-    one_click_purchasing = models.BooleanField(default=False)
-
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.first_name} {self.last_name} with {self.user.email} and id: {self.user.id}'
 
 
 class Address(models.Model):
@@ -169,4 +182,3 @@ class Address(models.Model):
 
     class Meta:
         verbose_name_plural = 'Addresses'
-

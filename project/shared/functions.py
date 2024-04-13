@@ -1,11 +1,15 @@
 import os
 
 from PIL import Image, ImageChops
+from django.shortcuts import redirect
 
 # Delete default image of object
 from project.settings import BASE_DIR
 
-
+def previous_page_redirect(request, default='/'):
+    if request.META.get('HTTP_REFERER'):
+        request.session['previous_page'] = request.META.get('HTTP_REFERER')
+    return redirect(default)
 def delete_main_photo(model, pk):
     item = model.objects.filter(id=pk)
     if item.exists():

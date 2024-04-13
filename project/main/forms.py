@@ -7,16 +7,7 @@ from django.core.mail import send_mail
 from project import settings
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
-from project.main.models import Product, ProductImage, Subscriber
-
-class NewsletterSignupForm(forms.Form):
-    email = forms.EmailField(
-        widget=forms.TextInput(attrs={'placeholder': 'email'})
-    )
-    name = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'name'}
-                               )
-    )
+from project.main.models import Product, ProductImage
 
 
 class ContactForm(forms.Form):

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const itemID = likeButton.getAttribute("data-item-id");
 
         // Fetch liked status for each product using a GET request
-        fetch(`/get-liked-status/${itemID}/`)
+        fetch(`/engagements/get-liked-status/${itemID}/`)
             .then((response) => response.json())
             .then((data) => {
                 if (data.liked) {
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function toggleLike(itemID, likeButton) {
         // Toggle the "like" status on the server using a POST request
-        fetch("/wishlist/", {
+        fetch("/engagements/wishlist/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

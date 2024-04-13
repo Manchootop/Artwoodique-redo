@@ -1,0 +1,436 @@
+section.user-profile-container {
+    display: flex;
+    max-width: 1300px;
+    gap: 1em;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 1em;
+    margin-bottom: 30em;
+}
+
+.side-bar {
+    max-width: 280px;
+    min-width: 280px;
+    font-size: 13px;
+    line-height: 1.25;
+}
+
+.side-bar-menu {
+    display: block;
+    border: 2px solid #eee;
+    border-radius: .8em;
+}
+
+.user-sidebar-account {
+    padding: 1.5em .5em;
+    background-color: #eee;
+    display: flex;
+    justify-content: space-between;
+    gap: 2px;
+    align-items: center;
+}
+
+.thumbnail-wrapper {
+    display: inline-block;
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 0;
+    padding: 0;
+    margin: 0;
+    line-height: 1.428571429;
+    color: #fff;
+    vertical-align: middle;
+}
+
+.thumbnail {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: visible;
+    border-radius: 50%;
+    background-color: #C78B5F;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+.ini {
+    text-transform: uppercase;
+    font-size: 2rem;
+    vertical-align: middle;
+    padding-top: 1.6em;
+}
+
+.user-sidebar-name {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.user-sidebar-edit a img {
+    width: 1em;
+    height: 1em;
+}
+
+.user-sidebar-content {
+    border-radius: 0 0 6px 6px !important;
+    margin: 0 0 10px 0 !important;
+    background-color: #fff;
+    display: block;
+    text-align: center;
+}
+
+
+.users-features-list {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1em;
+    padding: 1.5em 0;
+    margin: 0 1em;
+}
+
+a.feature-icon-orders {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    gap: 1em;
+    align-items: center;
+    width: 81px;
+    min-width: 81px;
+}
+
+a.feature-icon-orders .img-wrap {
+    padding: .6em;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+a.feature-icon-orders .first {
+    background-color: #7040a4;
+}
+
+a.feature-icon-orders .second {
+    background-color: #329f60;
+}
+
+a.feature-icon-orders .third {
+    background-color: #ef2809;;
+}
+
+a.feature-icon-orders .img-wrap img {
+    height: 2.5em;
+    width: 2.5em;
+    padding: 0 7.5px 7.5px 0;
+}
+
+a.feature-icon-orders .text-wrap {
+    color: black;
+    margin-top: .5em;
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
+
+/* side bottom */
+
+.user-account-menu-box {
+    width: 280px;
+    border: 2px solid #eee;
+    font-size: 1.5rem;
+    padding: 2em;
+    margin-top: 2em;
+}
+
+#logout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 12em;
+}
+#logout .text-wrap {
+    font-size: 2em;
+    padding-bottom: .5em;
+}
+/* right col starts here: */
+
+#logout .img-wrap {
+    padding: .3em .2em .2em .3em;
+}
+.page-container {
+    border: 2px solid #eee;
+    flex-grow: 1;
+}
+
+.personal-data {
+}
+
+.panel-body {
+    padding: 2em;
+}
+
+.personal-data-content {
+    display: flex;
+    gap: 5em;
+    margin-top: 3em;
+    justify-content: center;
+    margin-right: 12em;
+}
+
+.panel-body .title {
+    text-align: center;
+    margin: 0;
+    font-size: 3rem;
+}
+
+
+.panel-body .thumbnail {
+    width: 80px;
+    height: 80px;
+}
+
+.panel-body .ini {
+    font-size: 3rem;
+    padding-top: .6em;
+    color: white;
+}
+
+.col {
+    width: 40em;
+    min-width: 40em;
+    max-width: 40em;
+    /*border: 1px solid #C78B5F;*/
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.line {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.field-name {
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+.field-data {
+    font-size: 2rem;
+}
+
+#open {
+    font-size: 2rem;
+    border-bottom: 1px dotted black;
+    display: inline-block;
+    color: #0082e6;
+    cursor: pointer;
+}
+
+.modal-container{
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+}
+
+.modal-container div{
+  width: 400px;
+  height: 400px;
+  margin:0 auto;
+  text-align: center;
+
+}
+.modal-container div button{
+  top: 500px;
+  height: 30px;
+  margin: 0 auto;
+}
+
+
+.modal-container .container{
+  display: none;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  opacity: 0.9;
+  background: #222;
+  z-index: 40000;
+  top:0;
+  left: 0;
+  overflow: hidden;
+
+  animation-name: fadeIn_Container;
+  animation-duration: 1s;
+
+}
+
+.modal-container .modal{
+  display:none;
+  top: 0;
+  min-width: 250px;
+  width: 80%;
+  height: 400px;
+  margin: 0 auto;
+  position: fixed;
+  z-index: 40001;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #000;
+  margin-top: 30px;
+  margin-left: 10%;
+
+  animation-name: fadeIn_Modal;
+  animation-duration: 0.8s;
+
+}
+
+.modal-container .header{
+  width: 100%;
+  height: 70px;
+  border-radius: 10px 10px 0px 0px;
+  border-bottom: 2px solid #ccc;
+}
+
+.modal-container .header a{
+  text-decoration: none;
+  float: right;
+  line-height: 70px;
+  margin-right: 20px;
+  color: #aaa;
+}
+
+.modal-container .content{
+  width: 100%;
+  height: 250px;
+}
+
+.modal-container form{
+    margin-top: 20px;
+}
+
+.modal-container form label{
+  display: block;
+  margin-left: 12%;
+  margin-top: 10px;
+  font-family: sans-serif;
+  font-size: 1rem;
+}
+
+.modal-container form input{
+  display: block;
+  width: 75%;
+  margin-left: 12%;
+  margin-top: 10px;
+  border-radius: 3px;
+  font-family: sans-serif;
+}
+
+.modal-container #first_label{
+  padding-top: 30px;
+}
+
+.modal-container #second_label{
+  padding-top: 25px;
+}
+
+
+.modal-container .footer{
+  width: 100%;
+  height: 80px;
+  border-radius: 0px 0px 10px 10px;
+  border-top: 2px solid #ccc;
+}
+
+.modal-container .footer button{
+  float: right;
+  margin-right: 10px;
+  margin-top: 18px;
+  text-decoration: none;
+}
+
+/****MEDIA QUERIES****/
+
+@media screen and (min-width: 600px){
+
+  .modal-container .modal{
+    width: 500px;
+    height: 300px;
+    margin-left: calc(50vw - 250px);
+    margin-top: calc(50vh - 150px);
+  }
+
+
+  .modal-container .header{
+    width: 100%;
+    height: 40px;
+  }
+
+  .modal-container .header a{
+    line-height: 40px;
+    margin-right: 10px;
+  }
+
+  .modal-container .content{
+    width: 100%;
+    height: 190px;
+  }
+
+  .modal-container form label{
+    margin-left: 10%;
+    margin-top: 10px;
+  }
+
+  .modal-container form input{
+    width: 75%;
+    margin-left: 10%;
+    margin-top: 10px;
+  }
+
+  .modal-container #first_label{
+  padding-top: 0px;
+  }
+
+  .modal-container #second_label{
+    padding-top: 0px;
+  }
+
+  .modal-container .footer{
+    width: 100%;
+    height: 70px;
+  }
+
+  .modal-container .footer button{
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+
+}
+
+/*LARGE SCREEN*/
+@media screen and (min-width: 1300px){
+
+}
+
+/****ANIMATIONS****/
+
+@keyframes fadeIn_Modal {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn_Container {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 0.9;
+  }
+}
