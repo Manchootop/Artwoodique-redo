@@ -72,7 +72,7 @@
                                 <span>lv.</span></p>
                             {#                            <div class="qty">+ -</div>#}
                             <div class="actions">
-                                <a href="" class="add-to-wishlist">add to WishList</a>
+                                <a href="{% url 'add-to-wishlist' pk=table.id %}" class="add-to-wishlist">add to WishList</a>
                                 <a href="{% url 'remove-from-cart' slug=table.slug %}" class="remove">delete</a>
                             </div>
 

@@ -14,10 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
-from django.shortcuts import render, get_object_or_404
-from django.utils import timezone
-from django.views.decorators.http import require_POST
-from django.views.generic import ListView, DetailView, View
+from django.shortcuts import render
 from .forms import ContactForm
 from project import settings
 from .filters import ProductFilter
@@ -72,7 +69,6 @@ class StoreListView(views.ListView):
         context['is_catalog'] = is_catalog
 
         return context
-
 
 
 class CatalogView(views.ListView):

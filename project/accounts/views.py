@@ -21,13 +21,8 @@ class LoginView(auth_views.LoginView, SuccessMessageMixin):
 
     def form_valid(self, form):
         """Security check complete. Log the user in."""
-        login(self.request, form.get_user())
         messages.success(self.request, 'You have been logged in successfully')
-        success_url = self.get_success_url()
-        # Emit user_logged_in signal
-        user_logged_in.send(sender=self.request.user.__class__, request=self.request, user=self.request.user)
-        return HttpResponseRedirect(success_url)
-
+        return super().form_valid(form)
     def get_success_url(self):
         return reverse_lazy('index')
 
@@ -56,15 +51,8 @@ class RegisterView(views.CreateView):
     success_url = reverse_lazy("index")
 
     # def form_valid(self, form):
-    #     # Check if the form is valid before proceeding
     #     if form.is_valid():
-    #         # Save the form to create the user
-    #         self.object = form.save()
-    #
-    #         # Log in the user after registration
-    #         login(self.request, self.object)
-    #
-    #     # Redirect to the success URL
+    #         messages.success(self.request, 'Your profile was created successfully')
     #     return super().form_valid(form)
 
 
@@ -98,16 +86,18 @@ class ProfileUpdateView(views.View):
     def post(request, pk):
         form = ProfileUpdateForm(request.POST)
 
-
         if form.is_valid():
             # Get or create the profile instance for the current user
             profile_instance, created = ArtwoodiqueUserProfile.objects.get_or_create(user=request.user)
             # Check if the profile instance already exists
             if not created:
                 # Compare fields of the existing instance with the form data
-                if profile_instance.name == form.cleaned_data['name'] \
+                if profile_instance.username == form.cleaned_data['username'] \
                         and profile_instance.date_of_birth == form.cleaned_data['date_of_birth'] \
-                        and profile_instance.gender == form.cleaned_data['gender']:
+                        and profile_instance.gender == form.cleaned_data['gender'] \
+                        and profile_instance.first_name == form.cleaned_data['first_name'] \
+                        and profile_instance.last_name == form.cleaned_data['last_name']:
+                    # No changes were made to the profile
                     # No changes were made to the profile
                     messages.info(request, 'No changes were made to your profile')
                     return redirect(reverse('details profile', kwargs={'pk': profile_instance.pk}))
@@ -122,4 +112,3 @@ class ProfileUpdateView(views.View):
         # If form is invalid or other errors occur
         messages.error(request, f'{form.errors.as_text()}')
         return redirect(reverse('details profile', kwargs={'pk': pk}))
-

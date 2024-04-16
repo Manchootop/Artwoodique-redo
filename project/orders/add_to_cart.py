@@ -10,7 +10,13 @@ def add_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
 
     # If the user is authenticated, add the product to their cart in the database
+
     if request.user.is_authenticated:
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if order_qs.exists():
+            order = order_qs[0]
+            order_item, created = OrderItem.objects.get_or_create(user=request.user, item=product)
+
         order_item, created = OrderItem.objects.get_or_create(user=request.user, item=product)
         if created:
             messages.success(request, 'This item was added to your cart.')

@@ -3,11 +3,12 @@ from django.core.mail import send_mail
 from django.http import JsonResponse, HttpResponseRedirect
 import json
 
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DeleteView
 
 from ..shared.functions import previous_page_redirect
 
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django import views as views
 from django.views.decorators.http import require_POST
 from django.conf import settings
@@ -51,7 +52,6 @@ class AddSubscriberView(views.View):
 
 
 def like_button_view(request, pk):
-
     if request.method == 'POST' and request.is_ajax():
         obj = get_object_or_404(Product, pk=pk)  # Replace YourModel with your model class
         liked = request.POST.get('liked') == 'true'
@@ -157,37 +157,87 @@ def get_liked_status(request, item_id):
     except ValueError:
         return JsonResponse({'error': 'Invalid item ID'}, status=400)
 
-    # Check if the user has liked the product with the given item_id
-    liked = WishList.objects.filter(user=request.user, item__id=item_id).exists()
+        # Check if the user has liked the product with the given item_id
+    if request.user.is_authenticated:
+        liked = WishList.objects.filter(user=request.user, item__id=item_id).exists()
 
+    else:
+        print('alabala')
+        liked = request.session.get('wishlist', [])
+        if item_id in liked:
+            liked = True
+        else:
+            liked = False
     # Return the liked status as JSON
     return JsonResponse({'liked': liked})
 
 
 class WishListView(ListView):
-    model = WishList
-    template_name = 'engagements/wish_list.html'
+    queryset = WishList.objects.all()
+    template_name = 'account/wishlist.html'
     context_object_name = 'wishlist_items'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         wishlist_items = context.get('wishlist_items', [])
 
-        # If the user is authenticated, retrieve corresponding Product instances
+        # If the user is authenticated => retrieve corresponding Product instances
         if self.request.user.is_authenticated:
-            product_ids = [item.item_id for item in wishlist_items]
-            products = Product.objects.filter(pk__in=product_ids)
-            # handle the order by creating it/filling it with OrderItem instances
-            self._handle_order()
-
-            total_price = sum(float(product.current_price()) for product in products)
+            product_ids = [item.id for item in wishlist_items]
+            products = WishList.objects.filter(pk__in=product_ids)
         else:
-            # For unauthenticated users, retrieve Product instances from session['cart']
-            cart_item_ids = self.request.session.get('cart', [])
-            products = Product.objects.filter(pk__in=cart_item_ids)
-            total_price = sum(float(product.current_price()) for product in products)
+            # For unauthenticated users => retrieve Product instances from session['cart']
+            wishlist_items_ids = self.request.session.get('wishlist', [])
+            products = Product.objects.filter(pk__in=wishlist_items_ids)
 
-        context['total'] = total_price
-        context['tables'] = products
+        context['count'] = products.count()
+        context['wishlist_items'] = products
 
         return context
+
+
+def remove_from_wishlist(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    if request.user.is_authenticated:
+        wishlist_item = WishList.objects.filter(user=request.user, item=product)
+        if wishlist_item.exists():
+            wishlist_item.delete()
+            messages.success(request, 'Item removed from wishlist')
+        else:
+            messages.warning(request, 'Item not in wishlist')
+    else:
+        wishlist = request.session.get('wishlist', [])
+        if pk in wishlist:
+            wishlist.remove(pk)
+            request.session['wishlist'] = wishlist
+            messages.success(request, 'Item removed from wishlist.')
+        else:
+            messages.warning(request, 'Item not in wishlist.')
+
+    return redirect('my_wishlist')
+
+
+def add_to_wishlist(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    if request.user.is_authenticated:
+        wishlist, created = WishList.objects.get_or_create(user=request.user)
+
+        if wishlist.item.filter(pk=product.pk).exists():
+            wishlist.item.remove(product)
+            messages.success(request, 'Item removed from wishlist')
+        else:
+            wishlist.item.add(product)
+            messages.success(request, 'Item added to wishlist')
+    else:
+        wishlist = request.session.get('wishlist', [])
+        if pk in wishlist:
+            wishlist.remove(pk)
+            messages.warning(request, 'Item removed from wishlist')
+        else:
+            wishlist.append(pk)
+            messages.success(request, 'Item added to wishlist')
+        request.session['wishlist'] = wishlist
+
+    return redirect('store')

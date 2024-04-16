@@ -22,12 +22,12 @@
             <li><a href="{% url 'store' %}"
                    class="{% if request.path == '/store/' %}active{% endif %} {% if product.in_stock %}active {% endif %}">Store</a>
             </li>
-            <li><a href="{% url 'catalog' %}"
-                   class="{% if request.path == '/catalog/' %}active{% endif %} {% if not product.in_stock and request.path != '/store/' and request.path != '/' and request.path != '/contacts/' %}active {% endif %}">Catalog</a>
-            </li>
-            <li><a href="{% url 'contacts' %}"
-                   class="{% if request.path == '/contacts/' %}active{% endif %}">Contacts</a></li>
-            <li><a href="{% url 'faq' %}" class="{% if request.path == '/faq/' %}active{% endif %}">FAQ</a></li>
+{#            <li><a href="{% url 'catalog' %}"#}
+{#                   class="{% if request.path == '/catalog/' %}active{% endif %} {% if not product.in_stock and request.path != '/store/' and request.path != '/' and request.path != '/contacts/' %}active {% endif %}">Catalog</a>#}
+{#            </li>#}
+{#            <li><a href="{% url 'contacts' %}"#}
+{#                   class="{% if request.path == '/contacts/' %}active{% endif %}">Contacts</a></li>#}
+{#            <li><a href="{% url 'faq' %}" class="{% if request.path == '/faq/' %}active{% endif %}">FAQ</a></li>#}
             {##}
             {#            <div class="secondary-nav-buttons">#}
             {#                <div class="search-box">#}
@@ -50,7 +50,7 @@
             {##}
 
             <li class="cart-icon">
-                <a href="{% url 'cart' %}" class="{% if request.path == '/checkout/' %}active{% endif %}">
+                <a href="{% url 'cart' %}" class="{% if request.path == '/orders/cart/' %}active{% endif %}">
                     <span class="cart-count">
                         {{ request|cart_item_count }}
                     </span>
@@ -60,16 +60,14 @@
             </li>
 
 
-            <li><a href="{% url 'cart' %}"
-                   class="{% if request.path == '/wishlist/' %}active{% endif %}">
+            <li><a href="{% url 'my_wishlist' %}"
+                   class="{% if request.path == '/engagements/my_wishlist/' %}active{% endif %}">
+                    <span class="cart-count">
+                        {{ request|wishlist_item_count }}
+                    </span>
+
                 <img src="{% static 'images/heart-icon.svg' %}" alt="user-profile-icon" style="">
-                <div class="liked-products">
-                    <i class="heart-icon"></i>
-                    <div class="dropdown">
-                        <div class="arrow-up"></div>
-                        <div class="content"></div>
-                    </div>
-                </div>
+
             </a></li>
             {% if request.user.is_authenticated %}
                 <li><a href="{% url 'details profile' pk=request.user.pk %}">
@@ -78,10 +76,10 @@
 
             {% else %}
                 <li><a href="{% url 'login' %}"
-                       class="{% if request.path == '/accounts/user_profile/' %}active{% endif %}">
-                Log in
-            </a></li>
-        {% endif %}
+                       class="{% if '/accounts/profile/11/' == request.path %}active{% endif %}">
+                    Log in
+                </a></li>
+            {% endif %}
         </ul>
 
 

@@ -4,7 +4,6 @@ import cloudinary
 import dj_database_url
 import sys
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Read SECRET_KEY from the file
 # if DEBUG:
@@ -71,10 +70,13 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'project.engagements.context_processors.newsletter_signup_form',
+                'project.accounts.context_processors.profile_context_processor',
             ],
             'builtins': [
                 'project.shared.templatetags.cart_item_count',
                 'project.shared.templatetags.extract_decimal_part_from_a_number',
+                'project.shared.templatetags.get_name_first_letters',
+                'project.shared.templatetags.wishlist_item_count',
             ],
         },
     },

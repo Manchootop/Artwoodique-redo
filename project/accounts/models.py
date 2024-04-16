@@ -97,6 +97,9 @@ class ArtwoodiqueUser(AbstractBaseUser, PermissionsMixin):
 
     objects = ArtwoodiqueUserManager()
 
+    def __str__(self):
+        return str(self.email)
+
 
 class ArtwoodiqueUserProfile(models.Model):
     FIRST_NAME_MIN_LENGTH = 2
@@ -116,9 +119,7 @@ class ArtwoodiqueUserProfile(models.Model):
         max_length=USERNAME_MAX_LENGTH,
         validators=(
             MinLengthValidator(USERNAME_MIN_LENGTH),
-            validate_only_letters,
         ),
-        unique=True,
     )
 
     first_name = models.CharField(
@@ -163,8 +164,8 @@ class ArtwoodiqueUserProfile(models.Model):
         primary_key=True
     )
 
-    def __str__(self):
-        return f'{self.first_name} {self.last_name} with {self.user.email} and id: {self.user.id}'
+    # def __str__(self):
+    #     return f'{self.first_name} {self.last_name} with {self.user.email} and id: {self.user.id}'
 
 
 class Address(models.Model):
