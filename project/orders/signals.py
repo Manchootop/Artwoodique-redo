@@ -59,12 +59,10 @@ from ..engagements.models import WishList
 @receiver(user_logged_in)
 def transfer_cart_items(sender, user, request, **kwargs):
     cart = request.session.get('cart', [])
-
     for item_id in cart:
-        order_item, created = OrderItem.objects.get_or_create(user=user, item__id=item_id)
         item = Product.objects.get(pk=item_id)
         # Check if the item is not already in OrderItem for the user
-        if not order_item.exists():
+        if not OrderItem.objects.filter(user=user, item=item).exists():
             OrderItem.objects.create(user=user, item=item, ordered=False)
 
     request.session['cart'] = []
@@ -75,13 +73,12 @@ user_logged_in.connect(transfer_cart_items)
 @receiver(user_logged_in)
 def transfer_wishlist_items(sender, user, request, **kwargs):
 
-    cart = request.session.get('cart', [])
-    print('alabala')
-    for item_id in cart:
+    wishlist = request.session.get('wishlist', [])
+    for item_id in wishlist:
         item = Product.objects.get(pk=item_id)
-        wishlist = WishList.objects.filter(user=user, item__id=item_id)
-        if not wishlist.exists():
+        wishlist_item = WishList.objects.filter(user=user, item__id=item_id)
+        if not wishlist_item.exists():
             WishList.objects.create(user=user, item=item)
-    request.session['cart'] = []
+    request.session['wishlist'] = []
 
 user_logged_in.connect(transfer_cart_items)

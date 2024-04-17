@@ -10,6 +10,7 @@ def remove_cart(request, slug):
 
     # If the user is authenticated, remove the product from their cart in the database
     if request.user.is_authenticated:
+        print(f'Removing {product} with id: {product.id} from {request.user}')
         order_item = OrderItem.objects.filter(user=request.user, item=product)
         if order_item.exists():
             order_item.delete()

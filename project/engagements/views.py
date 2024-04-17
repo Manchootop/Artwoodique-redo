@@ -113,47 +113,48 @@ import json
 from django.core.exceptions import ObjectDoesNotExist
 
 
-@require_POST
-def toggle_wishlist(request):
-    user = request.user
-
-    try:
-        data = json.loads(request.body.decode('utf-8'))
-        item_id = data.get('item_id')
-
-        if item_id is None:
-            return JsonResponse({'error': 'Missing item_id in the request body'}, status=400)
-
-        try:
-            product = Product.objects.get(pk=item_id)
-        except Product.DoesNotExist:
-            return JsonResponse({'error': 'Product not found'}, status=400)
-
-        wishlist, created = WishList.objects.get_or_create(user=user)
-        if created:
-            # If a new wishlist is created, add the product to it
-            wishlist.item.add(product)
-            liked = True
-        else:
-            # If the wishlist already exists, check if the product is in it
-            if wishlist.item.filter(pk=item_id).exists():
-                # If the product is in the wishlist, remove it
-                wishlist.item.remove(product)
-                liked = False
-            else:
-                # If the product is not in the wishlist, add it
-                wishlist.item.add(product)
-                liked = True
-
-        return JsonResponse({'liked': liked})
-    except json.JSONDecodeError:
-        return JsonResponse({'error': 'Invalid JSON data in the request body'}, status=400)
+# @require_POST
+# def toggle_wishlist(request):
+#     user = request.user
+#
+#     try:
+#         data = json.loads(request.body.decode('utf-8'))
+#         item_id = data.get('item_id')
+#
+#         if item_id is None:
+#             return JsonResponse({'error': 'Missing item_id in the request body'}, status=400)
+#
+#         try:
+#             product = Product.objects.get(pk=item_id)
+#         except Product.DoesNotExist:
+#             return JsonResponse({'error': 'Product not found'}, status=400)
+#
+#         wishlist, created = WishList.objects.get_or_create(user=user)
+#         if created:
+#             # If a new wishlist is created, add the product to it
+#             wishlist.item.add(product)
+#             liked = True
+#         else:
+#             # If the wishlist already exists, check if the product is in it
+#             if wishlist.item.filter(pk=item_id).exists():
+#                 # If the product is in the wishlist, remove it
+#                 wishlist.item.remove(product)
+#                 liked = False
+#             else:
+#                 # If the product is not in the wishlist, add it
+#                 wishlist.item.add(product)
+#                 liked = True
+#
+#         return JsonResponse({'liked': liked})
+#     except json.JSONDecodeError:
+#         return JsonResponse({'error': 'Invalid JSON data in the request body'}, status=400)
 
 
 def get_liked_status(request, item_id):
     try:
         # Ensure item_id is an integer
         item_id = int(item_id)
+        print(item_id, "= item_id")
     except ValueError:
         return JsonResponse({'error': 'Invalid item ID'}, status=400)
 
@@ -162,29 +163,25 @@ def get_liked_status(request, item_id):
         liked = WishList.objects.filter(user=request.user, item__id=item_id).exists()
 
     else:
-        print('alabala')
-        liked = request.session.get('wishlist', [])
-        if item_id in liked:
-            liked = True
-        else:
-            liked = False
+        wishlist = request.session.get('wishlist', [])
+        liked = item_id in wishlist
     # Return the liked status as JSON
     return JsonResponse({'liked': liked})
 
 
 class WishListView(ListView):
-    queryset = WishList.objects.all()
+    model = WishList
     template_name = 'account/wishlist.html'
     context_object_name = 'wishlist_items'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        wishlist_items = context.get('wishlist_items', [])
 
         # If the user is authenticated => retrieve corresponding Product instances
         if self.request.user.is_authenticated:
-            product_ids = [item.id for item in wishlist_items]
-            products = WishList.objects.filter(pk__in=product_ids)
+            wishlist, created = WishList.objects.get_or_create(user=self.request.user)
+            products = wishlist.item.all()
+            print(products)
         else:
             # For unauthenticated users => retrieve Product instances from session['cart']
             wishlist_items_ids = self.request.session.get('wishlist', [])
@@ -200,12 +197,12 @@ def remove_from_wishlist(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
     if request.user.is_authenticated:
-        wishlist_item = WishList.objects.filter(user=request.user, item=product)
-        if wishlist_item.exists():
-            wishlist_item.delete()
-            messages.success(request, 'Item removed from wishlist')
-        else:
-            messages.warning(request, 'Item not in wishlist')
+        try:
+            wishlist = WishList.objects.get(user=request.user)
+            wishlist.item.remove(product)
+            messages.success(request, 'Item removed from wishlist.')
+        except WishList.DoesNotExist:
+            messages.warning(request, 'Item not in wishlist.')
     else:
         wishlist = request.session.get('wishlist', [])
         if pk in wishlist:
@@ -222,7 +219,7 @@ def add_to_wishlist(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
     if request.user.is_authenticated:
-        wishlist, created = WishList.objects.get_or_create(user=request.user)
+        wishlist = WishList.objects.get(user=request.user)
 
         if wishlist.item.filter(pk=product.pk).exists():
             wishlist.item.remove(product)

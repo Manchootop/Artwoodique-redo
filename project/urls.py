@@ -28,6 +28,7 @@ urlpatterns = [
     # path('admin/', include('admin_interface.urls')),
     path('orders/', include('project.orders.urls')),
     path('engagements/', include('project.engagements.urls')),
+    path('payments/', include('paypal.standard.ipn.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

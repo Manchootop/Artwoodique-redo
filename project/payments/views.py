@@ -1,4 +1,13 @@
-from django.shortcuts import render
+import uuid
+
+from django.conf import settings
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
+from paypal.standard.forms import PayPalPaymentsForm
+
+from project.main.models import Product
+from project.orders.models import Order
+
 
 # class PaymentView(View):
 #     def get(self, *args, **kwargs):
@@ -138,3 +147,30 @@ from django.shortcuts import render
 #
 #         messages.warning(self.request, "Invalid data received")
 #         return redirect("/payment/stripe/")
+
+def CheckoutView(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    order = Order.objects.filter(user=request.user, ordered=False)
+    products = order.items.all()
+    host = request.get_host()
+
+
+    paypal_checkout = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'products': products,
+        'amount': [item.current_price() for item in products],
+        'invoices': uuid.uuid4(),
+        'currency': 'USD',
+        'notify_url': f'https://{host}{reverse("paypal-ipn")}',
+        'return_url': f'https://{host}{reverse("index", kwargs = {'order_id': order.id})}', #TODO: do checkout-success
+        'cancel_url': f'https://{host}{reverse("index", kwargs = {'order_id'})}'
+    }
+
+    paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
+
+    context = {
+        'product': product,
+        'paypal_form': paypal_payment,
+    }
+
+    return render(request, 'checkout.html', context)

@@ -15,7 +15,6 @@ def add_cart(request, slug):
         order_qs = Order.objects.filter(user=request.user, ordered=False)
         if order_qs.exists():
             order = order_qs[0]
-            order_item, created = OrderItem.objects.get_or_create(user=request.user, item=product)
 
         order_item, created = OrderItem.objects.get_or_create(user=request.user, item=product)
         if created:

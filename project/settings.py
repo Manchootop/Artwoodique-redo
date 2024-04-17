@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'project.shared',
     'project.engagements',
+    'paypal.standard.ipn',
     # 'allauth',
     # 'allauth.account',
     # 'allauth.socialaccount',
@@ -211,3 +212,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 #     # Add other providers if needed
 # }
 CONTACT_EMAIL = 'artwoodique@gmail.com'
+
+
+PAYPAL_RECEIVER_EMAIL = 'bussiness_acc@gmail.com'
+PAYPAL_TEST = True
