@@ -37,8 +37,8 @@
         </div>
         <div class="user-sidebar-content">
             <nav class="users-features-list">
-                {% if request.is_authenticated %}
-                <a href="#" class="feature-icon-orders">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'my_orders' %}" class="feature-icon-orders">
                             <span class="img-wrap first"><img  src="{% static 'images/icons8-list-50.png' %}"
                                                               alt="orders"></span>
                     <span class="text-wrap">Orders</span>

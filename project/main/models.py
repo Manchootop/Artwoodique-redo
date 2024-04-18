@@ -9,6 +9,8 @@ from django.utils.text import slugify
 from django_countries.fields import CountryField
 
 from django.conf import settings
+
+
 from project.shared.functions import upload_other_images_product_url
 from project.shared.models import TimeBaseModel
 
@@ -28,6 +30,21 @@ LABEL_CHOICES = (
     ('P', 'primary'),
     ('S', 'secondary'),
     ('D', 'danger')
+)
+
+SIZE_CHOICES = (
+    ('XS', 'XS'),
+    ('S', 'S'),
+    ('M', 'M'),
+    ('L', 'L'),
+    ('XL', 'XL'),
+    ('XXL', 'XXL'),
+)
+
+TYPE_CHOICES = (
+    ('Living Table', 'Living Table'),
+    ('Coffe Table', 'Coffe Table'),
+    ('Dining Table', 'Dining Table'),
 )
 
 
@@ -61,6 +78,7 @@ class Product(models.Model):
 
     subheading = models.CharField(
         max_length=400,
+        
     )
     description = models.TextField(
         max_length=400,
@@ -84,9 +102,16 @@ class Product(models.Model):
         return super().save(*args, **kwargs)
 
     size = models.CharField(
-        max_length=400,
+        max_length=max([len(x) for x, _ in SIZE_CHOICES]),
+        choices=SIZE_CHOICES,
+        default='undefined',
     )
 
+    type = models.CharField(
+        max_length=max([len(x) for x, _ in TYPE_CHOICES]),
+        choices=TYPE_CHOICES,
+        default='undefined',
+    )
     image = models.ImageField(
         upload_to=upload_image_product_url
     )
@@ -141,12 +166,24 @@ class Product(models.Model):
         })
 
     def is_liked_by_user(self, user):
+        from project.engagements.models import WishList
         try:
             # Check if the user has liked the item
             self.wishlist_set.get(user=user)
             return True
         except WishList.DoesNotExist:
             return False
+
+    def get_tags(self):
+        tags = {
+            'material': self.material,
+            'size': self.size,
+            'type': self.type,
+
+            # TODO: do with details
+            # 'details': self.details,
+        }
+        return tags
 
 
 class ProductImage(TimeBaseModel):

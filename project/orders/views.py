@@ -329,3 +329,22 @@ class AddCouponView(views.View):
 #         except ObjectDoesNotExist:
 #             messages.info(self.request, "This order does not exist.")
 #             return redirect("request-refund")
+
+class OrderListView(LoginRequiredMixin, generic_views.ListView):
+    template_name = 'order_list.html'
+    context_object_name = 'orders'
+    model = Order
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        orders = context.get('orders', [])
+        orders = orders.filter(user=self.request.user)
+
+
+        context['orders'] = orders
+        return context
+
+
+
+
+

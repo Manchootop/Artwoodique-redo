@@ -21,10 +21,10 @@ class OrderItem(models.Model):
         return f"{self.quantity} of {self.item.title}"
 
     def get_total_item_price(self):
-        return self.quantity * self.item.price
+        return self.item.current_price()
 
     def get_total_discount_item_price(self):
-        return self.quantity * self.item.discount_price
+        return self.item.price - self.item.discount_price
 
     def get_amount_saved(self):
         return self.get_total_item_price() - self.get_total_discount_item_price()
@@ -82,6 +82,8 @@ class Order(models.Model):
             total -= self.coupon.amount
         return total
 
+    def get_order_item_names(self):
+        return ", ".join([item.item.title for item in self.items.all()])
 
 class Coupon(models.Model):
     code = models.CharField(max_length=15)
