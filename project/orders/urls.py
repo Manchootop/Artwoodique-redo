@@ -2,7 +2,7 @@ from django.urls import path
 
 from project.orders import views
 from project.orders.add_to_cart import add_cart
-from project.orders.designer import SimilarProductsAPIView
+from project.orders.designer import SimilarProductsView, SimilarProductsSearchView
 from project.orders.remove_from_cart import remove_cart
 
 urlpatterns = [
@@ -13,6 +13,6 @@ urlpatterns = [
     path('remove-from-cart/<slug>/', remove_cart, name='remove-from-cart'),
     path('cart/', views.CartView.as_view(), name='cart'),
     path('my_orders/', views.OrderListView.as_view(), name='my_orders'),
-
-    path('similar-products/', SimilarProductsAPIView.as_view(), name='similar-products'),
+    path('', SimilarProductsSearchView.as_view(), name='similar-products'),
+    path('similar-products/', SimilarProductsView.as_view(), name='similar-products'),
 ]

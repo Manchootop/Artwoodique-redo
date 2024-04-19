@@ -216,3 +216,9 @@ CONTACT_EMAIL = 'artwoodique@gmail.com'
 
 PAYPAL_RECEIVER_EMAIL = 'bussiness_acc@gmail.com'
 PAYPAL_TEST = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}

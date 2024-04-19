@@ -41,6 +41,14 @@ SIZE_CHOICES = (
     ('XXL', 'XXL'),
 )
 
+MATERIAL_CHOICES = (
+    ('Oak', 'Oak'),
+    ('Cherry', 'Cherry'),
+    ('Pine', 'Pine'),
+    ('Walnut', 'Walnut'),
+    ('Mulberry', 'Mulberry'),
+)
+
 TYPE_CHOICES = (
     ('Living Table', 'Living Table'),
     ('Coffe Table', 'Coffe Table'),
@@ -78,14 +86,16 @@ class Product(models.Model):
 
     subheading = models.CharField(
         max_length=400,
-        
+
     )
     description = models.TextField(
         max_length=400,
     )
 
     material = models.CharField(
-        max_length=400,
+        max_length=max([len(x) for x, _ in MATERIAL_CHOICES]),
+        choices=MATERIAL_CHOICES,
+        default='undefined',
     )
 
     slug = models.SlugField(
@@ -182,6 +192,8 @@ class Product(models.Model):
 
             # TODO: do with details
             # 'details': self.details,
+
+
         }
         return tags
 

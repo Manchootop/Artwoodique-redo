@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/designer.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="designer-wrapper">
+        <div class="page-container">
+        <h1 class="title">Designer</h1>
+        <form action="" method="get">
+        {% csrf_token %}
+
+        <div class="selectors">
+            <div class="header">
+                <label for="title">Pick title</label>
+                <input id="title" class="form-control" type="text">
+            </div>
+            <div class="material">
+                <label for="material">Choose material:</label>
+
+                <select class="form-control" name="material" id="material">
+                    {% for material_value, material_value in material_choices %}
+                        <option value="{{ material_value }}">{{ material_value }}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+            <div class="size">
+                <label for="size">Choose size:</label>
+
+                <select class="form-control" name="size" id="size">
+                    {% for size_value, size_label in size_choices %}
+                        <option value="{{ size_value }}">{{ size_label }}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+            <div class="type">
+                <label for="type">Choose type:</label>
+                <select class="form-control" name="type" id="type">
+                    {% for type_value, type_label in type_choices %}
+                        <option value="{{ type_value }}">{{ type_label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <input type="submit"  value="submit" class="btn">
+
+        </div>
+        </form>
+
+        <div id="similar_material">
+            <h2>Material Products</h2>
+            <ul id="material-list"></ul>
+        </div>
+
+        <div id="similar_size">
+            <h2>Size Products</h2>
+            <ul id="size-list"></ul>
+        </div>
+
+        <div id="similar_type">
+            <h2>Type Products</h2>
+            <ul id="type-list"></ul>
+        </div>
+    </div>
+
+    </div>
+
+
+    <script src="{% static 'js/designer.js' %}"></script>
+{% endblock %}
