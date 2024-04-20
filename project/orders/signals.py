@@ -73,7 +73,10 @@ user_logged_in.connect(transfer_cart_items)
 @receiver(user_logged_in)
 def transfer_wishlist_items(sender, user, request, **kwargs):
 
+
     wishlist = request.session.get('wishlist', [])
+    if not wishlist and not WishList.objects.filter(user=user).exists():
+        WishList.objects.create(user=user)
     for item_id in wishlist:
         item = Product.objects.get(pk=item_id)
         wishlist_item = WishList.objects.filter(user=user, item__id=item_id)
@@ -81,4 +84,4 @@ def transfer_wishlist_items(sender, user, request, **kwargs):
             WishList.objects.create(user=user, item=item)
     request.session['wishlist'] = []
 
-user_logged_in.connect(transfer_cart_items)
+user_logged_in.connect(transfer_wishlist_items)

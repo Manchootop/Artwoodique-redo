@@ -1,4 +1,6 @@
 import os
+import random
+import string
 
 from PIL import Image, ImageChops
 from django.shortcuts import redirect
@@ -60,3 +62,6 @@ def is_valid_form(values):
         if field == '':
             valid = False
     return valid
+
+def create_ref_code():
+    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))

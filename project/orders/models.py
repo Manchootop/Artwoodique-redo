@@ -4,6 +4,7 @@ from django.db import models
 from project.accounts.models import Address
 from project.main.models import Product
 from project.payments.models import Payment
+from project.shared.functions import create_ref_code
 
 UserModel = get_user_model()
 
@@ -27,7 +28,7 @@ class OrderItem(models.Model):
         return self.item.price - self.item.discount_price
 
     def get_amount_saved(self):
-        return self.get_total_item_price() - self.get_total_discount_item_price()
+        return self.item.discount_price
 
     def get_final_price(self):
         if self.item.discount_price:
@@ -36,13 +37,15 @@ class OrderItem(models.Model):
 
 
 class Order(models.Model):
+    DELIVERY_FEE_PERCENTAGE = 1
+
     user = models.ForeignKey(
         UserModel,
         on_delete=models.CASCADE,
         null=True,
         blank=True
     )
-    ref_code = models.CharField(max_length=20, blank=True, null=True)
+    ref_code = models.CharField(max_length=20, default=create_ref_code(), editable=False)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
@@ -72,7 +75,7 @@ class Order(models.Model):
     '''
 
     def __str__(self):
-        return self.user.email
+        return f'{self.ref_code}: {self.get_order_item_names()} | {self.get_total():.2f} '
 
     def get_total(self):
         total = 0
@@ -82,6 +85,10 @@ class Order(models.Model):
             total -= self.coupon.amount
         return total
 
+    def calc_delivery_fee(self):
+        return self.get_total() *  self.DELIVERY_FEE_PERCENTAGE / 100
+    def get_total_with_delivery_fee(self):
+        return self.get_total() + self.calc_delivery_fee()
     def get_order_item_names(self):
         return ", ".join([item.item.title for item in self.items.all()])
 

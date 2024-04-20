@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 import cloudinary
 import dj_database_url
@@ -13,30 +14,37 @@ SECRET_KEY = 'django-insecure-=(!&olqxy6ni=d_7_)#x6#9rhs9(oad+@h%f1(+utjc-8k99a+
 DEBUG = True
 IS_PRODUCTION = False
 ALLOWED_HOSTS = ['*']
-INSTALLED_APPS = [
+
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+PROJECT_APPS = [
     'project.main',
     'project.accounts',
     'project.orders',
     'project.payments',
-    'crispy_forms',
     'project.shared',
     'project.engagements',
+]
+
+THIRD_PARTY_APPS = [
+    'crispy_forms',
     'paypal.standard.ipn',
     'rest_framework',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',
-    # 'allauth.socialaccount.providers.facebook',
     'django_countries',
     'crispy_bootstrap5',
 ]
+
+
+
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -222,3 +230,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
 }
+
+
+

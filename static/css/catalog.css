@@ -475,3 +475,17 @@ aside {
 .card:hover img {
     transform: scale(1.01);
 }
+
+.card-price-current .btn i {
+    font-size: 22px;
+    display: inline-block;
+    background: #F1E2D1;
+    /*background: -webkit-linear-gradient(left, #4a60c1 10%, #3985e0);*/
+    /*background: linear-gradient(to right, #4a60c1 10%, #3985e0);*/
+
+    border-radius: 0 !important;
+    padding: 0;
+    color: white;
+    width: 42px;
+    height: 42px;
+}

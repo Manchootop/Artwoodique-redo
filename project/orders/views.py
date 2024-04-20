@@ -11,10 +11,8 @@ from project.accounts.models import Address
 from project.main.models import Product
 from project.orders.forms import RefundForm, CouponForm, CheckoutForm
 from project.orders.models import Order, Coupon, Refund, OrderItem
-from project.shared.functions import is_valid_form
+from project.shared.functions import is_valid_form, create_ref_code
 
-def create_ref_code():
-    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
 # class CheckoutView(views.View):
 #     def get(self, *args, **kwargs):
@@ -210,10 +208,11 @@ class CartView(generic_views.ListView):
             return OrderItem.objects.filter(user=self.request.user, ordered=False)
         # If the user is not authenticated, get the products from the session
         else:
-           return OrderItem.objects.none()
+            return OrderItem.objects.none()
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
+        coupon_form = CouponForm()
         tables = context.get('tables', [])
         total_price = 0
 
@@ -231,6 +230,7 @@ class CartView(generic_views.ListView):
             products = Product.objects.filter(pk__in=cart_item_ids)
             total_price = sum(float(product.current_price()) for product in products)
 
+        context['coupon_form'] = coupon_form
         context['total'] = total_price
         context['tables'] = products
 
@@ -250,15 +250,18 @@ class CartView(generic_views.ListView):
 
     def _create_order(self):
         ordered_date = timezone.now()
+        order_ref_code = create_ref_code()
         order = Order.objects.create(
-            user=self.request.user, ordered_date=ordered_date)
+            user=self.request.user, ordered_date=ordered_date, ref_code=order_ref_code, ordered=False)
         order.save()
         return order
+
     def _fill_order(self, order):
         order_items = OrderItem.objects.filter(user=self.request.user, ordered=False)
         for order_item in order_items:
             if order_item.item_id not in order.items.all():
                 order.items.add(order_item)
+
 
 class OrderSummaryView(LoginRequiredMixin, views.View):
     def get(self, *args, **kwargs):
@@ -272,6 +275,7 @@ class OrderSummaryView(LoginRequiredMixin, views.View):
             messages.warning(self.request, "You do not have an active order")
             return redirect("/")
 
+
 def get_coupon(request, code):
     try:
         coupon = Coupon.objects.get(code=code)
@@ -279,6 +283,7 @@ def get_coupon(request, code):
     except ObjectDoesNotExist:
         messages.info(request, "This coupon does not exist")
         return redirect("checkout")
+
 
 class AddCouponView(views.View):
     def post(self, *args, **kwargs):
@@ -291,10 +296,11 @@ class AddCouponView(views.View):
                 order.coupon = get_coupon(self.request, code)
                 order.save()
                 messages.success(self.request, "Successfully added coupon")
-                return redirect("cart")
+                return redirect("checkout")
             except ObjectDoesNotExist:
                 messages.info(self.request, "You do not have an active order")
-                return redirect("cart")
+                return redirect("checkout")
+
 
 # class RequestRefundView(views.View):
 #     def get(self, *args, **kwargs):
@@ -341,10 +347,6 @@ class OrderListView(LoginRequiredMixin, generic_views.ListView):
         orders = orders.filter(user=self.request.user)
 
 
+
         context['orders'] = orders
         return context
-
-
-
-
-

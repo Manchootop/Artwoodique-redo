@@ -65,8 +65,7 @@ class StoreListView(views.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['count'] = context['paginator'].count
-        is_catalog = any(not product.in_stock for product in context['products'])
-        context['is_catalog'] = is_catalog
+
 
         return context
 
@@ -78,7 +77,7 @@ class CatalogView(views.ListView):
     paginate_by = 9
 
     def get_queryset(self):
-        queryset = Product.objects.all()
+        queryset = Product.objects.filter(in_stock=False)
         product_filter = ProductFilter(self.request.GET, queryset=queryset)
         sort_by = self.request.GET.get('sort_by')
         order = self.request.GET.get('order', 'asc')  # Default to ascending order

@@ -165,7 +165,6 @@ class Product(models.Model):
         })
 
     def get_add_to_cart_url(self):
-        print('lolol')
         return reverse("add-to-cart", kwargs={
             'slug': self.slug
         })

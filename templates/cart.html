@@ -60,9 +60,9 @@
                                 </div>
                             </div>
                             <div class="tags">
-                                <a class="tag" href="">oak</a>
-                                <a class="tag">walnut</a>
-                                <a class="tag">cherry</a>
+                                <a class="tag" href="" style="color: darkgreen; border-color: darkgreen">{{ table.material }}</a>
+                                <a class="tag" style="color: orange; border-color: orange">{{ table.size }}</a>
+                                <a class="tag" style="color: purple; border-color: purple" >{{ table.type }}</a>
                             </div>
                         </div>
 
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                     <div class="order-summary-actions">
-                        <a href="#" class="btn">Continue</a>
+                        <a href="{% url 'checkout' %}" class="btn">Continue</a>
                     </div>
                 </div>
 

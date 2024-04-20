@@ -284,8 +284,9 @@ form.voucher-form {
     align-items: flex-start;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    gap: 10px;
+    gap: 15px;
 }
+
 
 form.voucher-form input {
     flex-grow: 1;
@@ -312,3 +313,6 @@ form.voucher-form input {
     border-radius: .6em;
 }
 
+section label {
+    display: none;
+}
