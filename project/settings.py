@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #         SECRET_KEY = f.read().strip()
 SECRET_KEY = 'django-insecure-=(!&olqxy6ni=d_7_)#x6#9rhs9(oad+@h%f1(+utjc-8k99a+'
 DEBUG = True
-IS_PRODUCTION = True
+IS_PRODUCTION = False
 ALLOWED_HOSTS = ['*']
 
 DJANGO_APPS = [
@@ -31,6 +31,7 @@ PROJECT_APPS = [
     'project.payments',
     'project.shared',
     'project.engagements',
+    'project.designer',
 ]
 
 THIRD_PARTY_APPS = [
@@ -39,8 +40,8 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'django_countries',
     'crispy_bootstrap5',
+    'paypal',
 ]
-
 
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
@@ -74,7 +75,6 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -107,23 +107,23 @@ if IS_PRODUCTION:
         "default": dj_database_url.config(default=os.environ.get("DATABASE_URL1"))
     }
 else:
-    # DATABASES = {
-    #     "default": {
-    #         "ENGINE": "django.db.backends.postgresql",
-    #         "NAME": "artwoodique-original_db",
-    #         "USER": "postgres",
-    #         "PASSWORD": "Thatshurt",
-    #         "HOST": "127.0.0.1",
-    #         "PORT": "5432",
-    #     }
-    # }
-
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "artwoodique_exam",
+            "USER": "postgres",
+            "PASSWORD": "Thatshurt",
+            "HOST": "127.0.0.1",
+            "PORT": "5432",
         }
     }
+
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': BASE_DIR / 'db.sqlite3',
+    #     }
+    # }
 
 if not IS_PRODUCTION and not DEBUG:
     AUTH_PASSWORD_VALIDATORS = [
@@ -156,7 +156,7 @@ if IS_PRODUCTION:
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
 MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-DEFAULT_FROM_EMAIL = "mariqn5000@gmail.com"
+DEFAULT_FROM_EMAIL = "artwoodique@gmail.com"
 
 # settings.py
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -164,8 +164,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587  # Use the appropriate port for your email provider
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mariqn5000@gmail.com'
-EMAIL_HOST_PASSWORD = 'mgtn nqyr leaz sidv '
+EMAIL_HOST_USER = 'artwoodique@gmail.com'
+EMAIL_HOST_PASSWORD = 'mgtn nqyr leaz sidv'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 STRIPE_SECRET_KEY = "sk_test_Thatshurt74408K"
 STRIPE_PUBLIC_KEY = "bla bla bla "
@@ -185,41 +185,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 
-# Set email as the required field for registration
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-
-# SOCIALACCOUNT_PROVIDERS = {
-#     'google': {
-#         'APP': {
-#             'client_id': 'your-google-client-id',
-#             'secret': 'your-google-client-secret',
-#             'key': '',
-#         }
-#     },
-#     'facebook': {
-#         'APP': {
-#             'client_id': 'your-facebook-app-id',
-#             'secret': 'your-facebook-app-secret',
-#             'key': '',
-#             'scope': ['email', 'public_profile'],
-#             'fields': [
-#                 'id',
-#                 'email',
-#                 'name',
-#                 'first_name',
-#                 'last_name',
-#                 'verified',
-#                 'locale',
-#                 'timezone',
-#                 'link',
-#                 'gender',
-#                 'updated_time',
-#             ],
-#             'version': 'v12.0',
-#         }
-#     },
-#     # Add other providers if needed
-# }
 CONTACT_EMAIL = 'artwoodique@gmail.com'
 
 PAYPAL_RECEIVER_EMAIL = 'bussiness_acc@gmail.com'

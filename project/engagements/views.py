@@ -171,7 +171,7 @@ def get_liked_status(request, item_id):
 
 class WishListView(ListView):
     model = WishList
-    template_name = 'account/wishlist.html'
+    template_name = 'engagements/wishlist.html'
     context_object_name = 'wishlist_items'
 
     def get_context_data(self, **kwargs):
@@ -195,6 +195,7 @@ class WishListView(ListView):
 
 def remove_from_wishlist(request, pk):
     product = get_object_or_404(Product, pk=pk)
+    next_url = request.GET.get('next')
 
     if request.user.is_authenticated:
         try:
@@ -212,12 +213,12 @@ def remove_from_wishlist(request, pk):
         else:
             messages.warning(request, 'Item not in wishlist.')
 
-    return redirect('my_wishlist')
+    return redirect(next_url or '/store/')
 
 
 def add_to_wishlist(request, pk):
     product = get_object_or_404(Product, pk=pk)
-
+    next_url = request.GET.get('next')
     if request.user.is_authenticated:
         wishlist = WishList.objects.get(user=request.user)
 
@@ -237,4 +238,4 @@ def add_to_wishlist(request, pk):
             messages.success(request, 'Item added to wishlist')
         request.session['wishlist'] = wishlist
 
-    return redirect('store')
+    return redirect(next_url or '/store/')

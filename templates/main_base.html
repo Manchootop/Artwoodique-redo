@@ -11,9 +11,11 @@
     {% block extra_head %}
     {% endblock %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 
 <body>
+
 <div class="wrapper">
 
 
@@ -60,6 +62,7 @@
 
 <div class="wrapper">
     {% block content %}
+
     {% endblock content %}
 
 </div>
@@ -72,7 +75,6 @@
 
 
 {#{% include "footer.html" %}#}
-{% include "scripts.html" %}
 
 {% block extra_scripts %}
 {% endblock extra_scripts %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+{% endblock %}
+{% block content %}
+    <div class="wishlist-wrapper">
+        {% include 'sidebar.html' %}
+        <div class="page-container">
+            <div class="panel-body">
+                <h1 class="title">Favourites</h1>
+                <div class="wishlist">
+
+                    <div class="header">
+                        {% if wishlist_items %}
+                            <p class="subhead">You have {{ count }} items in your wishlist</p>
+                        {% else %}
+                            <p class="subhead">Your wishlist is empty. Fill it with awesome stuff. <a
+                                    href="{% url 'store' %}">BROWSE!</a></p>
+                        {% endif %}
+                    </div>
+                    {% for table in wishlist_items %}
+                        <div class="cart-card">
+                            <div class="card-body">
+                                <div class="item-details">
+                                    <div class="main-product">
+                                        <div class="img-container">
+                                            <img
+                                                    src="{{ table.image.url }}"
+                                                    class="img-fluid rounded-3" alt="Shopping item"
+                                                    style="width: 65px;">
+                                        </div>
+
+                                        <div class="item-details">
+                                            <a class="item-title" href="{% url 'catalog-details' pk=table.pk %}">
+                                                {{ table.title }}
+                                            </a>
+                                            <div class="subhead">{{ table.subheading }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="tags">
+                                        <a class="tag" href="">{{ table.material }}</a>
+                                        <a class="tag">{{ table.size }}</a>
+                                        <a class="tag">{{ table.type }}</a>
+                                    </div>
+                                </div>
+
+                                <div class="other-info">
+                                    <p class="price">{{ table.current_price|floatformat:0 }}
+                                        <sup>{{ table.discount_price|extract_decimal_part }}</sup>
+                                        <span>lv.</span></p>
+                                    {#                            <div class="qty">+ -</div>#}
+                                    <div class="actions">
+                                        {#                                <a href="{% url 'toggle-like' %}" class="add-to-wishlist">remove</a>#}
+                                        <a href="{% url 'remove-from-wishlist' pk=table.pk %}?next={{ request.path }}" class="remove">delete</a>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

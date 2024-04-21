@@ -43,7 +43,7 @@ button.addEventListener('click', function (event) {
 
 // Function to fetch similar products based on attributes
 function fetchSimilarProducts(attributes) {
-    const url = '/orders/';
+    const url = '/designer/';
     const queryParams = new URLSearchParams(attributes).toString();
     const csrftoken = getCookie('csrftoken');
     console.log(queryParams, url, attributes);

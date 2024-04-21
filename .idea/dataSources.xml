@@ -26,5 +26,12 @@
         </library>
       </libraries>
     </data-source>
+    <data-source source="LOCAL" name="artwoodique_exam" uuid="763cc7df-4e83-4277-954a-c1907ea883b2">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

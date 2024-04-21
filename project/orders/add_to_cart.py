@@ -7,15 +7,12 @@ from project.orders.models import OrderItem, Order
 
 
 def add_cart(request, slug):
+    next_url = request.GET.get('next')
     product = get_object_or_404(Product, slug=slug)
 
     # If the user is authenticated, add the product to their cart in the database
 
     if request.user.is_authenticated:
-        order_qs = Order.objects.filter(user=request.user, ordered=False)
-        if order_qs.exists():
-            order = order_qs[0]
-
         order_item, created = OrderItem.objects.get_or_create(user=request.user, item=product)
         if created:
             messages.success(request, 'This item was added to your cart.')
@@ -32,4 +29,4 @@ def add_cart(request, slug):
             request.session['cart'] = cart
             messages.success(request, 'This item was added to your cart.')
 
-    return redirect('store')
+    return redirect(next_url or '/orders/cart/')

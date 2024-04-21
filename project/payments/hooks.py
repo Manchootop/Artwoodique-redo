@@ -36,7 +36,7 @@ def handle_successful_payment(ipn_obj):
 
 @receiver(post_save, sender=valid_ipn_received)
 def handle_payment(sender, **kwargs):
-    print('alabala')
+    print('hit hit hit')
     ipn_obj = sender
     if ipn_obj.payment_status == ST_PP_COMPLETED:
         if ipn_obj.receiver_email != settings.PAYPAL_RECEIVER_EMAIL:

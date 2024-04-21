@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% block content %}
+    <section class="user-profile-container">
+        {% include 'sidebar.html' %}
+        <div class="page-container">
+            <div class="personal-data">
+                <div class="panel-body">
+                    <div class="title">Account information</div>
+                    <div class="personal-data-content">
+
+                        <div class="thumbnail">
+                            <div class="ini">
+                                {{ request | get_name_first_letters }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="line">
+                                <div class="field-name">Username:</div>
+                                <div class="field-data"> {{ profile.username }}
+                                </div>
+                            </div>
+                            <div class="line">
+                                <div class="field-name">Name:</div>
+                                <div class="field-data">{{ profile.first_name }} {{ profile.last_name }}</div>
+                            </div>
+                            <div class="line">
+                                <div class="field-name">Email:</div>
+                                <div class="field-data">{{ user.email }}</div>
+                            </div>
+
+                            <div class="line">
+                                <div class="field-name">Gender</div>
+                                <div class="field-data">
+                                    {% if profile.gender %}
+                                        {{ profile.gender }}
+                                    {% else %}
+                                        Add gender
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="line">
+                                <div class="field-name">Birthday</div>
+                                <div class="field-data">
+                                    {% if profile.date_of_birth %}
+                                        {{ profile.date_of_birth }}
+                                    {% else %}
+                                        Add Birthday
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <p id="open">Manage your personal data</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="modal-container">
+        <div class="container" id="a">
+
+        </div>
+        <div class="modal" id="b">
+            <div class="header">
+                <a href="#" class="cancel">X</a>
+            </div>
+            <div class="content">
+                <form method="post" action="{% url 'update_profile' pk=request.user.pk %}">
+                    {% csrf_token %}
+                    {{ profile_form }}
+                    <button type="submit" class="update btn">Update</button>
+                    <button type="submit" class="close">Cancel</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+        $("#open").click(function () {
+            $("#a").css("display", "block");
+            $("#b").css("display", "block");
+        });
+
+
+        $(".cancel").click(function () {
+            $("#a").fadeOut();
+            $("#b").fadeOut();
+        });
+    </script>
+{% endblock %}

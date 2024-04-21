@@ -1,0 +1,65 @@
+{% extends 'main_base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include 'social_icons.html' %}
+
+    <main style="margin-bottom: 8em">
+        <div class="left-col" >
+            <h1>Contacts</h1>
+            <div class="contacts-card">
+                <div class="first-row">
+                    <section class="contact-block">
+                        <img src="" alt="">
+                        <span>artwoodique@gmail.com</span>
+                    </section>
+                    <section class="contact-block">
+                        <img src="" alt="">
+                        <span>Facebook Group</span>
+                    </section>
+                    <section class="contact-block">
+                        <img src="" alt="">
+                        <span>Facebook Page</span>
+                    </section>
+                    <section class="contact-block">
+                        <img src="" alt="">
+                        <span>+359 878 130 052</span>
+                    </section>
+
+                </div>
+                {#                <div class="second-row">#}
+                {#                    <section class="contact-block">#}
+                {#                        <img src="" alt="">#}
+                {#                        <span>+359 878 130 052</span>#}
+                {#                    </section>#}
+                {#                    <section class="contact-block">#}
+                {#                        <img src="" alt="">#}
+                {#                        <span>artwoodique@gmail.com</span>#}
+                {#                    </section>#}
+                {#                </div>#}
+
+
+            </div>
+
+        </div>
+        <div class="right-col">
+            <div class="contact-us-wrapper">
+                <span>Write us</span>
+                <form action="{% url 'contacts' %}" method="POST">
+                    {{ form|crispy }}
+                    {% csrf_token %}
+                    <button style="margin-top: 1em">Submit</button>
+
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+

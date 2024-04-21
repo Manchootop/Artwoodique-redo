@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Get the left and right arrow elements
     const leftArrow = document.querySelector('.left-arrow');
     const rightArrow = document.querySelector('.right-arrow');
+    console.log(sidebarImages)
 
     // Initialize the current image index
     let currentImageIndex = 0;

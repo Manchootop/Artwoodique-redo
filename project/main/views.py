@@ -18,21 +18,17 @@ from django.shortcuts import render
 from .forms import ContactForm
 from project import settings
 from .filters import ProductFilter
-from .models import Product, ProductImage, ProductRating
-
+from .models import Product, ProductImage
 UserModel = get_user_model()
 
 
 class HomeView(views.TemplateView):
-    template_name = 'index.html'
+    template_name = 'main/index.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
 
 class StoreListView(views.ListView):
     model = Product
-    template_name = 'store.html'
+    template_name = 'main/store.html'
     context_object_name = 'products'
     paginate_by = 9
 
@@ -53,7 +49,7 @@ class StoreListView(views.ListView):
         elif sort_by == 'views':
             sort_field = 'views'
         else:
-            sort_field = 'calculated_price'  # Replace 'default_sort_field' with the actual default sort field
+            sort_field = 'calculated_price'
 
         if order == 'desc':
             queryset = queryset.order_by(f'-{sort_field}')
@@ -64,21 +60,18 @@ class StoreListView(views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['count'] = context['paginator'].count
-
-
+        context['count'] = Product.objects.filter(in_stock=True).count()
         return context
 
 
 class CatalogView(views.ListView):
     model = Product
-    template_name = 'store.html'
+    template_name = 'main/store.html'
     context_object_name = 'products'
     paginate_by = 9
 
     def get_queryset(self):
         queryset = Product.objects.filter(in_stock=False)
-        product_filter = ProductFilter(self.request.GET, queryset=queryset)
         sort_by = self.request.GET.get('sort_by')
         order = self.request.GET.get('order', 'asc')  # Default to ascending order
 
@@ -88,6 +81,7 @@ class CatalogView(views.ListView):
                 output_field=FloatField()
             )
         )
+
         if sort_by == 'price':
             if order == 'desc':
                 queryset = queryset.order_by('-price')
@@ -103,36 +97,24 @@ class CatalogView(views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['count'] = context['paginator'].count
-        is_catalog = any(not product.in_stock for product in context['products'])
-        context['is_catalog'] = is_catalog
+        context['count'] = Product.objects.filter(in_stock=False).count()
+        context['is_catalog'] = True
         return context
 
 
 class ProductDetailsView(views.DetailView):
     model = Product
-    template_name = 'details.html'
+    template_name = 'main/details.html'
     context_object_name = 'product'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['images'] = ProductImage.objects.filter(product=self.object)
-        context['average_rating'] = ProductRating.objects.filter(product=self.object).aggregate(Avg('rating'))[
-            'rating__avg']
-
-        # try:
-        #     sale = Sale.objects.get(product=self.object)
-        #     context['sale_percentage'] = sale.sale_percentage
-        #     context['sale_expiry_date'] = sale.sale_date
-        # except Sale.DoesNotExist:
-        #     context['sale_percentage'] = None
-        #     context['sale_expiry_date'] = None
-
         return context
 
 
 class ContactsView(views.TemplateView):
-    template_name = 'contact.html'
+    template_name = 'main/contact.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -151,7 +133,7 @@ class ContactsView(views.TemplateView):
             subject = 'Contact Form Submission'
             message = f'Heading: {heading}\nEmail: {email}\nMessage: {message}'
             from_email = settings.DEFAULT_FROM_EMAIL
-            recipient_list = [settings.CONTACT_EMAIL]  # Replace with the recipient's email address
+            recipient_list = [settings.EMAIL_HOST_USER]  # Replace with the recipient's email address
 
             send_mail(subject, message, from_email, recipient_list, fail_silently=True)
 
@@ -165,6 +147,6 @@ class ContactsView(views.TemplateView):
 
 
 class FAQView(views.TemplateView):
-    template_name = 'faq.html'
+    template_name = 'main/faq.html'
 
 

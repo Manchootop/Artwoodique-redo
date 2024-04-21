@@ -30,6 +30,7 @@ urlpatterns = [
     path('engagements/', include('project.engagements.urls')),
     path('paypal/', include('paypal.standard.ipn.urls')),
     path('payments/', include('project.payments.urls')),
+    path('designer/', include('project.designer.urls')),
 
 ]
 if settings.DEBUG:

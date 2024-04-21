@@ -5,6 +5,7 @@ from project.main.models import Product
 
 UserModel = get_user_model()
 
+
 class Subscriber(models.Model):
     email = models.EmailField(unique=True)
     name = models.CharField(

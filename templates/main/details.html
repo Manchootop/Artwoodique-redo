@@ -1,0 +1,352 @@
+{% load static %}
+{#{% load custom_filters %}#}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/details.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0-beta/css/all.min.css">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Poppins:wght@200;300;400;700&display=swap"
+            rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'images/AW-logo.svg' %}">
+
+    <script src="{% static 'js/details.js' %}" defer></script>
+{#    <link rel="stylesheet" href="{% static 'css/main.css' %}">#}
+</head>
+
+<body>
+<div class="wrapper">
+    {% include 'header.html' %}
+
+    {#    <div class="slider-container">#}
+    {#        <div class="slider">#}
+    {#            <ul>#}
+    {#                <li>#}
+    {#                    <span>Shop All New Arrivals</span>#}
+    {#                    <div class="slider-cta">#}
+    {#                        <p><a href="{% url 'store' %}">Shop</a></p>#}
+    {#                    </div>#}
+    {#                </li>#}
+    {##}
+    {#            </ul>#}
+    {#        </div>#}
+    {#        <!-- Repeat this structure for each new arrival -->#}
+    {#    </div>#}
+    {% include 'messages.html' %}
+    <main>
+
+
+        <!-- <a href="#" class="primary-cta"><---</a> -->
+
+        <div class="details-container">
+
+            <div class="up-row">
+                <div class="arrow left-arrow">
+                    <svg class="arrow left-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                         viewBox="0 0 24 24">
+                        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+                    </svg>
+                </div>
+                <img src="{{ product.image.url }}"
+                     alt="main image">
+                <div class="arrow right-arrow">
+                    <svg class="arrow right-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                         viewBox="0 0 24 24">
+                        <path d="M8.59 16.59L13.17 12l-4.58-4.59L10 6l6 6-6 6-1.41-1.41z"/>
+                    </svg>
+                </div>
+
+            </div>
+
+            <div class="down-row">
+                <img src="{{ product.image.url }}"
+                     class="active" alt="{{ image.url }}">
+                {% for image in images %}
+                    <img src="{{ image.image.url }}" alt="side image">
+                {% endfor %}
+            </div>
+
+
+            <div class="details">
+                {% if product.in_stock %}
+                    <span style="">Store</span>
+                {% else %}
+                    <span style="">Catalog</span>
+                {% endif %}
+                <h2>{{ product.title }}</h2>
+                <span>{{ product.subheading }}</span>
+                <br>
+                {#                <span>{{ product.price|floatformat:2 }}</span>#}
+                <div class="card-content">
+                    <div class="card-pricing">
+                        {% if product.discount_price %}
+                            <div class="card-price-old"><s>
+                                {{ product.price|floatformat:0 }} лв.
+                            </s>
+                            </div>
+                        {% endif %}
+                        <div class="card-price-current">
+                            {{ product.current_price|floatformat:0 }} лв.
+                        </div>
+                    </div>
+                    <div class="card-buy">
+                        <a href="/peralnja-heinner-6-kg-1000-ob-min-klas-d-led-displej-60-sm-bjal-hwm-v6010d/pd/DVPJ17MBM/?ref=prod_CMP-282857_6149_65514"
+                           class="btn js-product-link" aria-label="Product details">
+                            <i class="em em-double-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <p>{{ product.description }}</p>
+
+                <div class="tags">
+                    <a href="" class="tag"
+                       style="color: orange; border-color: orange">{{ product.material }}</a>
+                    {% if product.in_stock %}
+                        <a href="" class="tag" style="color: green; border-color: green">in stock</a>
+                    {% else %}
+                        <a href="" class="tag" style="color: red; border-color: red">in stock</a>
+                    {% endif %}
+                    <a class="tag" href="#" style="color: purple; border-color: purple;">{{ product.size }}</a>
+                    <a class="tag" style="color: #3498db; border-color: #3498db">{{ product.type }}</a>
+                </div>
+
+                {% if product.in_stock %}
+                    <div class="cta-btns">
+                    <a href="{% url 'add-to-cart' slug=product.slug %}?next={{ request.path }}" class="primary-cta">Add to cart</a>
+                    <a href="{% url 'cart' %}" class="secondary-cta">Checkout</a>
+                    <a href="#" class="primary-cta" id="contactLink" style="display: none">Contact us</a>
+                    <div id="popup" class="popup" style="display: none">
+                        <div class="popup-content" style="display: flex; flex-direction: column; gap: 3em;">
+                            <span class="close" id="closePopup">&times;</span>
+                            <h2>Contact Us</h2>
+                            <hr>
+                            <p style="margin-bottom: -10px">Feel free to contact us using the information below:</p>
+                            <address>
+                                <strong>Artwoodique</strong>
+                                <p>Phone: +359 878 130 052 </p>
+                                <p>Email: artwoodique@gmail.com</p>
+                                <em>Table details:</em>
+                                <div class="popup-table-details"
+                                     style="display: flex; flex-direction: column; justify-content: space-between; align-items: center">
+                                    <div class="popup-table-text-details" style="display: flex; gap: 1em">
+                                        <p>{{ product.title }}</p>
+                                        <p><strong>id:</strong> {{ product.id }}</p>
+                                        <p><strong>material:</strong> {{ product.material }}</p>
+                                    </div>
+                                    <p><img src="{{ product.image.url }}"
+                                            style="background-repeat: no-repeat; background-position: center; max-height: 200px"
+                                            alt="table_img">
+                                    </p>
+                                </div>
+                            </address>
+                            <p style="margin-top: -50px">We look forward to hearing from you!</p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="cta-btns">
+                        <a href="#" class="primary-cta" id="contactLink">Contact us</a>
+                        {#                    <a href="{{ product.get_add_to_cart_url }}" class="secondary-cta" id="contactLink">#}
+                        {#                        <img src="/static/images/cart.svg" alt="cart_icon">#}
+                        {#                        Add to cart#}
+                        {#                    </a>#}
+
+
+                        <div id="popup" class="popup">
+                            <div class="popup-content" style="display: flex; flex-direction: column; gap: 3em;">
+                                <span class="close" id="closePopup">&times;</span>
+                                <h2>Contact Us</h2>
+                                <hr>
+                                <p style="margin-bottom: -10px">Feel free to contact us using the information below:</p>
+                                <address>
+                                    <strong>Artwoodique</strong>
+                                    <p>Phone: +359 878 130 052 </p>
+                                    <p>Email: artwoodique@gmail.com</p>
+                                    <em>Table details:</em>
+                                    <div class="popup-table-details"
+                                         style="display: flex; flex-direction: column; justify-content: space-between; align-items: center">
+                                        <div class="popup-table-text-details" style="display: flex; gap: 1em">
+                                            <p>{{ product.title }}</p>
+                                            <p><strong>id:</strong> {{ product.id }}</p>
+                                            <p><strong>material:</strong> {{ product.material }}</p>
+                                        </div>
+                                        <p><img src="{{ product.image.url }}"
+                                                style="background-repeat: no-repeat; background-position: center; max-height: 200px"
+                                                alt="table_img">
+                                        </p>
+                                    </div>
+                                </address>
+                                <p style="margin-top: -50px">We look forward to hearing from you!</p>
+                            </div>
+                        </div>
+
+                        <a href="{% url 'store' %}" class="secondary-cta">Explore in-stock</a>
+                    </div>
+                {% endif %}
+                {% if not product.in_stock %}
+                    <div class="disclaimer">
+                        <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAB/CAMAAADxY+0hAAAAY1BMVEX///8AAADJyclhYWGampr09PS4uLj7+/vv7+/j4+MRERHc3NzDw8PQ0NDn5+cjIyNra2uUlJQwMDCMjIw7OzuDg4MKCgpAQEBbW1uhoaF1dXUXFxewsLAqKirW1tZQUFBISEiHYq6NAAAD9UlEQVRoge1aa3eqMBAsUOQpClVEser//5W9bd0ByeYBBHruOZlvBsiQZB+zi29vDg4ODg4ODg4O/w2iJLtlSfRH7HEZVKmXVkEZ/gF7ePQ6fMRr0ycHr49Tsi591nqv2GVr0oepN0S7phEcBXrPO65HnzP0nuevxn8CZ13VnQ2uRX8G5ebfrw1+XdehjysizH9+4wWqdaIAjO/yHLggDK1Bf4Pv0XIL+OAaQWBPbCWGPmhovzw9fO/UBZwQDpEvTR/e+7ZPgAnel46C8L3gZbih4fOy9CGcffsyvsX4shsg+B4BPrhoGsAyP4vBlWLHb4xdwPjehUvvdKlZjv6K5TMXsQEb5qIVhA8VBXzwsZQJYov5MIfAKB6OFSTYYV5sZnR5t4wY1brYUXfDLMD3qqHvEQoIg9sC/IE+xEqCsxXA9+69ei/0c79n7REcxL4Ug87spdjim+/ROw4k59Q2fclsbfy73EdP9uGQSnGKOUC91ZdYubgjWcrcZwGILX2JSfGoH2+WkWI417o/yvGzdjIXEfLei12z/KyfzAT8unmZk+WP7EuxruB51RYsfy9O2iqHZKKL57deDiU03zCvSfh1eXIspHldwt/FKis+CF1zGuoaGX+I3pQNKfbJ+p6Kv/PBaj49RNddeknUWwqdPBIFli9qCjm/vE4YC5XokvPL66SR6Oo6Jpoq+CM8N68cQj7nDlLBr9PqhlDX9Sp+da1iCE1fQ8XfpewZ5ZAmkCn5LUixmGZIeT2v5hf7ZGOhS2Rq/tk+6NPzskROskQiNGKErmmdaRifTMgw+pd9v2md6av26af+l/fcsIIJ5VCMJCoXsj9KQ1FtwwcP403QzHrys1JmT5diKGS8ORlsemeaLXjG48NoF0XA907zRHRnRaN8UFLwCCjKY6k+n2nlUFfwKG/LNf7xjSnlUKcelLv21GbSftAPcJK1+QYYRm5SB+oMP94Hkbla9dlS/lHvbEKtC0kWFWGqnnXxf/Capp1pRE1d9RD+2lagEzjIg0YtiQjCRavcim/vPmgDJFRkYGKCaOOaKNdsYxBYIwRTkyh8HnOzGbAkkxhA22+ziUw+aNKXJeFu83M+mfTD4N6naKltfkeiIGgixMj7bX7GoSwk1vAi6KwOFvmpgWaiAhB+7ra+ItwQUE0CUPclsW0CHhfuzW4Xyd0N/iu0MxIz0EwKiMax0T9kmAHjWj+TkBkT8R9JAlJDLXfVTyVsgMnyjauQs36uYSSd8IgCpXayoQVutU+MasXdGvVkl2Em7XIcj2ZkNov8fdXKDLHdi4k83A//kkeo22rvT/kYkWx9HrziKCR3b1f+b6KDg4ODg4ODg4ODgwRf9gIoOKaA6/cAAAAASUVORK5CYII="
+                                alt="disclaimer_icon">
+
+
+                        <h3>Disclaimer</h3>
+                    </div>
+                    <ul class="note">
+                        <li>The tables displayed below are just for model!</li>
+                        <li>In order to order a similar look at the number and purchase via phone</li>
+                        <li>Our epoxy tables are custom-made, and we strive to use the same type of wood as
+                            depicted in our advertising pictures. However, it is not always possible to find an exact
+                            match,
+                            which may result in slight variations in the epoxy color and wood grain pattern.
+
+                            It's important to keep in mind that the table you receive may not be an exact replica of the
+                            advertising picture. We ensure that our clients are informed of every step of the process,
+                            from
+                            the selection of the wood to the final finish of the table. We keep our clients up-to-date
+                            throughout the process to ensure transparency and avoid any misunderstandings.
+                        </li>
+
+                    </ul>
+
+
+                    </div>
+                {% endif %}
+
+                <div class="details-tb">
+                    <table>
+
+                        <!-- Add more rows for other details -->
+
+                        {#                    <tr>#}
+                        {#                        <td><strong>Review:</strong></td>#}
+                        {#                        <td>#}
+                        {#                            <div class="star-rating">#}
+                        {#                                <!-- Add your star rating spans here -->#}
+                        {#                            </div>#}
+                        {#                        </td>#}
+                        {#                    </tr>#}
+                        <tr>
+                            <td><strong>Material:</strong></td>
+                            <td>{{ product.material }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Type</strong></td>
+                            <td>{{ product.type }}</td>
+                        </tr>
+                        {#                        <tr>#}
+                        {#                            <td><strong>{{ product.}}</strong></td>#}
+                        {#                            <td>160</td>#}
+                        {#                        </tr>#}
+                        <tr>
+                            <td><strong>Size:</strong></td>
+                            <td>{{ product.size }}</td>
+                        </tr>
+                        {#                        <tr>#}
+                        {#                            <td><strong>Id:</strong></td>#}
+                        {#                            <td>{{ product.id }}</td>#}
+                        {#                        </tr>#}
+                    </table>
+                </div>
+
+
+            </div>
+    </main>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const contactLink = document.getElementById("contactLink");
+            const popup = document.getElementById("popup");
+            const closePopup = document.getElementById("closePopup");
+
+            contactLink.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent the default link behavior
+                popup.style.display = "block";
+            });
+
+            closePopup.addEventListener("click", function () {
+                popup.style.display = "none";
+            });
+        });
+    </script>
+
+    <style>
+        /* Add this CSS to your existing styles.css or in a separate CSS file */
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            font-size: 1.8rem;
+        }
+
+        .popup-content {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 2em;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            max-width: 80%;
+            text-align: center;
+        }
+
+        .popup-content h2 {
+            margin-bottom: -100px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: red;
+        }
+
+        .left-arrow {
+            position: absolute;
+            left: 0;
+            top: 50%; /* Vertically center the arrow */
+            transform: translateY(-50%);
+        }
+
+        .right-arrow {
+            position: absolute;
+            right: 0;
+            top: 50%; /* Vertically center the arrow */
+            transform: translateY(-50%);
+        }
+
+        .up-row {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            position: relative;
+        }
+
+        .up-row img {
+            max-width: 100%; /* Ensure the image doesn't overflow the container */
+        }
+
+
+    </style>
+</div>
+
+
+</body>
+
+</html>

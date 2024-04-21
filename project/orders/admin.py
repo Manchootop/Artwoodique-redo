@@ -1,19 +1,16 @@
 from django.contrib import admin
 
 from project.accounts.models import Address
-from project.main.models import UserProfile
-from project.orders.models import OrderItem, Coupon, Refund, Order
+from project.orders.models import OrderItem, Coupon, Order
 
 
-# Register your models here.
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ['item', 'quantity', 'user', 'ordered']
+    list_filter = ['ordered']
+    search_fields = ['item__title', 'user__username']
 
-
-def make_refund_accepted(modeladmin, request, queryset):
-    queryset.update(refund_requested=False, refund_granted=True)
-
-
-make_refund_accepted.short_description = 'Update orders to refund granted'
-
+@admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['user',
                     'ordered',
@@ -39,12 +36,14 @@ class OrderAdmin(admin.ModelAdmin):
                    'refund_requested',
                    'refund_granted']
     search_fields = [
-        'user__username',
+        'user__email',
         'ref_code'
     ]
-    actions = [make_refund_accepted]
+@admin.register(Coupon)
+class CouponAdmin(admin.ModelAdmin):
+    list_display = ['code', 'amount']
 
-
+@admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
     list_display = [
         'user',
@@ -59,9 +58,3 @@ class AddressAdmin(admin.ModelAdmin):
     search_fields = ['user', 'street_address', 'apartment_address', 'zip']
 
 
-admin.site.register(OrderItem)
-admin.site.register(Order, OrderAdmin)
-admin.site.register(Coupon)
-admin.site.register(Refund)
-admin.site.register(Address, AddressAdmin)
-admin.site.register(UserProfile)

@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load extract_decimal_part_from_a_number %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="cart-wrapper">
+        <div class="left-col">
+            <div class="cart-header">
+                <a href="{% if previous_page %}{{ previous_page }}{% else %}{% url 'store' %}{% endif %}"
+                   class="continue-shopping">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 9" fill="none">
+                        <path
+                                d="M23.3536 4.85355C23.5488 4.65829 23.5488 4.34171 23.3536 4.14645L20.1716 0.964466C19.9763 0.769204 19.6597 0.769204 19.4645 0.964466C19.2692 1.15973 19.2692 1.47631 19.4645 1.67157L22.2929 4.5L19.4645 7.32843C19.2692 7.52369 19.2692 7.84027 19.4645 8.03553C19.6597 8.2308 19.9763 8.2308 20.1716 8.03553L23.3536 4.85355ZM0 5H23V4H0V5Z"
+                                fill="black"/>
+                    </svg>
+                    <span>Continue shopping</span>
+                </a>
+                <hr>
+                <div class="main-header">
+                    <div class="header-left-col">
+                        <h1>Shopping cart</h1>
+                        {% if tables %}
+                        <p class="subhead">You have {{ tables.count }} items in your cart</p>
+                        {% else %}
+                        <p class="subhead">Your cart is empty. Fill it with awesome stuff. <a href="{% url 'store' %}">BROWSE!</a></p>
+                        {% endif %}
+                    </div>
+
+                    <div class="header-left-col">
+                        <div>
+                            <p class="mb-0"><span class=""></span> <a href="#!"
+                                                                      class="text-body">
+                                <i class=""></i></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% for table in tables %}
+                <div class="cart-card">
+                    <div class="card-body">
+                        <div class="item-details">
+                            <div class="main-product">
+                                <div class="img-container">
+                                    <img
+                                            src="{{ table.image.url}}"
+                                            class="img-fluid rounded-3" alt="Shopping item"
+                                            style="width: 65px;">
+                                </div>
+
+                                <div class="item-details">
+                                    <a class="item-title" href="{% url 'catalog-details' pk=table.pk %}">
+                                        {{ table.title }}
+                                    </a>
+                                    <div class="subhead">{{ table.subheading }}</div>
+                                </div>
+                            </div>
+                            <div class="tags">
+                                <a class="tag" href="" style="color: darkgreen; border-color: darkgreen">{{ table.material }}</a>
+                                <a class="tag" style="color: orange; border-color: orange">{{ table.size }}</a>
+                                <a class="tag" style="color: purple; border-color: purple" >{{ table.type }}</a>
+                            </div>
+                        </div>
+
+                        <div class="other-info">
+                            <p class="price">{{ table.current_price|floatformat:0 }}
+                                <sup>{{ table.discount_price|extract_decimal_part }}</sup>
+                                <span>lv.</span></p>
+                            {#                            <div class="qty">+ -</div>#}
+                            <div class="actions">
+                                <a href="{% url 'add-to-wishlist' pk=table.id %}?next={{ request.path }}" class="add-to-wishlist">add to WishList</a>
+                                <a href="{% url 'remove-from-cart' slug=table.slug %}?next={{ request.path }}" class="remove">delete</a>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if tables %}
+        <div class="right-col">
+            <aside class="">
+                <div class="order-summary-widget">
+                    <div class="order-summary-main-content">
+                        <div class="order-summary-text">
+                            <div class="order-summary-title">Order information</div>
+                            <div class="line">
+                                <span>All products:</span>
+                                <div class="order-summary-items-price">
+                                    {{ total|floatformat:0 }}
+                                    <sup>{{ total|extract_decimal_part }}</sup>
+                                    <span>lv.</span>
+                                </div>
+                            </div>
+                            <div class="line">
+                                <span>Delivery price:</span>
+                                <div class="order-summary-items-price">
+                                    <span>Undefined</span>
+{#                                    {{ total|floatformat:0 }}#}
+{#                                    <sup>{{ total|extract_decimal_part }}</sup>#}
+{#                                    <span>lv.</span>#}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-summary-total">
+                            <div class="order-summary-total-title">Total:</div>
+                            <p class="order-summary-total-price">
+                                    {{ total|floatformat:0 }}
+                                    <sup>{{ total|extract_decimal_part }}</sup>
+                                    <span>lv.</span>
+                        </div>
+                    </div>
+                    <div class="order-summary-actions">
+                        <a href="{% url 'checkout' %}" class="btn">Continue</a>
+                    </div>
+                </div>
+
+                <div class="voucher-widget">
+                    <section>
+                        <p class="voucher-title">Have a voucher for discount?</p>
+                        <form class="voucher-form form-control" action="">
+                            {{ coupon_form }}
+                            <div>
+                                <button class="btn">></button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </aside>
+        </div>
+    {% endif %}
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block extra_scripts %}
+
+{% endblock %}

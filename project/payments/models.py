@@ -7,7 +7,6 @@ UserModel = get_user_model()
 # Create your models here.
 
 class Payment(models.Model):
-    stripe_charge_id = models.CharField(max_length=50)
     user = models.ForeignKey(
         UserModel,
         on_delete=models.DO_NOTHING,

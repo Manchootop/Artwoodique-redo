@@ -3,14 +3,15 @@ from django.shortcuts import get_object_or_404, redirect
 
 from project.main.models import Product
 from project.orders.models import OrderItem
+from project.shared.functions import previous_page_redirect
 
 
 def remove_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
+    next_url = request.GET.get('next')
 
     # If the user is authenticated, remove the product from their cart in the database
     if request.user.is_authenticated:
-        print(f'Removing {product} with id: {product.id} from {request.user}')
         order_item = OrderItem.objects.filter(user=request.user, item=product)
         if order_item.exists():
             order_item.delete()
@@ -29,4 +30,4 @@ def remove_cart(request, slug):
         else:
             messages.info(request, 'This item is not in your cart.')
 
-    return redirect('cart')
+    return redirect(next_url or '/orders/cart/')
