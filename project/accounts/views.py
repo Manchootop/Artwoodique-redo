@@ -19,10 +19,6 @@ class LoginView(auth_views.LoginView, SuccessMessageMixin):
     template_name = 'accounts/login.html'
     redirect_authenticated_user = True
 
-    # def form_valid(self, form):
-    #     """Security check complete. Log the user in."""
-    #     messages.success(self.request, 'You have been logged in successfully')
-    #     return super().form_valid(form)
     def get_success_url(self):
         return reverse_lazy('index')
 
@@ -71,28 +67,26 @@ class ProfileUpdateView(views.View):
         form = ProfileUpdateForm(request.POST)
 
         if form.is_valid():
-            # Get or create the profile instance for the current user
             profile_instance, created = ArtwoodiqueUserProfile.objects.get_or_create(user=request.user)
-            # Check if the profile instance already exists
+
             if not created:
-                # Compare fields of the existing instance with the form data
+
                 if profile_instance.username == form.cleaned_data['username'] \
                         and profile_instance.date_of_birth == form.cleaned_data['date_of_birth'] \
                         and profile_instance.gender == form.cleaned_data['gender'] \
                         and profile_instance.first_name == form.cleaned_data['first_name'] \
                         and profile_instance.last_name == form.cleaned_data['last_name']:
-                    # No changes were made to the profile
-                    # No changes were made to the profile
                     messages.info(request, 'No changes were made to your profile')
                     return redirect(reverse('details profile', kwargs={'pk': profile_instance.pk}))
-            # Update the profile instance with the form data
+
             form = ProfileUpdateForm(request.POST, instance=profile_instance)
-            # Save the profile instance
             profile_instance = form.save(commit=False)
             profile_instance.user = request.user  # Set the user
             profile_instance.save()
+
+
             messages.success(request, 'Your profile was updated successfully')
             return redirect(reverse('details profile', kwargs={'pk': profile_instance.pk}))
-        # If form is invalid or other errors occur
+
         messages.error(request, f'{form.errors.as_text()}')
         return redirect(reverse('details profile', kwargs={'pk': pk}))

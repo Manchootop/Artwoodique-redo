@@ -18,7 +18,7 @@ ADDRESS_CHOICES = (
 
 
 def validate_only_letters(value):
-    if not all(ch.isalpha() for ch in value):
+    if not value.is_alpha():
         raise ValidationError('Value must contain only letters')
 
 

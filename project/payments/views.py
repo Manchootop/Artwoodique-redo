@@ -19,7 +19,6 @@ def checkout(request):
         order.ref_code = create_ref_code()
     else:
         order.ref_code = create_ref_code()
-    print(order)
     host = request.get_host()
 
     if not order:
@@ -36,7 +35,7 @@ def checkout(request):
         'item_name': order.ref_code,
         'amount': order.get_total_with_delivery_fee(),
         'invoices': uuid.uuid4(),
-        'currency': 'USD',
+        'currency': 'BGN',
         'notify_url': request.build_absolute_uri(reverse('paypal-ipn')),
         'return_url': f'https://{host}{return_url}',
         'cancel_url': f'https://{host}{return_url}'

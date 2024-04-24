@@ -23,3 +23,6 @@ def extract_decimal_part(number):
     except TypeError:
         return ''
 
+
+# 245.99 ->> 99
+# 240 -> ''
