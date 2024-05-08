@@ -8,25 +8,25 @@
 
 <h2>Project Screenshots:</h2>
 
-[![Screenshot-2.png](https://i.postimg.cc/PJqhmZ2B/Screenshot-2.png)]
+![Screenshot-2.png](https://i.postimg.cc/PJqhmZ2B/Screenshot-2.png)
 
-[![Screenshot-3.png](https://i.postimg.cc/bwqJJDhf/Screenshot-3.png)]
+![Screenshot-3.png](https://i.postimg.cc/bwqJJDhf/Screenshot-3.png)
 
-[![Screenshot-4.png](https://i.postimg.cc/Vvysc5RT/Screenshot-4.png)]
+![Screenshot-4.png](https://i.postimg.cc/Vvysc5RT/Screenshot-4.png)
 
-[![Screenshot-5.png](https://i.postimg.cc/cH3ZT0Sc/Screenshot-5.png)]
+![Screenshot-5.png](https://i.postimg.cc/cH3ZT0Sc/Screenshot-5.png)
 
-[![Screenshot-6.png](https://i.postimg.cc/yYLqmkRH/Screenshot-6.png)]
+![Screenshot-6.png](https://i.postimg.cc/yYLqmkRH/Screenshot-6.png)
 
-[![Screenshot-7.png](https://i.postimg.cc/XqnhFb7q/Screenshot-7.png)]
+![Screenshot-7.png](https://i.postimg.cc/XqnhFb7q/Screenshot-7.png)
 
-[![Screenshot-9.png](https://i.postimg.cc/mkhYKXmV/Screenshot-9.png)]
+![Screenshot-9.png](https://i.postimg.cc/mkhYKXmV/Screenshot-9.png)
 
-[![Screenshot-10.png](https://i.postimg.cc/CKPHJpNd/Screenshot-10.png)
+![Screenshot-10.png](https://i.postimg.cc/CKPHJpNd/Screenshot-10.png)
 
-[url=https://postimg.cc/rDBDbjsZ][img]https://i.postimg.cc/rDBDbjsZ/Screenshot-11.png[/img][/url]
+[url=https://postimg.cc/rDBDbjsZ][img]https://i.postimg.cc/rDBDbjsZ/Screenshot-11.png[/img][/url
 
-[![Screenshot-12.png](https://i.postimg.cc/NfB9yP6n/Screenshot-12.png)](https://postimg.cc/7btYd9Q1)
+![Screenshot-12.png](https://i.postimg.cc/NfB9yP6n/Screenshot-12.png)](https://postimg.cc/7btYd9Q1)
 
   
   
