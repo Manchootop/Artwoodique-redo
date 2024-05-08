@@ -24,7 +24,6 @@
 
 ![Screenshot-10.png](https://i.postimg.cc/CKPHJpNd/Screenshot-10.png)
 
-[url=https://postimg.cc/rDBDbjsZ][img]https://i.postimg.cc/rDBDbjsZ/Screenshot-11.png[/img][/url
 
 ![Screenshot-12.png](https://i.postimg.cc/NfB9yP6n/Screenshot-12.png)](https://postimg.cc/7btYd9Q1)
 
