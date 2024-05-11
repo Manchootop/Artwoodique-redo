@@ -1,0 +1,335 @@
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+:root {
+    --main-bg-color-light: #bfa271;
+    --main-bg-color-dark: #583d22;
+
+    --header-font: 'Playfair Display SC';
+    --main-font: 'Poppins';
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Styling for the close button */
+
+.close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 10px;
+    color: #333;
+}
+
+.message {
+    list-style: none;
+    border-radius: 10px;
+    box-shadow: 3px 3px 4px 0px rgba(50, 50, 50, 0.75);
+    color: white;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+    width: 80%;
+}
+
+/*
+ * Give the various message types the correct colors
+ */
+
+.message.success {
+    background-color: green;
+}
+
+.message.error {
+    background-color: red;
+}
+
+.success {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Info Messages */
+
+.info {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Warning Messages */
+
+.warning {
+    background-color: #FF9800;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Error Messages */
+
+.error {
+    background-color: #F44336;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.wrapper {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.social-icons {
+    position: fixed;
+    top: 50%;
+    left: 20px; /* Adjust as needed */
+    z-index: 1000;
+}
+
+.social-icons ul {
+    list-style: none;
+    padding: 0;
+}
+
+.social-icons li {
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.animated {
+    transition: transform 0.3s ease-in-out;
+}
+
+.animated:hover {
+    transform: scale(1.2); /* Larger size on hover */
+}
+
+
+.social-icons.fixed {
+    position: fixed;
+    top: 20px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+}
+
+main {
+    display: block;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /*flex-wrap: nowrap;*/
+    gap: 0;
+    margin: 0 auto;
+}
+
+main .left-col {
+    display: block;
+    background-color: var(--main-bg-color-light);
+    border-radius: .8em;
+    margin: 0 auto;
+    min-width: 500px;
+    max-width: 700px;
+}
+
+
+main .right-col {
+
+    border: 1px solid #eee;
+    border-radius: 0 0 .8em .8em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    min-width: 500px;
+    max-width: 700px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+h1 {
+    font-size: 5.2rem;
+    font-family: 'Playfair Display SC', sans-serif;
+    font-weight: normal;
+    margin: 0;
+    text-align: center;
+}
+
+.contacts-card {
+    display: flex;
+    justify-content: space-around;
+    gap: 2em;
+}
+
+
+.first-row, .second-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+section {
+    margin: 1em;
+    background-color: white;
+    padding: 1em;
+
+}
+
+.right-col input[type="text"],
+.right-col input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: .8em 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.right-col button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.right-col button:hover {
+    background-color: #0056b3;
+}
+
+.contact-us-wrapper {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2em;
+}
+
+.contact-us-wrapper span {
+    font-family: "Playfair Display SC", sans-serif;
+    font-size: 5.2rem;
+    text-align: center;
+    margin-bottom: .5em;
+}
+
+.contact-us-wrapper div:first-child {
+    margin-bottom: 1em;
+}
+
+
+.contact-us-wrapper label {
+    color: white;
+    text-align: center;
+    display: none;
+}
+
+.form_wrap {
+    height: 300px;
+    width: 500px;
+    background: white;
+    margin: 50px auto;
+    padding: 125px 0px 0px 100px;
+    outline: 5px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+input[type="text"] {
+    border: 2px solid #afbdcf;
+    border-radius: 5px;
+    height: 47px;
+    width: 300px;
+    color: #000000;
+    font-size: 14px;
+    padding-left: 20px;
+    box-shadow: none;
+}
+
+/* Label style after Input feild is in focus. Can also use input:focus ~ label to select sibling. */
+
+input:focus + label, input:valid + label {
+    font-size: 12px;
+    color: #afbdcf;
+    top: -5px;
+    left: 10px;
+    background: #ffffff;
+    padding: 0px 5px 0px 5px;
+}
+
+.input_wrap {
+    width: auto;
+    height: auto;
+    position: relative;
+}
+
+.input_wrap label {
+    font-family: arial, sans-serif;
+    font-size: 16px;
+    color: #afbdcf;
+    padding: 14px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+    pointer-events: none;
+
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+/* floating fieldsss... */
+
+
+.floating-placeholder-container {
+    position: relative;
+    margin-bottom: 25px; /* Adjust as needed */
+}
+
+.floating-placeholder {
+    font-size: 16px; /* Adjust as needed */
+    padding: 10px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc; /* Adjust as needed */
+    transition: all 0.3s;
+}
+
+.floating-placeholder:focus,
+.floating-placeholder:not(:placeholder-shown) {
+    outline: none;
+    border-bottom: 2px solid #007BFF; /* Adjust as needed */
+}
+
+.floating-placeholder-label {
+    position: absolute;
+    pointer-events: none;
+    left: 10px;
+    top: 10px;
+    transition: all 0.3s;
+}
+
+.floating-placeholder:focus ~ .floating-placeholder-label,
+.floating-placeholder:not(:placeholder-shown) ~ .floating-placeholder-label {
+    font-size: 12px; /* Adjust as needed */
+    top: -15px; /* Adjust as needed */
+    color: #007BFF; /* Adjust as needed */
+}

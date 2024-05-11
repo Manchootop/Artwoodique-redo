@@ -1,0 +1,313 @@
+.designer-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: .5em;
+    /*margin-bottom: 30em;*/
+}
+
+.title {
+    font-size: 5.2rem;
+    font-family: 'Playfair Display SC', sans-serif;
+    font-weight: normal;
+    margin-bottom: 1em;
+    margin-top: 0;
+}
+
+.page-container {
+    padding: 1em 1.5em 1em 1.5em;
+    margin: 1em 1.5em 1em 1.5em;
+    border: 1px solid #eee;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.form-control {
+    width: 100%;
+    height: 40px;
+    display: block;
+    color: #495057;
+    font-size: 13px;
+    background: #fff;
+    border: 1px solid #d5dee6;
+    padding: 6px 35px 6px 10px;
+    border-radius: 21px;
+}
+
+label {
+    font-size: 1.5rem;
+    float: left;
+    margin-left: 1em;
+}
+
+.selectors {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+
+.btn {
+    margin-top: 1em;
+    cursor: pointer;
+    width: 20%;
+    border-radius: .8em;
+    padding: 1em 1.5em 1em 1.5em;
+    background: #C78B5F;
+    color: white;
+    font-size: 1.5rem;
+    display: inline-block;
+}
+
+.sections {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 3em;
+}
+
+/* cards */
+.card {
+    max-height: 510px;
+    margin-bottom: 3em;
+    background: white;
+    position: relative;
+    z-index: 1;
+    padding: 2em;
+    border-radius: .8em;
+    box-shadow: 0 3px 12px -2px rgba(0, 0, 0, .1);
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fill, minmax(auto, 1fr));
+    gap: 0 4em;
+    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2em 0;
+}
+
+.product-image {
+    object-fit: cover;
+    background-origin: border-box;
+    min-height: 350px;
+
+    width: 100%;
+    /* Ensure the image takes the full width of the container */
+    height: 60%;
+    /* Ensure the image takes the full height of the container */
+    /*border-radius: .8em;*/
+    border-radius: .2em;
+}
+
+
+.card-details {
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*border: 1px solid black;*/
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: .6em;
+    padding: 2em;
+    width: 100%;
+    /*justify-content: c;*/
+    transition: transform 800ms;
+    box-shadow: rgb(208, 208, 208) 0 4px 12px;
+    min-height: 120px;
+}
+
+.card-details:hover {
+    cursor: default;
+}
+
+.card-details a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.card-details p {
+    font-size: 1.4rem;
+    margin: 0;
+    font-weight: lighter;
+}
+
+p.product-price {
+    font-size: 1.8rem;
+}
+
+.card-badges {
+    width: 60px;
+    overflow: hidden;
+    flex-direction: column;
+    border-radius: 4px;
+    left: 0;
+    top: 15px;
+    position: absolute;
+    z-index: 10000000;
+}
+
+.card-badges .card-badge {
+    margin: 0;
+    width: 100%;
+    border-radius: 0;
+    padding: .25em 0;
+}
+
+.card-badges .badge--offer,
+.card-badges .badge--commercial {
+    display: none
+}
+
+.card-badges-cmp {
+    left: 0;
+    display: flex
+}
+
+.card-badges-cmp .card-badge {
+    border-radius: 4px
+}
+
+.card-badge.badge--genius {
+    font-size: 13px;
+    background-image: linear-gradient(69deg, #090171 0%, #ff005a 100%)
+}
+
+.card-badge.badge--discount {
+    background-image: linear-gradient(287deg, #f0280a 0%, #bc2610 100%)
+}
+
+.card-badge .badge-label {
+    padding: 0 7px
+}
+
+.card-badge .badge-child {
+    padding: 1px
+}
+
+.card-badge .badge-child > span {
+    height: 100%;
+    padding: 0 7px;
+    border-radius: 3px
+}
+
+.card-badge .badge-label,
+.card-badge .badge-child,
+.card-badge .badge-child > span {
+    display: flex;
+    align-items: center
+}
+
+span.badge-label {
+    text-align: center;
+    justify-self: center;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.card-pricing .card-price-old {
+    color: #888;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.card-price-old {
+    margin-top: 1em;
+    margin-bottom: -1em;
+}
+
+.card-pricing .card-price-current {
+    font-size: 16px;
+    font-weight: 800;
+    color: #ef2809;
+}
+
+.card-price-current {
+    font-size: 16px;
+    font-weight: 800;
+    color: #ef2809;
+}
+
+/* styles.css */
+
+/* Container styling */
+
+.card-price-current {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Footer styling */
+.card-price-current .btn i {
+    font-size: 22px;
+    display: inline-block;
+    background: #F1E2D1;
+    /*background: -webkit-linear-gradient(left, #4a60c1 10%, #3985e0);*/
+    /*background: linear-gradient(to right, #4a60c1 10%, #3985e0);*/
+
+    border-radius: 0 !important;
+    padding: 0;
+    color: white;
+    width: 42px;
+    height: 42px;
+}
+
+.card-price-current .btn:hover {
+    cursor: pointer;
+    color: #f5d5bc;
+}
+
+.card .cart-icon {
+    width: 32px;
+!important;
+    height: 32px;
+!important;
+    min-height: 32px;
+!important;
+    margin-top: .25em;
+    margin-right: .25em;
+}
+
+.card-price-current .btn {
+    height: 100%;
+    font-size: 0 !important;
+    background: transparent;
+    text-align: right;
+    width: 42px;
+    display: block;
+    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.spinner-container {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

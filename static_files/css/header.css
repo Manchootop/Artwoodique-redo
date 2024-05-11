@@ -1,0 +1,247 @@
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --main-bg-color-light: #F1E2D1;
+    --main-bg-color-dark: #583d22;
+
+    --header-font: 'Playfair Display SC';
+    --main-font: 'Poppins';
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Styling for the close button */
+.close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 10px;
+    color: #333;
+}
+
+header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.cart-icon {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -18px;
+    left: -7px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* header.main-header {
+    position: sticky;
+    z-index: 999;
+    top: 0;
+    background-color: white;
+} */
+
+nav {
+
+    margin: 2em 0;
+
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 4.1em;
+    margin: 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul li a,
+.logo {
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    position: relative;
+}
+
+.logo {
+    font-weight: 500;
+}
+
+nav ul li a.active:before {
+    position: absolute;
+    content: "";
+    width: 35%;
+    height: 1px;
+    border-bottom: 2px solid black;
+    bottom: -6px;
+}
+
+/* for microinteraction */
+
+nav ul li a:before {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 1px;
+    border-bottom: 2px solid rgb(122, 122, 122);
+    bottom: -6px;
+    transition: width .3s;
+}
+
+nav ul li a:hover:before {
+    width: 35%;
+}
+
+nav ul li a.active:before {
+    position: absolute;
+    content: "";
+    width: 35%;
+    height: 1px;
+    border-bottom: 2px solid black;
+    bottom: -6px;
+}
+
+.search-box {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #F1E2D1;
+    background-color: #F1E2D1;
+    border-radius: .8em;
+}
+
+.search-box svg {
+    /*position: absolute;*/
+
+}
+
+.search-box-input, .search-button {
+    display: inline-block;
+    border: 1px solid transparent;
+    outline: none;
+    background: transparent;
+}
+
+search-box-button {
+    display: inline-block;
+}
+
+/* Hero Section */
+
+/* CSS for the hamburger menu */
+@media (max-width: 1320px) {
+    header nav {
+        margin-right: 1em;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+
+    nav ul {
+        display: block;
+        margin-top: 4em;
+        margin-left: 2em;
+    }
+
+    nav li a {
+        font-size: 5rem;
+    }
+
+    .close-button {
+        color: white;
+        position: absolute;
+        top: 24px;
+        right: 21px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 9999999;
+        background-color: black;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        text-align: center;
+    }
+
+    .hamburger-menu {
+        display: block;
+        cursor: pointer;
+        margin-right: 2em;
+    }
+
+    .bar {
+        width: 30px;
+        height: 3px;
+        background-color: #333;
+        margin: 6px 0;
+        transition: 0.4s;
+    }
+
+    /* CSS for the side navigation */
+    .side-nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Initially, hide the side navigation */
+        width: 30%; /* Adjust as needed */
+        height: 100%;
+        background-color: #fff;
+        overflow-y: auto;
+        transition: 0.4s;
+        z-index: 999999;
+
+    }
+
+    .side-nav ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    .side-nav li {
+        padding: 20px;
+    }
+
+    /* CSS for showing the side navigation */
+    .side-nav.show {
+        right: 0;
+    }
+
+    nav.breadcrumbs {
+        display: none;
+        margin: 5em 0;
+        flex-direction: row;
+        z-index: 2;
+    }
+
+    main {
+        margin-top: 0;
+    }
+}
+
+
+/* CSS for the close button */
+
+

@@ -1,0 +1,195 @@
+.page-container {
+    border: 2px solid #eee;
+    flex-grow: 1;
+}
+
+.personal-data {
+}
+
+.panel-body {
+    padding: 2em;
+}
+
+.personal-data-content {
+    display: flex;
+    gap: 5em;
+    margin-top: 3em;
+    justify-content: center;
+    margin-right: 12em;
+}
+
+.panel-body .title {
+    text-align: center;
+    margin: 0 0 .5em 0;
+    font-size: 3rem;
+}
+
+.my-orders-container {
+    display: flex;
+    max-width: 1300px;
+    gap: 1em;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 1em;
+    margin-bottom: 30em;
+}
+
+
+.order-card {
+    /*border: 1px solid black;*/
+    border-radius: 0.8em;
+}
+
+.order-card .card-body {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    border: 1px solid #eee;
+    border-radius: 1.2em;
+    position: relative;
+    padding: 2em 1.5em;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    margin-bottom: 1.5em;
+}
+
+.order-details {
+    -webkit-box-flex: 4;
+    flex: 4;
+}
+
+.order-details .subhead {
+    cursor: pointer;
+    margin-top: 0.5em;
+}
+
+.order-main {
+    display: flex;
+    -webkit-box-align: start;
+    align-items: flex-start;
+}
+
+.order-main .img-container {
+    max-width: 140px !important;
+    max-height: 140px;
+    min-width: 100px;
+    text-align: center;
+}
+
+.img-container img {
+    object-fit: contain;
+    width: auto;
+    max-width: 100%;
+    display: flex;
+}
+
+.order-details {
+    padding-left: 1.5em;
+    text-align: left;
+}
+
+.order-details .order-ref-code {
+    font-size: 1.8rem;
+    color: inherit;
+    display: inline-block;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.other-info {
+    -webkit-box-flex: 1;
+    flex: 1;
+    border: none;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    float: right;
+    gap: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.other-info > * {
+    margin-top: 0;
+}
+
+.other-info .price {
+    font-size: 2rem;
+    font-weight: 600;
+
+}
+
+.other-info .actions {
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+    font-size: 1.3rem;
+    justify-content: flex-start;
+    margin-bottom: .5em;
+}
+
+.other-info .actions a, p {
+    text-decoration: underline 1px dashed #242424;
+    color: inherit;
+    /*border-bottom: 1px dotted black;*/
+    transition: color 0.3s;
+}
+
+
+.other-info .actions a:hover {
+    color: var(--main-bg-color-dark); /* Change color on hover */
+}
+
+/* bottom cart body */
+.status-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1em;
+}
+
+a.tag {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0.3em;
+    padding: 0.3em 0.8em;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: color 0.3ms;
+    font-weight: bold;
+}
+
+a.tag:hover {
+    color: var(--main-bg-color-dark); /* Change color on hover */
+}
+
+.header p.subhead {
+    font-size: 1.8rem;
+    text-align: center;
+    /*color: #C78B5F;*/
+
+}
+
+a.tag.active {
+    border-color: green; /* Example border color for active tags */
+    color: green; /* Example text color for active tags */
+}
+
+/* Styles for inactive tags */
+a.tag.inactive {
+    border-color: red; /* Example border color for inactive tags */
+    color: red; /* Example text color for inactive tags */
+}
+
+/* Styles for being delivered tags */
+a.tag.active[href='#'] {
+    border-color: blue; /* Example border color for being delivered tags */
+    color: blue; /* Example text color for being delivered tags */
+}
+
+/* Styles for delivered tags */
+a.tag.delivered {
+    border-color: orange; /* Example border color for delivered tags */
+    color: orange; /* Example text color for delivered tags */
+}

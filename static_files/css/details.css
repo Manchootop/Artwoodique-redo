@@ -1,0 +1,626 @@
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    /*animation: expandBody 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;*/
+    /*height: 100vh;*/
+    /*width: 100vw;*/
+}
+
+.wrapper {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* Navbar */
+.message {
+    list-style: none;
+    border-radius: 10px;
+    box-shadow: 3px 3px 4px 0px rgba(50, 50, 50, 0.75);
+    color: white;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+    width: 80%;
+}
+
+/*
+ * Give the various message types the correct colors
+ */
+.message.success {
+    background-color: green;
+}
+
+.message.error {
+    background-color: red;
+}
+
+.success {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Info Messages */
+.info {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Warning Messages */
+.warning {
+    background-color: #FF9800;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Error Messages */
+.error {
+    background-color: #F44336;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+main .header h1 {
+    font-size: 5.2rem;
+    margin: 0em 0em 0 1em;
+    text-align: center;
+    font-family: 'Playfair Display SC', sans-serif;
+}
+
+main .header {
+    box-shadow: rgb(255, 244, 230) 0px 8px 24px;
+    border-radius: .8em;
+    padding: 0em 2em 1em 2em;
+
+}
+
+main .header p {
+    text-align: center;
+    font-size: 1.6rem;
+}
+
+/*header of main*/
+.slider-container {
+    background: #efefef;
+}
+
+.slider {
+    display: flex;
+    justify-content: center;
+}
+
+.slider ul li {
+    list-style: none;
+    text-align: center;
+}
+
+.slider ul li span {
+    font-size: 2rem;
+}
+
+.slider ul li .slider-cta p a {
+    font-size: 1.4rem;
+    color: black;
+}
+
+.details-container {
+    display: grid;
+    grid-template-columns: .1fr 7fr 4fr;
+    grid-template-rows: 1fr 10fr;
+    grid-template-areas:
+        "images main side"
+        "table table side";
+    align-items: start;
+    justify-content: center;
+    max-height: 1100px;
+    margin-top: -1em;
+}
+
+.details-container > * {
+    /* border: 1px solid black; */
+    padding: 1em;
+}
+
+.up-row {
+    position: relative;
+}
+
+.up-row img {
+    background-size: contain;
+    max-height: 500px;
+    max-width: 100%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    /* Adjust the font size as needed */
+    color: #000;
+    /* Arrow color */
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.left-arrow {
+    left: 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+/
+}
+
+.right-arrow {
+    right: 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+/
+}
+
+.up-row svg {
+    display: block;
+    width: 2.4em;
+    height: 2.4em;
+}
+
+.down-row {
+    grid-area: images;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: .5em;
+    flex-wrap: wrap;
+
+}
+
+.down-row img {
+    background-size: cover;
+    background-origin: padding-box;
+    background-clip: padding-box;
+    opacity: 75%;
+    height: 60px;
+    width: 60px;
+}
+
+.down-row img.active {
+    opacity: 100%;
+    border: 3px solid black;
+}
+
+.down-row img:hover {
+    opacity: 100%;
+    cursor: pointer;
+}
+
+.details {
+    grid-area: side;
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+    margin: 1em;
+    font-family: 'Poppins', sans-serif;
+    line-height: 2rem;
+    border-radius: .8em;
+    padding: 2em;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.details-tb {
+    grid-area: table;
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+}
+
+/* Ensure the table takes up the full available width */
+table {
+    width: 100%;
+    table-layout: auto; /* This allows the table to expand as needed */
+}
+
+/* Optional: If you want the table cells to automatically adjust their width */
+table td, table th {
+    white-space: normal;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 1.8rem;
+
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+td {
+    width: 10em;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+
+.details h2 {
+    margin: 0;
+    font-size: 3rem;
+    line-height: 4rem;
+}
+
+.details span:first-of-type {
+    color: red;
+    margin-top: -1em;
+    margin-bottom: 1em;
+    font-size: 1.6rem;
+}
+
+.details span:last-of-type {
+    line-height: 2rem;
+    font-size: 1.8rem;
+}
+
+.details p {
+    font-weight: lighter;
+    font-size: 1.5rem;
+    line-height: 3rem;
+    margin-top: 2em;
+}
+
+/* cta btns */
+
+.cta-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    margin: 2em 0 2em 0;
+    justify-content: center;
+    text-align: center;
+}
+
+@media (max-width: 810px) {
+    .cta-btns {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+
+.primary-cta {
+    background-color: #F1E2D1;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    border-radius: 0.8em;
+    padding: 1em;
+}
+
+.secondary-cta {
+    font-size: 1.8rem;
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    padding: 1em 0;
+    align-items: center;
+    border: 1px solid #F1E2D1;
+    border-radius: .8em;
+}
+
+
+/* disclaimer */
+.details .disclaimer {
+    display: flex;
+    align-items: center;
+}
+
+.details .disclaimer h3 {
+    text-align: center;
+    font-size: 2rem;
+    /* margin: 1em 0 0 0; */
+}
+
+.details .disclaimer img {
+    width: 3em;
+    height: 3em;
+    margin: 0;
+    padding: 0;
+}
+
+.details ul.note li {
+    font-size: 1.4rem;
+    list-style: none;
+    line-height: 2rem;
+    margin-bottom: 1em;
+}
+
+/* microinteractions */
+
+@keyframes expandBody {
+    0% {
+        transform: scale(0.8);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.primary-cta:hover {
+    background-color: #E2D1BD;
+}
+
+.secondary-cta:hover svg {
+    transform: translateX(10px);
+}
+
+.secondary-cta:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1000px) {
+    .container {
+        display: grid;
+        grid-template-columns: .1fr 7fr;
+        grid-template-rows: none;
+        grid-template-areas:
+            "images main"
+            "side side"
+            "table table";
+        justify-content: initial;
+        align-items: start;
+        margin: 2em auto;
+    }
+
+    .details {
+        margin-top: 2em;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.card-pricing .card-price-old {
+    color: #888;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.card-pricing .card-price-current {
+    font-size: 16px;
+    font-weight: 800;
+    color: #ef2809;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1em;
+}
+
+.tag {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0.3em;
+    padding: 0.3em 0.8em;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: color 0.3ms;
+    font-weight: bold;
+}
+
+.message.success {
+    background-color: green;
+}
+
+.message.error {
+    background-color: red;
+}
+
+.success {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Info Messages */
+.info {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Warning Messages */
+.warning {
+    background-color: #FF9800;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Error Messages */
+.error {
+    background-color: #F44336;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
+.custom-message {
+    display: flex;
+    flex-direction: column;
+    /*padding: 3em;*/
+    border: 1px solid transparent;
+    font-size: 1.4rem;
+    width: 100%;
+    margin: -2em auto;
+}
+
+/* Individual messages */
+.custom-message .alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border-radius: 0.25rem;
+    font-size: 2rem;
+    margin: -2em auto;
+}
+
+/* Close button */
+.custom-message .close {
+    font-size: 1.6rem;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+    transition: color 0.3s;
+    margin: 0;
+}
+
+.custom-message .close:hover {
+    color: red; /* Change color on hover for better visibility */
+    margin: 0;
+}
+
+/* Different message tags */
+.custom-message .alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    margin: 0;
+}
+
+.custom-message .alert-info {
+    color: #0c5460;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+    margin: 0;
+}
+
+.custom-message .alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    margin: 0;
+}
+
+.custom-message .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    margin: 0;
+}
+
+.container {
+    padding: 0;
+    margin: 0;
+}
+
+
+.custom-message {
+    display: flex;
+    flex-direction: column;
+    padding: 3em 0;
+    border: 1px solid transparent;
+    font-size: 1.4rem;
+    width: 100%;
+    margin: -2em auto;
+}
+
+/* Individual messages */
+.custom-message .alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border-radius: 0.25rem;
+    font-size: 2rem;
+    margin: -2em auto;
+}
+
+/* Close button */
+.custom-message .close {
+    font-size: 1.6rem;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+    transition: color 0.3s;
+    margin: 0;
+}
+
+.custom-message .close:hover {
+    color: red; /* Change color on hover for better visibility */
+    margin: 0;
+}
+
+/* Different message tags */
+.custom-message .alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    margin: 0;
+}
+
+.custom-message .alert-info {
+    color: #0c5460;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+    margin: 0;
+}
+
+.custom-message .alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    margin: 0;
+}
+
+.custom-message .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    margin: 0;
+}
