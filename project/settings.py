@@ -17,6 +17,7 @@ IS_PRODUCTION = True
 ALLOWED_HOSTS = ['artwoodique.com', 'artwoodique.azurewebsites.net']
 # ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
 # CSRF_TRUSTED_ORIGINS = [f'https://{host}'.format(host=host) for host in ALLOWED_HOSTS]
+CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
