@@ -13,8 +13,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=(!&olqxy6ni=d_7_)#x6#9rhs9(oad+@h%f1(+utjc-8k99a+'
 DEBUG = os.environ.get('DEBUG', 1)
 IS_PRODUCTION = True
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
-CSRF_TRUSTED_ORIGINS = [f'https://{host}'.format(host=host) for host in ALLOWED_HOSTS]
+
+ALLOWED_HOSTS = ['artwoodique.com', 'artwoodique.azurewebsites.net']
+# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
+# CSRF_TRUSTED_ORIGINS = [f'https://{host}'.format(host=host) for host in ALLOWED_HOSTS]
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
