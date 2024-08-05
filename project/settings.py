@@ -106,8 +106,10 @@ if IS_PRODUCTION:
     #         "PORT": "5432",
     #     }
     # }
+
+
     DATABASES = {
-        "default": dj_database_url.config(default=os.environ.get("DATABASE_URL1"))
+        "default": dj_database_url.config(default=os.environ.get("DATABASE_URL_AZURE"))
     }
 else:
     DATABASES = {
